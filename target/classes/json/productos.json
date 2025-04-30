@@ -1,0 +1,992 @@
+[
+  {
+    "codigo": "P001",
+    "nombre": "Laptop HP Pavilion",
+    "descripcion": "Laptop HP Pavilion 15.6\" FHD, Intel Core i7, 16GB RAM, 512GB SSD",
+    "precio": 899.99,
+    "stock": 20,
+    "categoria": "Computadoras",
+    "proveedor": "HP Inc."
+  },
+  {
+    "codigo": "P002",
+    "nombre": "Smartphone Samsung Galaxy S22",
+    "descripcion": "Smartphone Samsung Galaxy S22, 6.1\" AMOLED, 8GB RAM, 128GB almacenamiento",
+    "precio": 799.99,
+    "stock": 50,
+    "categoria": "Celulares",
+    "proveedor": "Samsung Electronics"
+  },
+  {
+    "codigo": "P003",
+    "nombre": "Monitor LG UltraWide",
+    "descripcion": "Monitor LG UltraWide 34\" WQHD IPS, 3440x1440, HDR10",
+    "precio": 449.99,
+    "stock": 15,
+    "categoria": "Monitores",
+    "proveedor": "LG Electronics"
+  },
+  {
+    "codigo": "P004",
+    "nombre": "Teclado Mecánico Logitech G Pro",
+    "descripcion": "Teclado mecánico gaming, switches GX Blue, RGB personalizable",
+    "precio": 129.99,
+    "stock": 30,
+    "categoria": "Periféricos",
+    "proveedor": "Logitech"
+  },
+  {
+    "codigo": "P005",
+    "nombre": "Disco Duro Externo WD",
+    "descripcion": "Disco duro externo Western Digital 2TB, USB 3.0",
+    "precio": 79.99,
+    "stock": 40,
+    "categoria": "Almacenamiento",
+    "proveedor": "Western Digital"
+  },
+  {
+    "codigo": "P006",
+    "nombre": "Impresora Epson EcoTank",
+    "descripcion": "Impresora multifunción con sistema de tanque de tinta, Wi-Fi",
+    "precio": 279.99,
+    "stock": 20,
+    "categoria": "Impresoras",
+    "proveedor": "Epson"
+  },
+  {
+    "codigo": "P007",
+    "nombre": "Audífonos Sony WH-1000XM4",
+    "descripcion": "Audífonos inalámbricos con cancelación de ruido, Bluetooth 5.0",
+    "precio": 349.99,
+    "stock": 35,
+    "categoria": "Audio",
+    "proveedor": "Sony"
+  },
+  {
+    "codigo": "P008",
+    "nombre": "Router TP-Link Archer AX50",
+    "descripcion": "Router Wi-Fi 6 de doble banda, 4 antenas, velocidad AX3000",
+    "precio": 149.99,
+    "stock": 45,
+    "categoria": "Redes",
+    "proveedor": "TP-Link"
+  },
+  {
+    "codigo": "P009",
+    "nombre": "Tablet Apple iPad Air",
+    "descripcion": "Tablet Apple iPad Air 10.9\", chip M1, 64GB, Wi-Fi",
+    "precio": 599.99,
+    "stock": 25,
+    "categoria": "Tablets",
+    "proveedor": "Apple Inc."
+  },
+  {
+    "codigo": "P010",
+    "nombre": "Cámara Canon EOS Rebel T7",
+    "descripcion": "Cámara DSLR 24.1MP, grabación Full HD, Wi-Fi",
+    "precio": 449.99,
+    "stock": 18,
+    "categoria": "Fotografía",
+    "proveedor": "Canon"
+  },
+  {
+    "codigo": "P011",
+    "nombre": "Mouse Inalámbrico Microsoft Surface",
+    "descripcion": "Mouse ergonómico, Bluetooth, 12 meses de batería",
+    "precio": 59.99,
+    "stock": 60,
+    "categoria": "Periféricos",
+    "proveedor": "Microsoft"
+  },
+  {
+    "codigo": "P012",
+    "nombre": "SSD Samsung 970 EVO 1TB",
+    "descripcion": "SSD NVMe M.2, velocidades hasta 3500MB/s",
+    "precio": 129.99,
+    "stock": 30,
+    "categoria": "Almacenamiento",
+    "proveedor": "Samsung"
+  },
+  {
+    "codigo": "P013",
+    "nombre": "Smart TV TCL 55\" 4K",
+    "descripcion": "TV Android, HDR, Dolby Vision, 3 HDMI",
+    "precio": 399.99,
+    "stock": 22,
+    "categoria": "Televisores",
+    "proveedor": "TCL"
+  },
+  {
+    "codigo": "P014",
+    "nombre": "Consola PlayStation 5",
+    "descripcion": "Edición estándar con control DualSense, 825GB SSD",
+    "precio": 499.99,
+    "stock": 10,
+    "categoria": "Gaming",
+    "proveedor": "Sony"
+  },
+  {
+    "codigo": "P015",
+    "nombre": "Bocina JBL Charge 5",
+    "descripcion": "Bocina portátil Bluetooth, resistencia al agua IP67",
+    "precio": 179.99,
+    "stock": 40,
+    "categoria": "Audio",
+    "proveedor": "JBL"
+  },
+  {
+    "codigo": "P016",
+    "nombre": "Drone DJI Mini 2",
+    "descripcion": "Drone compacto, cámara 4K, 31min de vuelo",
+    "precio": 449.99,
+    "stock": 12,
+    "categoria": "Drones",
+    "proveedor": "DJI"
+  },
+  {
+    "codigo": "P017",
+    "nombre": "Proyector Epson Home Cinema",
+    "descripcion": "Proyector 1080p, 3400 lúmenes, conexión HDMI/USB",
+    "precio": 599.99,
+    "stock": 8,
+    "categoria": "Proyectores",
+    "proveedor": "Epson"
+  },
+  {
+    "codigo": "P018",
+    "nombre": "Smartwatch Garmin Venu 2",
+    "descripcion": "Reloj inteligente con GPS, monitor de ritmo cardíaco",
+    "precio": 349.99,
+    "stock": 25,
+    "categoria": "Wearables",
+    "proveedor": "Garmin"
+  },
+  {
+    "codigo": "P019",
+    "nombre": "Tarjeta Gráfica NVIDIA RTX 3060",
+    "descripcion": "12GB GDDR6, Ray Tracing, DLSS",
+    "precio": 329.99,
+    "stock": 5,
+    "categoria": "Componentes",
+    "proveedor": "NVIDIA"
+  },
+  {
+    "codigo": "P020",
+    "nombre": "Micrófono Blue Yeti",
+    "descripcion": "Micrófono USB profesional, 4 patrones polares",
+    "precio": 129.99,
+    "stock": 18,
+    "categoria": "Audio",
+    "proveedor": "Blue"
+  },
+  {
+    "codigo": "P021",
+    "nombre": "Laptop Dell XPS 13",
+    "descripcion": "Laptop 13.4\" 4K, Intel Core i5, 8GB RAM, 256GB SSD",
+    "precio": 999.99,
+    "stock": 15,
+    "categoria": "Computadoras",
+    "proveedor": "Dell"
+  },
+  {
+    "codigo": "P022",
+    "nombre": "Smartphone iPhone 13",
+    "descripcion": "6.1\" Super Retina XDR, 128GB, sistema dual cámara",
+    "precio": 799.99,
+    "stock": 30,
+    "categoria": "Celulares",
+    "proveedor": "Apple"
+  },
+  {
+    "codigo": "P023",
+    "nombre": "Monitor Curvo Samsung 27\"",
+    "descripcion": "QHD 144Hz, 1ms, FreeSync Premium",
+    "precio": 299.99,
+    "stock": 20,
+    "categoria": "Monitores",
+    "proveedor": "Samsung"
+  },
+  {
+    "codigo": "P024",
+    "nombre": "Kit Teclado y Mouse Logitech MK270",
+    "descripcion": "Inalámbrico, 2.4GHz, hasta 24 meses de batería",
+    "precio": 29.99,
+    "stock": 50,
+    "categoria": "Periféricos",
+    "proveedor": "Logitech"
+  },
+  {
+    "codigo": "P025",
+    "nombre": "NAS Synology DS220j",
+    "descripcion": "2 bahías, compatible con RAID, 1GB RAM",
+    "precio": 199.99,
+    "stock": 12,
+    "categoria": "Almacenamiento",
+    "proveedor": "Synology"
+  },
+  {
+    "codigo": "P026",
+    "nombre": "Impresora Laser Brother HL-L2350DW",
+    "descripcion": "Impresora monocromática, Wi-Fi, duplex automático",
+    "precio": 149.99,
+    "stock": 18,
+    "categoria": "Impresoras",
+    "proveedor": "Brother"
+  },
+  {
+    "codigo": "P027",
+    "nombre": "Audífonos Bose QuietComfort 45",
+    "descripcion": "Cancelación de ruido ajustable, 24h de batería",
+    "precio": 329.99,
+    "stock": 22,
+    "categoria": "Audio",
+    "proveedor": "Bose"
+  },
+  {
+    "codigo": "P028",
+    "nombre": "Switch Gigabit Netgear GS308",
+    "descripcion": "8 puertos, velocidad 10/100/1000 Mbps",
+    "precio": 29.99,
+    "stock": 35,
+    "categoria": "Redes",
+    "proveedor": "Netgear"
+  },
+  {
+    "codigo": "P029",
+    "nombre": "Tablet Samsung Galaxy Tab S7",
+    "descripcion": "11\" LTPS, S Pen incluido, 128GB, 6GB RAM",
+    "precio": 499.99,
+    "stock": 14,
+    "categoria": "Tablets",
+    "proveedor": "Samsung"
+  },
+  {
+    "codigo": "P030",
+    "nombre": "Cámara GoPro HERO10 Black",
+    "descripcion": "5.3K60, HyperSmooth 4.0, resistencia al agua",
+    "precio": 399.99,
+    "stock": 10,
+    "categoria": "Fotografía",
+    "proveedor": "GoPro"
+  },
+  {
+    "codigo": "P031",
+    "nombre": "Webcam Logitech C920",
+    "descripcion": "1080p, autofoco, micrófono estéreo",
+    "precio": 69.99,
+    "stock": 40,
+    "categoria": "Periféricos",
+    "proveedor": "Logitech"
+  },
+  {
+    "codigo": "P032",
+    "nombre": "Disco Duro Interno Seagate 4TB",
+    "descripcion": "3.5\", SATA 6Gb/s, 7200 RPM",
+    "precio": 89.99,
+    "stock": 25,
+    "categoria": "Almacenamiento",
+    "proveedor": "Seagate"
+  },
+  {
+    "codigo": "P033",
+    "nombre": "Smart TV LG OLED 65\"",
+    "descripcion": "4K, AI ThinQ, Dolby Atmos, Magic Remote",
+    "precio": 1799.99,
+    "stock": 5,
+    "categoria": "Televisores",
+    "proveedor": "LG"
+  },
+  {
+    "codigo": "P034",
+    "nombre": "Consola Xbox Series X",
+    "descripcion": "1TB SSD, 12 teraflops, 4K UHD Blu-Ray",
+    "precio": 499.99,
+    "stock": 8,
+    "categoria": "Gaming",
+    "proveedor": "Microsoft"
+  },
+  {
+    "codigo": "P035",
+    "nombre": "Soundbar Sonos Beam",
+    "descripcion": "Compacta, Dolby Atmos, control por voz",
+    "precio": 449.99,
+    "stock": 15,
+    "categoria": "Audio",
+    "proveedor": "Sonos"
+  },
+  {
+    "codigo": "P036",
+    "nombre": "Drone Autel Robotics EVO Lite+",
+    "descripcion": "Cámara 6K, 40min vuelo, 3-axis gimbal",
+    "precio": 999.99,
+    "stock": 6,
+    "categoria": "Drones",
+    "proveedor": "Autel Robotics"
+  },
+  {
+    "codigo": "P037",
+    "nombre": "Proyector BenQ TK700STi",
+    "descripcion": "4K HDR, 3000 lúmenes, bajo input lag",
+    "precio": 1499.99,
+    "stock": 4,
+    "categoria": "Proyectores",
+    "proveedor": "BenQ"
+  },
+  {
+    "codigo": "P038",
+    "nombre": "Smartwatch Samsung Galaxy Watch 4",
+    "descripcion": "44mm, Wear OS, monitoreo de sueño y ECG",
+    "precio": 249.99,
+    "stock": 20,
+    "categoria": "Wearables",
+    "proveedor": "Samsung"
+  },
+  {
+    "codigo": "P039",
+    "nombre": "Procesador AMD Ryzen 7 5800X",
+    "descripcion": "8 núcleos, 16 hilos, 4.7GHz max boost",
+    "precio": 299.99,
+    "stock": 12,
+    "categoria": "Componentes",
+    "proveedor": "AMD"
+  },
+  {
+    "codigo": "P040",
+    "nombre": "Micrófono Shure SM7B",
+    "descripcion": "Micrófono dinámico para estudio, respuesta plana",
+    "precio": 399.99,
+    "stock": 9,
+    "categoria": "Audio",
+    "proveedor": "Shure"
+  },
+  {
+    "codigo": "P041",
+    "nombre": "Laptop Asus ROG Zephyrus",
+    "descripcion": "15.6\" QHD 165Hz, RTX 3070, 16GB RAM, 1TB SSD",
+    "precio": 1899.99,
+    "stock": 7,
+    "categoria": "Computadoras",
+    "proveedor": "Asus"
+  },
+  {
+    "codigo": "P042",
+    "nombre": "Smartphone Google Pixel 6 Pro",
+    "descripcion": "6.7\" LTPO OLED, Tensor chip, cámara 50MP",
+    "precio": 899.99,
+    "stock": 18,
+    "categoria": "Celulares",
+    "proveedor": "Google"
+  },
+  {
+    "codigo": "P043",
+    "nombre": "Monitor MSI Optix MAG274QRF",
+    "descripcion": "27\" QHD, 165Hz, 1ms, HDR Ready",
+    "precio": 349.99,
+    "stock": 14,
+    "categoria": "Monitores",
+    "proveedor": "MSI"
+  },
+  {
+    "codigo": "P044",
+    "nombre": "Mouse Gaming Razer DeathAdder V2",
+    "descripcion": "Sensor óptico 20K DPI, 8 botones programables",
+    "precio": 69.99,
+    "stock": 30,
+    "categoria": "Periféricos",
+    "proveedor": "Razer"
+  },
+  {
+    "codigo": "P045",
+    "nombre": "SSD Externo SanDisk Extreme 1TB",
+    "descripcion": "1050MB/s, resistencia al agua y polvo",
+    "precio": 149.99,
+    "stock": 25,
+    "categoria": "Almacenamiento",
+    "proveedor": "SanDisk"
+  },
+  {
+    "codigo": "P046",
+    "nombre": "Impresora HP LaserJet Pro",
+    "descripcion": "Impresión a doble cara automática, Wi-Fi Direct",
+    "precio": 199.99,
+    "stock": 12,
+    "categoria": "Impresoras",
+    "proveedor": "HP"
+  },
+  {
+    "codigo": "P047",
+    "nombre": "Audífonos Sennheiser HD 660 S",
+    "descripcion": "Audífonos de estudio, open-back, 150Ω",
+    "precio": 499.99,
+    "stock": 8,
+    "categoria": "Audio",
+    "proveedor": "Sennheiser"
+  },
+  {
+    "codigo": "P048",
+    "nombre": "Router ASUS RT-AX86U",
+    "descripcion": "Wi-Fi 6, gaming port, protección comercial",
+    "precio": 249.99,
+    "stock": 10,
+    "categoria": "Redes",
+    "proveedor": "ASUS"
+  },
+  {
+    "codigo": "P049",
+    "nombre": "Tablet Lenovo Tab P11 Pro",
+    "descripcion": "11.5\" OLED 2K, Snapdragon 730G, 128GB",
+    "precio": 399.99,
+    "stock": 16,
+    "categoria": "Tablets",
+    "proveedor": "Lenovo"
+  },
+  {
+    "codigo": "P050",
+    "nombre": "Cámara Sony Alpha A7 III",
+    "descripcion": "Espejo sin espejo full-frame, 24.2MP, 4K",
+    "precio": 1999.99,
+    "stock": 6,
+    "categoria": "Fotografía",
+    "proveedor": "Sony"
+  },
+  {
+    "codigo": "P051",
+    "nombre": "Silla Gaming Secretlab Titan",
+    "descripcion": "Cuero sintético, ajuste lumbar, 165° reclinable",
+    "precio": 389.99,
+    "stock": 10,
+    "categoria": "Gaming",
+    "proveedor": "Secretlab"
+  },
+  {
+    "codigo": "P052",
+    "nombre": "Disco SSD NVMe Kingston KC3000 2TB",
+    "descripcion": "7000MB/s lectura, PCIe 4.0 x4",
+    "precio": 229.99,
+    "stock": 15,
+    "categoria": "Almacenamiento",
+    "proveedor": "Kingston"
+  },
+  {
+    "codigo": "P053",
+    "nombre": "Smart TV Sony Bravia XR 75\"",
+    "descripcion": "Mini-LED, Google TV, Cognitive Processor XR",
+    "precio": 2499.99,
+    "stock": 4,
+    "categoria": "Televisores",
+    "proveedor": "Sony"
+  },
+  {
+    "codigo": "P054",
+    "nombre": "Nintendo Switch OLED",
+    "descripcion": "Pantalla OLED 7\", dock con LAN, 64GB almacenamiento",
+    "precio": 349.99,
+    "stock": 12,
+    "categoria": "Gaming",
+    "proveedor": "Nintendo"
+  },
+  {
+    "codigo": "P055",
+    "nombre": "Sistema de Sonido Bose 900",
+    "descripcion": "Soundbar con Dolby Atmos, Alexa integrado",
+    "precio": 899.99,
+    "stock": 7,
+    "categoria": "Audio",
+    "proveedor": "Bose"
+  },
+  {
+    "codigo": "P056",
+    "nombre": "Drone DJI Avata",
+    "descripcion": "FPV, cámara 4K/60fps, modo Inmersive",
+    "precio": 629.99,
+    "stock": 5,
+    "categoria": "Drones",
+    "proveedor": "DJI"
+  },
+  {
+    "codigo": "P057",
+    "nombre": "Proyector Optoma UHD38",
+    "descripcion": "4K UHD, 4000 lúmenes, 240Hz para gaming",
+    "precio": 1299.99,
+    "stock": 3,
+    "categoria": "Proyectores",
+    "proveedor": "Optoma"
+  },
+  {
+    "codigo": "P058",
+    "nombre": "Smart Ring Oura Gen3",
+    "descripcion": "Seguimiento de sueño, temperatura corporal, 7 días batería",
+    "precio": 299.99,
+    "stock": 18,
+    "categoria": "Wearables",
+    "proveedor": "Oura"
+  },
+  {
+    "codigo": "P059",
+    "nombre": "Placa Base ASUS ROG Strix B550-F",
+    "descripcion": "AM4, PCIe 4.0, RGB, Wi-Fi 6",
+    "precio": 179.99,
+    "stock": 14,
+    "categoria": "Componentes",
+    "proveedor": "ASUS"
+  },
+  {
+    "codigo": "P060",
+    "nombre": "Mixer DJ DDJ-400",
+    "descripcion": "Controlador para rekordbox, entrada para micrófono",
+    "precio": 249.99,
+    "stock": 9,
+    "categoria": "Audio",
+    "proveedor": "Pioneer DJ"
+  },
+  {
+    "codigo": "P061",
+    "nombre": "Laptop Microsoft Surface Laptop 4",
+    "descripcion": "13.5\" Touchscreen, AMD Ryzen 5, 8GB RAM, 256GB SSD",
+    "precio": 999.99,
+    "stock": 10,
+    "categoria": "Computadoras",
+    "proveedor": "Microsoft"
+  },
+  {
+    "codigo": "P062",
+    "nombre": "Smartphone OnePlus 10 Pro",
+    "descripcion": "6.7\" LTPO 2.0, Snapdragon 8 Gen 1, Hasselblad camera",
+    "precio": 899.99,
+    "stock": 15,
+    "categoria": "Celulares",
+    "proveedor": "OnePlus"
+  },
+  {
+    "codigo": "P063",
+    "nombre": "Monitor Dell UltraSharp 32\"",
+    "descripcion": "4K UHD, 99% sRGB, USB-C 90W",
+    "precio": 649.99,
+    "stock": 8,
+    "categoria": "Monitores",
+    "proveedor": "Dell"
+  },
+  {
+    "codigo": "P064",
+    "nombre": "Teclado Keychron K8",
+    "descripcion": "Teclado mecánico Bluetooth/USB, hot-swappable, RGB",
+    "precio": 89.99,
+    "stock": 25,
+    "categoria": "Periféricos",
+    "proveedor": "Keychron"
+  },
+  {
+    "codigo": "P065",
+    "nombre": "HDD Seagate IronWolf 8TB",
+    "descripcion": "NAS, 7200 RPM, CMR, 256MB cache",
+    "precio": 199.99,
+    "stock": 12,
+    "categoria": "Almacenamiento",
+    "proveedor": "Seagate"
+  },
+  {
+    "codigo": "P066",
+    "nombre": "Impresora Canon PIXMA TR4520",
+    "descripcion": "All-in-One, Wi-Fi, duplex printing",
+    "precio": 99.99,
+    "stock": 20,
+    "categoria": "Impresoras",
+    "proveedor": "Canon"
+  },
+  {
+    "codigo": "P067",
+    "nombre": "Audífonos Jabra Elite 85t",
+    "descripcion": "ANC ajustable, 6 micrófonos, 25h con estuche",
+    "precio": 179.99,
+    "stock": 30,
+    "categoria": "Audio",
+    "proveedor": "Jabra"
+  },
+  {
+    "codigo": "P068",
+    "nombre": "Mesh Wi-Fi Google Nest",
+    "descripcion": "Sistema de 3 nodos, cobertura 6600 sq ft",
+    "precio": 299.99,
+    "stock": 10,
+    "categoria": "Redes",
+    "proveedor": "Google"
+  },
+  {
+    "codigo": "P069",
+    "nombre": "Tablet Huawei MatePad Pro",
+    "descripcion": "12.6\" OLED, Kirin 9000E, 8GB/256GB",
+    "precio": 699.99,
+    "stock": 8,
+    "categoria": "Tablets",
+    "proveedor": "Huawei"
+  },
+  {
+    "codigo": "P070",
+    "nombre": "Cámara Fujifilm X-T4",
+    "descripcion": "Mirrorless APS-C, IBIS, 4K/60p, 26.1MP",
+    "precio": 1699.99,
+    "stock": 5,
+    "categoria": "Fotografía",
+    "proveedor": "Fujifilm"
+  },
+  {
+    "codigo": "P071",
+    "nombre": "Escritorio Gaming Arozzi Arena",
+    "descripcion": "160x80cm, superficie de mouse extendida, cable management",
+    "precio": 299.99,
+    "stock": 6,
+    "categoria": "Muebles",
+    "proveedor": "Arozzi"
+  },
+  {
+    "codigo": "P072",
+    "nombre": "RAM Corsair Vengeance 32GB",
+    "descripcion": "DDR4 3600MHz, CL18, 2x16GB",
+    "precio": 129.99,
+    "stock": 18,
+    "categoria": "Componentes",
+    "proveedor": "Corsair"
+  },
+  {
+    "codigo": "P073",
+    "nombre": "Smart TV TCL 6-Series 65\"",
+    "descripcion": "QLED, 120Hz, Google TV, Mini-LED",
+    "precio": 999.99,
+    "stock": 7,
+    "categoria": "Televisores",
+    "proveedor": "TCL"
+  },
+  {
+    "codigo": "P074",
+    "nombre": "Steam Deck 512GB",
+    "descripcion": "Handheld gaming PC, 7\" touchscreen, AMD APU",
+    "precio": 649.99,
+    "stock": 5,
+    "categoria": "Gaming",
+    "proveedor": "Valve"
+  },
+  {
+    "codigo": "P075",
+    "nombre": "Subwoofer Klipsch R-120SW",
+    "descripcion": "12\", 400W peak power, frecuencia 29-120Hz",
+    "precio": 249.99,
+    "stock": 9,
+    "categoria": "Audio",
+    "proveedor": "Klipsch"
+  },
+  {
+    "codigo": "P076",
+    "nombre": "Drone Autel EVO Nano+",
+    "descripcion": "249g, cámara 50MP, 3-axis gimbal",
+    "precio": 799.99,
+    "stock": 4,
+    "categoria": "Drones",
+    "proveedor": "Autel Robotics"
+  },
+  {
+    "codigo": "P077",
+    "nombre": "Proyector ViewSonic X10-4K",
+    "descripcion": "4K UHD, 2400 lúmenes, Harman Kardon audio",
+    "precio": 1499.99,
+    "stock": 3,
+    "categoria": "Proyectores",
+    "proveedor": "ViewSonic"
+  },
+  {
+    "codigo": "P078",
+    "nombre": "Smart Glasses Ray-Ban Stories",
+    "descripcion": "Cámara 5MP, audio abierto, asistente de voz",
+    "precio": 299.99,
+    "stock": 12,
+    "categoria": "Wearables",
+    "proveedor": "Ray-Ban"
+  },
+  {
+    "codigo": "P079",
+    "nombre": "Fuente de Poder Corsair RM850x",
+    "descripcion": "850W 80+ Gold, full modular, ventilador silencioso",
+    "precio": 149.99,
+    "stock": 15,
+    "categoria": "Componentes",
+    "proveedor": "Corsair"
+  },
+  {
+    "codigo": "P080",
+    "nombre": "Interface de Audio Focusrite Scarlett 2i2",
+    "descripcion": "3ra gen, 2 entradas XLR/TRS, 24-bit/192kHz",
+    "precio": 169.99,
+    "stock": 10,
+    "categoria": "Audio",
+    "proveedor": "Focusrite"
+  },
+  {
+    "codigo": "P081",
+    "nombre": "Laptop Acer Swift X",
+    "descripcion": "14\" FHD, Ryzen 7 5800U, RTX 3050 Ti, 16GB RAM",
+    "precio": 1099.99,
+    "stock": 8,
+    "categoria": "Computadoras",
+    "proveedor": "Acer"
+  },
+  {
+    "codigo": "P082",
+    "nombre": "Smartphone Xiaomi 12 Pro",
+    "descripcion": "6.73\" AMOLED 120Hz, Snapdragon 8 Gen 1, 120W charging",
+    "precio": 999.99,
+    "stock": 12,
+    "categoria": "Celulares",
+    "proveedor": "Xiaomi"
+  },
+  {
+    "codigo": "P083",
+    "nombre": "Monitor Gigabyte M32U",
+    "descripcion": "32\" 4K 144Hz, HDMI 2.1, KVM, 90% DCI-P3",
+    "precio": 799.99,
+    "stock": 6,
+    "categoria": "Monitores",
+    "proveedor": "Gigabyte"
+  },
+  {
+    "codigo": "P084",
+    "nombre": "Mouse Logitech MX Master 3",
+    "descripcion": "Ergonómico, scroll electromagnético, multi-device",
+    "precio": 99.99,
+    "stock": 25,
+    "categoria": "Periféricos",
+    "proveedor": "Logitech"
+  },
+  {
+    "codigo": "P085",
+    "nombre": "SSD Crucial P5 Plus 1TB",
+    "descripcion": "PCIe 4.0 NVMe, 6600MB/s, cifrado hardware",
+    "precio": 139.99,
+    "stock": 20,
+    "categoria": "Almacenamiento",
+    "proveedor": "Crucial"
+  },
+  {
+    "codigo": "P086",
+    "nombre": "Impresora 3D Creality Ender 3 V2",
+    "descripcion": "220x220x250mm, pantalla a color, silent motherboard",
+    "precio": 269.99,
+    "stock": 7,
+    "categoria": "Impresoras",
+    "proveedor": "Creality"
+  },
+  {
+    "codigo": "P087",
+    "nombre": "Estudio de Grabación Rode NT-USB+",
+    "descripcion": "Micrófono USB, monitorización cero latencia, pop shield",
+    "precio": 199.99,
+    "stock": 9,
+    "categoria": "Audio",
+    "proveedor": "Rode"
+  },
+  {
+    "codigo": "P088",
+    "nombre": "Firewall Ubiquiti UniFi Dream Machine",
+    "descripcion": "Router security gateway, IDS/IPS, 850Mbps throughput",
+    "precio": 299.99,
+    "stock": 5,
+    "categoria": "Redes",
+    "proveedor": "Ubiquiti"
+  },
+  {
+    "codigo": "P089",
+    "nombre": "Tablet Amazon Fire HD 10",
+    "descripcion": "10.1\" 1080p, 32GB, Alexa hands-free",
+    "precio": 149.99,
+    "stock": 30,
+    "categoria": "Tablets",
+    "proveedor": "Amazon"
+  },
+  {
+    "codigo": "P090",
+    "nombre": "Cámara Instax Mini 11",
+    "descripcion": "Fotos instantáneas, modo selfie, carga automática flash",
+    "precio": 69.99,
+    "stock": 40,
+    "categoria": "Fotografía",
+    "proveedor": "Fujifilm"
+  },
+  {
+    "codigo": "P091",
+    "nombre": "Lámpara LED BenQ ScreenBar",
+    "descripcion": "Iluminación para escritorio, sensor de luz automático",
+    "precio": 99.99,
+    "stock": 15,
+    "categoria": "Iluminación",
+    "proveedor": "BenQ"
+  },
+  {
+    "codigo": "P092",
+    "nombre": "Cooler CPU Noctua NH-D15",
+    "descripcion": "Doble torre, 6 heatpipes, ventiladores NF-A15",
+    "precio": 89.99,
+    "stock": 12,
+    "categoria": "Componentes",
+    "proveedor": "Noctua"
+  },
+  {
+    "codigo": "P093",
+    "nombre": "Smart TV Philips Ambilight 55\"",
+    "descripcion": "OLED, Android TV, iluminación ambiental",
+    "precio": 1299.99,
+    "stock": 5,
+    "categoria": "Televisores",
+    "proveedor": "Philips"
+  },
+  {
+    "codigo": "P094",
+    "nombre": "Meta Quest 2 256GB",
+    "descripcion": "Realidad virtual, 1832x1920 por ojo, Snapdragon XR2",
+    "precio": 399.99,
+    "stock": 8,
+    "categoria": "Gaming",
+    "proveedor": "Meta"
+  },
+  {
+    "codigo": "P095",
+    "nombre": "Monitores KRK Rokit 5 G4",
+    "descripcion": "Estudio 5\", woofer de vidrio, DSP avanzado",
+    "precio": 179.99,
+    "stock": 10,
+    "categoria": "Audio",
+    "proveedor": "KRK"
+  },
+  {
+    "codigo": "P096",
+    "nombre": "Drone Holy Stone HS720E",
+    "descripcion": "4K UHD, GPS, 26min vuelo, control de gestos",
+    "precio": 299.99,
+    "stock": 7,
+    "categoria": "Drones",
+    "proveedor": "Holy Stone"
+  },
+  {
+    "codigo": "P097",
+    "nombre": "Proyector Anker Nebula Mars II",
+    "descripcion": "Portátil 720p, Android 7.1, batería 3h",
+    "precio": 499.99,
+    "stock": 6,
+    "categoria": "Proyectores",
+    "proveedor": "Anker"
+  },
+  {
+    "codigo": "P098",
+    "nombre": "Fitness Tracker Garmin Vivosmart 5",
+    "descripcion": "Monitor de estrés, SpO2, 7 días batería",
+    "precio": 149.99,
+    "stock": 20,
+    "categoria": "Wearables",
+    "proveedor": "Garmin"
+  },
+  {
+    "codigo": "P099",
+    "nombre": "Tarjeta de Video AMD RX 6700 XT",
+    "descripcion": "12GB GDDR6, 1440p gaming, ray tracing",
+    "precio": 479.99,
+    "stock": 6,
+    "categoria": "Componentes",
+    "proveedor": "AMD"
+  },
+  {
+    "codigo": "P100",
+    "nombre": "Micrófono Rode Wireless Go II",
+    "descripcion": "Sistema inalámbrico, grabación dual, 7h batería",
+    "precio": 299.99,
+    "stock": 8,
+    "categoria": "Audio",
+    "proveedor": "Rode"
+  },
+  {
+    "codigo": "P101",
+    "nombre": "Laptop Lenovo ThinkPad X1 Carbon",
+    "descripcion": "14\" WUXGA, Intel Core i7, 16GB RAM, 1TB SSD",
+    "precio": 1599.99,
+    "stock": 6,
+    "categoria": "Computadoras",
+    "proveedor": "Lenovo"
+  },
+  {
+    "codigo": "P102",
+    "nombre": "Smartphone ASUS ROG Phone 6",
+    "descripcion": "6.78\" 165Hz, Snapdragon 8+ Gen 1, 6000mAh",
+    "precio": 1099.99,
+    "stock": 5,
+    "categoria": "Celulares",
+    "proveedor": "ASUS"
+  },
+  {
+    "codigo": "P103",
+    "nombre": "Monitor Alienware AW3423DW",
+    "descripcion": "34\" QD-OLED, 175Hz, 0.1ms, NVIDIA G-Sync Ultimate",
+    "precio": 1299.99,
+    "stock": 4,
+    "categoria": "Monitores",
+    "proveedor": "Alienware"
+  },
+  {
+    "codigo": "P104",
+    "nombre": "Teclado Razer BlackWidow V3",
+    "descripcion": "Mecánico, switches verdes, reposamuñecas magnético",
+    "precio": 139.99,
+    "stock": 15,
+    "categoria": "Periféricos",
+    "proveedor": "Razer"
+  },
+  {
+    "codigo": "P105",
+    "nombre": "NAS QNAP TS-453D",
+    "descripcion": "4 bahías, Intel Celeron, 4GB RAM, 2.5GbE",
+    "precio": 599.99,
+    "stock": 5,
+    "categoria": "Almacenamiento",
+    "proveedor": "QNAP"
+  },
+  {
+    "codigo": "P106",
+    "nombre": "Impresora Brother HL-L8360CDW",
+    "descripcion": "Láser color, A3, duplex automático, Wi-Fi",
+    "precio": 499.99,
+    "stock": 4,
+    "categoria": "Impresoras",
+    "proveedor": "Brother"
+  },
+  {
+    "codigo": "P107",
+    "nombre": "Audífonos Audio-Technica ATH-M50x",
+    "descripcion": "Estudio, cerrados, 15Hz-28kHz, 38Ω",
+    "precio": 149.99,
+    "stock": 25,
+    "categoria": "Audio",
+    "proveedor": "Audio-Technica"
+  },
+  {
+    "codigo": "P108",
+    "nombre": "Switch PoE Netgear GS308P",
+    "descripcion": "8 puertos Gigabit, 4 PoE+, 64W total",
+    "precio": 99.99,
+    "stock": 12,
+    "categoria": "Redes",
+    "proveedor": "Netgear"
+  },
+  {
+    "codigo": "P109",
+    "nombre": "Tablet Microsoft Surface Pro 8",
+    "descripcion": "13\" 120Hz, Intel Core i5, 8GB RAM, 128GB SSD",
+    "precio": 1099.99,
+    "stock": 7,
+    "categoria": "Tablets",
+    "proveedor": "Microsoft"
+  },
+  {
+    "codigo": "P110",
+    "nombre": "Cámara Nikon Z5",
+    "descripcion": "Mirrorless full-frame, 4K, IBIS, 24.3MP",
+    "precio": 1399.99,
+    "stock": 5,
+    "categoria": "Fotografía",
+    "proveedor": "Nikon"
+  }
+]
