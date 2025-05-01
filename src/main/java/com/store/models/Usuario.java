@@ -101,7 +101,7 @@ public class Usuario {
         this.telefono = telefono;
     }
     
-    public boolean isEstadoActivo() {
+    public boolean getEstado() {
         return estadoActivo;
     }
 

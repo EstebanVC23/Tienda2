@@ -26,7 +26,7 @@ public class UsuarioServicio {
         Usuario usuarioEncontrado = usuarioRepositorio.obtenerUsuarioPorEmail(usuario.getEmail());
         return usuarioEncontrado != null 
                 && PasswordUtils.verify(usuario.getPassword(), usuarioEncontrado.getPassword()) 
-                && usuarioEncontrado.isEstadoActivo();
+                && usuarioEncontrado.getEstado();
     }
 
     public boolean registrarUsuario(Usuario usuario) {

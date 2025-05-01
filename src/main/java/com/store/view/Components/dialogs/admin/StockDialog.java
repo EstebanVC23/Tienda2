@@ -1,0 +1,162 @@
+package com.store.view.components.dialogs.admin;
+
+import com.store.models.Producto;
+import com.store.services.ProductoServicio;
+import com.store.utils.Colors;
+import com.store.utils.Fonts;
+import com.store.view.components.FormStyler;
+import com.store.view.components.buttons.CustomButton;
+import com.store.view.components.dialogs.constants.StockDialogConstants;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.EmptyBorder;
+
+public class StockDialog extends JDialog {
+    private final Producto producto;
+    private final ProductoServicio productoServicio;
+    private final StockDialogConstants constants;
+    
+    private JSpinner cantidadSpinner;
+    private JRadioButton addButton;
+    private JRadioButton removeButton;
+
+    public StockDialog(JFrame parent, Producto producto, ProductoServicio productoServicio) {
+        super(parent, "Gestionar Stock", true);
+        this.producto = producto;
+        this.productoServicio = productoServicio;
+        this.constants = new StockDialogConstants();
+        
+        initUI();
+        setupLayout();
+        setupListeners();
+    }
+
+    private void initUI() {
+        setSize(constants.WIDTH, constants.HEIGHT);
+        setLocationRelativeTo(getOwner());
+        setResizable(false);
+    }
+
+    private void setupLayout() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        mainPanel.setBackground(Colors.BACKGROUND);
+        
+        // Panel de información
+        JPanel infoPanel = createInfoPanel();
+        mainPanel.add(infoPanel, BorderLayout.NORTH);
+        
+        // Panel de formulario
+        JPanel formPanel = FormStyler.createFormPanel();
+        formPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Colors.BORDER));
+        
+        // Campos del formulario
+        cantidadSpinner = addSpinner(formPanel, "Cantidad:", 0, 1, 0, 9999);
+        addRadioButtons(formPanel);
+        
+        mainPanel.add(formPanel, BorderLayout.CENTER);
+        mainPanel.add(createButtonPanel(), BorderLayout.SOUTH);
+        add(mainPanel);
+    }
+
+    private JPanel createInfoPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(Colors.BACKGROUND);
+        panel.setBorder(new EmptyBorder(0, 0, 15, 0));
+        
+        JLabel nameLabel = new JLabel(producto.getNombre());
+        nameLabel.setFont(Fonts.SUBTITLE);
+        nameLabel.setForeground(Colors.PRIMARY_TEXT);
+        
+        JLabel detailsLabel = new JLabel(String.format(
+            "<html>Código: <b>%s</b> • Stock actual: <b style='color:%s'>%d</b></html>",
+            producto.getCodigo(),
+            producto.getStock() < constants.LOW_STOCK_THRESHOLD ? "#e53935" : "#43a047",
+            producto.getStock()
+        ));
+        detailsLabel.setFont(Fonts.BODY);
+        detailsLabel.setForeground(Colors.SECONDARY_TEXT);
+        
+        panel.add(nameLabel, BorderLayout.NORTH);
+        panel.add(detailsLabel, BorderLayout.SOUTH);
+        return panel;
+    }
+
+    private JSpinner addSpinner(JPanel panel, String label, int value, int step, int min, int max) {
+        panel.add(FormStyler.createFormLabel(label));
+        JSpinner spinner = FormStyler.createFormSpinner();
+        SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step);
+        spinner.setModel(model);
+        panel.add(spinner);
+        panel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
+        return spinner;
+    }
+
+    private void addRadioButtons(JPanel panel) {
+        JPanel radioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
+        radioPanel.setBackground(Colors.PANEL_BACKGROUND);
+        
+        addButton = new JRadioButton("Agregar stock");
+        removeButton = new JRadioButton("Quitar stock");
+        
+        ButtonGroup group = new ButtonGroup();
+        group.add(addButton);
+        group.add(removeButton);
+        addButton.setSelected(true);
+        
+        styleRadioButton(addButton);
+        styleRadioButton(removeButton);
+        
+        radioPanel.add(addButton);
+        radioPanel.add(removeButton);
+        
+        panel.add(radioPanel);
+    }
+
+    private void styleRadioButton(JRadioButton radio) {
+        radio.setFont(Fonts.BODY);
+        radio.setBackground(Colors.PANEL_BACKGROUND);
+        radio.setFocusPainted(false);
+        radio.setIcon(UIManager.getIcon("RadioButton.icon"));
+        radio.setSelectedIcon(UIManager.getIcon("RadioButton.selectedIcon"));
+    }
+
+    private JPanel createButtonPanel() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        panel.setBackground(Colors.BACKGROUND);
+        panel.setBorder(new EmptyBorder(10, 0, 0, 0));
+        
+        CustomButton cancelButton = new CustomButton("Cancelar", Colors.SECONDARY_GRAY);
+        cancelButton.addActionListener(_ -> dispose());
+        
+        CustomButton saveButton = new CustomButton("Aplicar", Colors.PRIMARY_BLUE);
+        saveButton.addActionListener(_ -> updateStock());
+        
+        panel.add(cancelButton);
+        panel.add(saveButton);
+        return panel;
+    }
+
+    private void setupListeners() {
+        // Validaciones adicionales si son necesarias
+    }
+
+    private void updateStock() {
+        try {
+            int cantidad = (Integer) cantidadSpinner.getValue();
+            if (removeButton.isSelected()) cantidad = -cantidad;
+            
+            boolean success = productoServicio.actualizarStock(producto.getCodigo(), cantidad);
+            
+            if (success) {
+                JOptionPane.showMessageDialog(this, constants.SUCCESS_MESSAGE, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, constants.ERROR_MESSAGE, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, constants.INVALID_NUMBER_MESSAGE, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}

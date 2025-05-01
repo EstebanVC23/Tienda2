@@ -7,10 +7,10 @@
     "tipoDocumento": "DNI",
     "numeroDocumento": "12345678",
     "direccion": "Av. Principal 123",
-    "telefono": "+51987654321",
+    "telefono": "+573185740578",
     "password": "5ZXt9pKy/U/PhWUtdFOcppCYsCAwNmIOk9MyoqssIG8Tr1tLr9jLkIk3LsDkUEX/",
-    "rol": "USER",
-    "estadoActivo": true
+    "rol": "Administrador",
+    "estadoActivo": false
   },
   {
     "id": 2,
@@ -1436,10 +1436,23 @@
     "email": "root",
     "tipoDocumento": "DNI",
     "numeroDocumento": "00000000",
-    "direccion": "Av. Principal 123",
+    "direccion": "",
     "telefono": "+999999999",
-    "password": "t2uwJC8XrNlRu2LVs80ijKb3iWT8+99IGxA8MgsbMgKZ7evVhME4bHtUt5XSnKxv",
+    "password": "EzIp8tb7OH45VNpgnuf887m9Sg7uA3XVwcTC0GkVcrC+TRVwnIFm6GR+21jZ3ezR",
     "rol": "ADMIN",
+    "estadoActivo": true
+  },
+  {
+    "id": 1000,
+    "nombre": "Marisol",
+    "apellido": "Vargas",
+    "email": "mari",
+    "tipoDocumento": "DNI",
+    "numeroDocumento": "111505",
+    "direccion": "",
+    "telefono": "136265285",
+    "password": "osGEaKqQZLkqJNrtZZqQOjv0B83tKZ+o2Q1EwAv8Pw1mksHxPwqe4gx7vxCPhTP4",
+    "rol": "Almacenero",
     "estadoActivo": true
   }
 ]

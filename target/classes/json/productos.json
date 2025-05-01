@@ -3,9 +3,9 @@
     "codigo": "P001",
     "nombre": "Laptop HP Pavilion",
     "descripcion": "Laptop HP Pavilion 15.6\" FHD, Intel Core i7, 16GB RAM, 512GB SSD",
-    "precio": 899.99,
+    "precio": 900.0,
     "stock": 20,
-    "categoria": "Computadoras",
+    "categoria": "Wearables",
     "proveedor": "HP Inc."
   },
   {

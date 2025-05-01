@@ -1,26 +1,22 @@
 package com.store.view.components.cards;
 
+import com.store.utils.Colors;
+import com.store.utils.Fonts;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class UserInfoCard extends JPanel {
+public class UserInfoCard extends BaseCard {
     public UserInfoCard(String label, String value) {
-        setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
-        setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(230, 230, 230)),
-            BorderFactory.createEmptyBorder(8, 15, 8, 15)
-        ));
+        super();
         
-        JLabel labelText = new JLabel(label);
-        labelText.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        labelText.setForeground(new Color(100, 100, 100));
-        
-        JLabel valueText = new JLabel(value);
-        valueText.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        valueText.setForeground(new Color(60, 60, 60));
+        JLabel labelText = createLabel(label, Fonts.SMALL, Colors.SECONDARY_TEXT);
+        JLabel valueText = createLabel(value, Fonts.BODY, Colors.PRIMARY_TEXT);
         
         add(labelText, BorderLayout.NORTH);
         add(valueText, BorderLayout.CENTER);
+        
+        // Eliminar el efecto hover si no es necesario
+        setCursor(Cursor.getDefaultCursor());
     }
 }

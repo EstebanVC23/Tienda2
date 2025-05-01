@@ -3,129 +3,110 @@ package com.store.view.AdminView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
-import com.store.view.UserProfilePanel;
-import com.store.view.AdminView.panels.*;
-import com.store.view.components.NavBar.*;
+import com.store.view.components.NavBar.Navbar;
 import com.store.Auth.Login;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class AdminView extends JFrame {
-    private Usuario usuario;
-    private UsuarioServicio usuarioServicio;
-    private ProductoServicio productoServicio;
-    private JPanel mainContent;
-    
-    public AdminView(Usuario usuario, UsuarioServicio usuarioServicio, ProductoServicio productoServicio) {
-        this.productoServicio = productoServicio;
-        this.usuario = usuario;
-        this.usuarioServicio = usuarioServicio;
+
+    private final Usuario usuario;
+    private final UsuarioServicio usuarioServicio;
+    private final ProductoServicio productoServicio;
+    private final JPanel mainContent;
+    private final AdminContentManager contentManager;
+
+    private enum AdminPanel {
+        DASHBOARD("Dashboard"), 
+        USERS("Usuarios"), 
+        PRODUCTS("Productos");
         
-        setTitle("Panel de Administración");
-        setSize(1000, 700);
+        private final String label;
+        
+        AdminPanel(String label) {
+            this.label = label;
+        }
+        
+        public String getLabel() {
+            return label;
+        }
+    }
+
+    public AdminView(Usuario usuario, UsuarioServicio usuarioServicio, ProductoServicio productoServicio) {
+        if (!usuario.getRol().equals("ADMIN")) {
+            throw new IllegalArgumentException("El usuario no tiene permisos de administrador");
+        }
+
+        this.usuario = usuario;
+        this.productoServicio = productoServicio;
+        this.usuarioServicio = usuarioServicio;
+        this.mainContent = new JPanel(new BorderLayout());
+        this.contentManager = new AdminContentManager(
+            mainContent, 
+            usuario, 
+            usuarioServicio, 
+            productoServicio
+        );
+
+        configureWindow();
+        initUI();
+    }
+    
+    private void configureWindow() {
+        setTitle("Panel de Administración - " + usuario.getNombre());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+    }
+    
+    private void initUI() {
+        String[] navOptions = {
+            AdminPanel.DASHBOARD.getLabel(),
+            AdminPanel.USERS.getLabel(),
+            AdminPanel.PRODUCTS.getLabel()
+        };
         
-        String[] navOptions = {"Dashboard", "Usuarios", "Productos"};
+        Navbar navBar = new Navbar(this::handleNavigation, navOptions);
         
-        Navbar navBar = new Navbar(
-            e -> handleNavigation(e.getActionCommand()),
-            navOptions
-        );
+        LogoutPanel logoutPanel = new LogoutPanel(this::handleLogout);
         
-        mainContent = new JPanel(new BorderLayout());
-        mainContent.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        mainContent.setBackground(new Color(240, 245, 249));
-        
-        // Panel para el botón de cerrar sesión
-        JPanel logoutPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        logoutPanel.setBackground(new Color(240, 245, 249));
-        
-        JButton logoutButton = new JButton("Cerrar Sesión");
-        logoutButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        logoutButton.setBackground(new Color(220, 53, 69));
-        logoutButton.setForeground(Color.WHITE);
-        logoutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        logoutButton.setFocusPainted(false);
-        logoutButton.addActionListener(_ -> handleLogout());
-        
-        logoutPanel.add(logoutButton);
-        
-        showDashboardPanel();
+        contentManager.showDashboard();
         
         add(navBar, BorderLayout.NORTH);
         add(mainContent, BorderLayout.CENTER);
         add(logoutPanel, BorderLayout.SOUTH);
     }
     
-    private void handleNavigation(String option) {
-        mainContent.removeAll();
-        
+    private void handleNavigation(ActionEvent e) {
+        String option = e.getActionCommand();
         switch (option) {
             case "Dashboard":
-                showDashboardPanel();
+                contentManager.showDashboard();
                 break;
             case "Usuarios":
-                showUsersPanel();
+                contentManager.showUsersPanel();
                 break;
             case "Productos":
-                showProductPanel();
+                contentManager.showProductsPanel();
                 break;
         }
-        
-        mainContent.revalidate();
-        mainContent.repaint();
     }
     
-    private void showDashboardPanel() {
-        JPanel dashboardPanel = new JPanel(new BorderLayout());
-        dashboardPanel.setBackground(new Color(240, 245, 249));
+    private void handleLogout(ActionEvent e) {
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro que desea cerrar sesión?",
+            "Confirmar cierre de sesión",
+            JOptionPane.YES_NO_OPTION
+        );
         
-        JLabel welcomeLabel = new JLabel("Bienvenido al Panel de Administración");
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
-        welcomeLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        
-        dashboardPanel.add(welcomeLabel, BorderLayout.NORTH);
-        dashboardPanel.add(new UserProfilePanel(usuario), BorderLayout.CENTER);
-        
-        mainContent.add(dashboardPanel, BorderLayout.CENTER);
-    }
-    
-    private void showUsersPanel() {
-        JPanel usersPanel = new JPanel(new BorderLayout());
-        usersPanel.setBackground(new Color(240, 245, 249));
-        
-        JLabel titleLabel = new JLabel("Gestión de Usuarios");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        
-        usersPanel.add(titleLabel, BorderLayout.NORTH);
-        usersPanel.add(new UsersPanel(usuarioServicio), BorderLayout.CENTER);
-
-        mainContent.add(usersPanel, BorderLayout.CENTER);
-    }
-
-    private void showProductPanel() {
-        JPanel productPanel = new JPanel(new BorderLayout());
-        productPanel.setBackground(new Color(240, 245, 249));
-        
-        JLabel titleLabel = new JLabel("Gestión de Productos");
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        
-        productPanel.add(titleLabel, BorderLayout.NORTH);
-        productPanel.add(new ProductosPanel(productoServicio), BorderLayout.CENTER);
-
-        mainContent.add(productPanel, BorderLayout.CENTER);
-    }
-    
-    private void handleLogout() {
-        new Login(usuarioServicio, productoServicio).setVisible(true);
-        dispose();
+        if (confirm == JOptionPane.YES_OPTION) {
+            new Login(usuarioServicio, productoServicio).setVisible(true);
+            dispose();
+        }
     }
 }

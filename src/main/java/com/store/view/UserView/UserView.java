@@ -3,8 +3,9 @@ package com.store.view.UserView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
-import com.store.view.UserProfilePanel;
 import com.store.view.components.NavBar.*;
+import com.store.view.panels.profile.UserProfilePanel;
+import com.store.view.panels.users.ProductosClientePanel;
 import com.store.Auth.Login;
 
 import javax.swing.*;
@@ -16,15 +17,18 @@ public class UserView extends JFrame {
     private ProductoServicio productoServicio;
     private JPanel mainContent;
     
-    public UserView(Usuario usuario, ProductoServicio productoServicio) {
+    public UserView(Usuario usuario, ProductoServicio productoServicio, UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
         this.usuario = usuario;
         
         setTitle("Panel de Usuario");
-        setSize(1000, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+
         
         String[] navOptions = {"Productos", "Dashboard"};
         
@@ -84,7 +88,7 @@ public class UserView extends JFrame {
         welcomeLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         
         dashboardPanel.add(welcomeLabel, BorderLayout.NORTH);
-        dashboardPanel.add(new UserProfilePanel(usuario), BorderLayout.CENTER);
+        dashboardPanel.add(new UserProfilePanel(usuarioServicio, usuario), BorderLayout.CENTER);
         
         mainContent.add(dashboardPanel, BorderLayout.CENTER);
     }

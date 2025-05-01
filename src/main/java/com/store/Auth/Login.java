@@ -109,7 +109,7 @@ public class Login extends JFrame {
                             AdminView adminPage = new AdminView(dataUser, usuarioServicio, productoServicio);
                             adminPage.setVisible(true);
                         } else {
-                            UserView userPage = new UserView(dataUser, productoServicio);
+                            UserView userPage = new UserView(dataUser, productoServicio, usuarioServicio);
                             userPage.setVisible(true);
                         }
 
