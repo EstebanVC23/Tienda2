@@ -1454,5 +1454,18 @@
     "password": "8V8kAeDpr+/hHWPBpHlQ06uhbWx5eXM0WorwbfT/YRDIpCLgPPhk1GKRz8yYZ9xG",
     "rol": "USER",
     "estadoActivo": true
+  },
+  {
+    "id": 1562158,
+    "nombre": "el hijueputa",
+    "apellido": "jodase",
+    "email": "arros",
+    "tipoDocumento": "DNI",
+    "numeroDocumento": "111111",
+    "direccion": "erferbtyhgvtmyt",
+    "telefono": "1324536",
+    "password": "kvnrnaSE8h0xN/wTQzw9fiTfHCsUfjFm7THyI2vJMm0DEiFBiJCLz4CXup1pRekp",
+    "rol": "USER",
+    "estadoActivo": true
   }
 ]
