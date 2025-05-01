@@ -2,8 +2,8 @@ package com.store.view.panels.admin;
 
 import com.store.models.Usuario;
 import com.store.services.UsuarioServicio;
-import com.store.view.components.CustomTable;
 import com.store.view.components.filters.AdminFilterPanel;
+import com.store.view.components.tables.CustomTable;
 import com.store.view.components.dialogs.admin.UserFormDialog;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

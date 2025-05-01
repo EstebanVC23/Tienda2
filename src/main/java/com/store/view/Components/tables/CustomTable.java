@@ -1,4 +1,4 @@
-package com.store.view.components;
+package com.store.view.components.tables;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

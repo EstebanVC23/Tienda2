@@ -3,8 +3,9 @@ package com.store.view.panels.admin;
 import com.store.view.panels.BasePanel;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.buttons.CustomButton;
-import com.store.view.components.CustomTable;
 import com.store.view.components.filters.AdminFilterPanel;
+import com.store.view.components.tables.CustomTable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

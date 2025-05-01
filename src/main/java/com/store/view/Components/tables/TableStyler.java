@@ -1,4 +1,4 @@
-package com.store.view.components;
+package com.store.view.components.tables;
 
 import com.store.utils.Colors;
 import com.store.utils.Fonts;

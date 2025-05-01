@@ -1,7 +1,7 @@
 package com.store.view.panels;
 
-import com.store.view.components.CustomTable;
 import com.store.view.components.filters.AdminFilterPanel;
+import com.store.view.components.tables.CustomTable;
 
 import javax.swing.*;
 import java.awt.*;
