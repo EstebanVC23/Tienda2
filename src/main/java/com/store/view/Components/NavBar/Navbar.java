@@ -48,7 +48,7 @@ public class Navbar extends JPanel {
                 g2.setColor(Color.WHITE);
                 g2.setFont(new Font("Segoe UI", Font.BOLD, 14));
                 FontMetrics fm = g2.getFontMetrics();
-                String text = "DB";
+                String text = "MC";
                 int x = (getWidth() - fm.stringWidth(text)) / 2;
                 int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
                 g2.drawString(text, x, y);
@@ -57,7 +57,7 @@ public class Navbar extends JPanel {
         };
         logoIcon.setPreferredSize(new Dimension(32, 32));
         
-        JLabel logoLabel = new JLabel("DASHBOARD");
+        JLabel logoLabel = new JLabel("MotoCoreBD");
         logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         logoLabel.setForeground(Colors.DARK_BLUE);
         

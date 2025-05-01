@@ -1,18 +1,5 @@
 [
   {
-    "id": 1,
-    "nombre": "Esteban",
-    "apellido": "Vasquez",
-    "email": "esvca",
-    "tipoDocumento": "DNI",
-    "numeroDocumento": "12345678",
-    "direccion": "Av. Principal 123",
-    "telefono": "+573185740578",
-    "password": "5ZXt9pKy/U/PhWUtdFOcppCYsCAwNmIOk9MyoqssIG8Tr1tLr9jLkIk3LsDkUEX/",
-    "rol": "Administrador",
-    "estadoActivo": false
-  },
-  {
     "id": 2,
     "nombre": "María",
     "apellido": "González",
@@ -1438,21 +1425,34 @@
     "numeroDocumento": "00000000",
     "direccion": "",
     "telefono": "+999999999",
-    "password": "EzIp8tb7OH45VNpgnuf887m9Sg7uA3XVwcTC0GkVcrC+TRVwnIFm6GR+21jZ3ezR",
+    "password": "odfRgQVIK1jb4FCu1T7wJmSFiRCaHiu89CyATyO9etKtqRzweoc6tCNrOO2aVm8X",
     "rol": "ADMIN",
     "estadoActivo": true
   },
   {
-    "id": 1000,
-    "nombre": "Marisol",
-    "apellido": "Vargas",
+    "id": 1562156,
+    "nombre": "marisol",
+    "apellido": "vargas",
     "email": "mari",
     "tipoDocumento": "DNI",
-    "numeroDocumento": "111505",
-    "direccion": "",
-    "telefono": "136265285",
-    "password": "osGEaKqQZLkqJNrtZZqQOjv0B83tKZ+o2Q1EwAv8Pw1mksHxPwqe4gx7vxCPhTP4",
-    "rol": "Almacenero",
+    "numeroDocumento": "8651856215",
+    "direccion": "papa",
+    "telefono": "652851265",
+    "password": "bambTLa+gj3xkFm+4muzJX4PdjS7h7yZNdV2Tv4iIlsgKgJT103A95xJ1Tg7DVj0",
+    "rol": "ADMIN",
+    "estadoActivo": true
+  },
+  {
+    "id": 1562157,
+    "nombre": "Esteban",
+    "apellido": "Vasquez",
+    "email": "esvca",
+    "tipoDocumento": "DNI",
+    "numeroDocumento": "68545",
+    "direccion": "afdfad",
+    "telefono": "654198",
+    "password": "8V8kAeDpr+/hHWPBpHlQ06uhbWx5eXM0WorwbfT/YRDIpCLgPPhk1GKRz8yYZ9xG",
+    "rol": "USER",
     "estadoActivo": true
   }
 ]

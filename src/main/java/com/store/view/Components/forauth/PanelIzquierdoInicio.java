@@ -1,4 +1,4 @@
-package com.store.Auth;
+package com.store.view.components.forauth;
 
 import javax.swing.*;
 import java.awt.*;

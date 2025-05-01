@@ -1,8 +1,8 @@
 package com.store;
 
-import com.store.Auth.Login;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
+import com.store.view.Auth.Login;
 
 /**
  * Clase principal de la aplicación.

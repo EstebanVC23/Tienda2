@@ -3,8 +3,8 @@ package com.store.view.AdminView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
+import com.store.view.Auth.Login;
 import com.store.view.components.NavBar.Navbar;
-import com.store.Auth.Login;
 
 import javax.swing.*;
 import java.awt.*;

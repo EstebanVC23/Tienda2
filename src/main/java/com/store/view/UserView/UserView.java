@@ -3,10 +3,10 @@ package com.store.view.UserView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
+import com.store.view.Auth.Login;
 import com.store.view.components.NavBar.*;
 import com.store.view.panels.profile.UserProfilePanel;
 import com.store.view.panels.users.ProductosClientePanel;
-import com.store.Auth.Login;
 
 import javax.swing.*;
 import java.awt.*;

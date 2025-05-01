@@ -1,10 +1,13 @@
-package com.store.Auth;
+package com.store.view.Auth;
 
 import javax.swing.*;
 import com.store.models.*;
 import com.store.services.*;
 import com.store.view.AdminView.AdminView;
 import com.store.view.UserView.UserView;
+import com.store.view.components.buttons.Boton;
+import com.store.view.components.forauth.CampoEntrada;
+import com.store.view.components.forauth.PanelIzquierdoInicio;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -72,8 +75,8 @@ public class Login extends JFrame {
         int ancho = 400;
         int alto = 30;
 
-        campoCorreo = new CampoEntrada("texto", "Correo electrónico", "✉", ancho, alto);
-        campoPassword = new CampoEntrada("password", "Contraseña", "🔒", ancho, alto);
+        campoCorreo = new CampoEntrada("texto", "Correo electrónico", ancho, alto);
+        campoPassword = new CampoEntrada("password", "Contraseña", ancho, alto);
         botonIngresar = new Boton("INGRESAR", 150, 40, 13, 1);
         botonRegistrarse = new Boton("¿No tienes cuenta? Regístrate", 0, 0, 12, 2);
 

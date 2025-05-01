@@ -1,4 +1,4 @@
-package com.store.Auth;
+package com.store.view.components.buttons;
 
 import javax.swing.*;
 import java.awt.*;

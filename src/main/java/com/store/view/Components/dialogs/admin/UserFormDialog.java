@@ -4,6 +4,7 @@ import com.store.models.Usuario;
 import com.store.services.UsuarioServicio;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
+import com.store.utils.PasswordUtils;
 import com.store.view.components.FormStyler;
 import com.store.view.components.buttons.CustomButton;
 import com.store.view.components.dialogs.constants.UserFormDialogConstants;
@@ -21,19 +22,24 @@ public class UserFormDialog extends JDialog {
     
     private JPanel formPanel;
     private JLabel errorLabel;
+    private JPasswordField passwordField;
+    private JPasswordField confirmPasswordField;
+    private boolean isNewUser;
 
     public UserFormDialog(Window parent, Usuario usuario, UsuarioServicio usuarioServicio) {
         super(parent, usuario == null ? "Nuevo Usuario" : "Editar Usuario", ModalityType.APPLICATION_MODAL);
         this.usuarioServicio = usuarioServicio;
         this.userToEdit = usuario == null ? new Usuario() : usuario;
         this.constants = new UserFormDialogConstants();
+        this.isNewUser = usuario == null;
         
         initUI();
         setupLayout();
     }
 
     private void initUI() {
-        setSize(constants.WIDTH, constants.HEIGHT);
+        // Ajustar altura según si es nuevo usuario (800px) o edición (650px)
+        setSize(constants.WIDTH, isNewUser ? constants.HEIGHT_CREATE : constants.HEIGHT_EDIT);
         setLocationRelativeTo(getOwner());
         setResizable(false);
     }
@@ -59,6 +65,12 @@ public class UserFormDialog extends JDialog {
             Arrays.asList("Administrador", "Vendedor", "Almacenero"), 
             userToEdit.getRol());
         
+        // Campos de contraseña solo para nuevo usuario
+        if (isNewUser) {
+            passwordField = addPasswordField("Contraseña:");
+            confirmPasswordField = addPasswordField("Confirmar Contraseña:");
+        }
+        
         JCheckBox estadoCheck = createStatusCheckbox();
         addCustomField("", estadoCheck);
         
@@ -75,6 +87,19 @@ public class UserFormDialog extends JDialog {
                        telefonoField, rolCombo, docPanel, estadoCheck), 
                      BorderLayout.SOUTH);
         add(mainPanel);
+    }
+
+    private JPasswordField addPasswordField(String label) {
+        formPanel.add(FormStyler.createFormLabel(label));
+        JPasswordField field = new JPasswordField();
+        field.setFont(Fonts.BODY);
+        field.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(Colors.BORDER),
+            BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+        formPanel.add(field);
+        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
+        return field;
     }
 
     private JTextField addTextField(String label, String value) {
@@ -156,14 +181,34 @@ public class UserFormDialog extends JDialog {
     }
 
     private void saveUser(JTextField nombreField, JTextField apellidoField, 
-                        JTextField emailField, JTextField telefonoField,
-                        JComboBox<String> rolCombo, JPanel docPanel, 
-                        JCheckBox estadoCheck) {
+                    JTextField emailField, JTextField telefonoField,
+                    JComboBox<String> rolCombo, JPanel docPanel, 
+                    JCheckBox estadoCheck) {
         try {
-            updateUserData(nombreField, apellidoField, emailField, 
-                          telefonoField, rolCombo, docPanel, estadoCheck);
+            // Validar contraseña si es nuevo usuario
+            if (isNewUser) {
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+                
+                if (password.isEmpty()) {
+                    showError("La contraseña no puede estar vacía");
+                    return;
+                }
+                
+                if (!password.equals(confirmPassword)) {
+                    showError("Las contraseñas no coinciden");
+                    return;
+                }
+                
+                // Encriptar contraseña y asignarla al usuario
+                String encryptedPassword = PasswordUtils.encrypt(password);
+                userToEdit.setPassword(encryptedPassword); // Usar setPassword() en lugar de setContrasena()
+            }
             
-            boolean success = userToEdit.getId() == 0 ? 
+            updateUserData(nombreField, apellidoField, emailField, 
+                        telefonoField, rolCombo, docPanel, estadoCheck);
+            
+            boolean success = isNewUser ? 
                 usuarioServicio.crearUsuario(userToEdit) : 
                 usuarioServicio.actualizarUsuario(userToEdit);
             
@@ -196,10 +241,7 @@ public class UserFormDialog extends JDialog {
         if (success) {
             JOptionPane.showMessageDialog(this, 
                 constants.SUCCESS_MESSAGE, "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            dispose(); // Solo cerramos el diálogo
-            
-            // Notificamos al panel padre mediante el WindowListener que ya tenemos
-            // No necesitamos enviar eventos manualmente
+            dispose();
         } else {
             showError(constants.ERROR_MESSAGE);
         }

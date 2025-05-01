@@ -9,8 +9,6 @@ public class UserFormDialogConstants extends FormDialogConstants {
     public String SUCCESS_MESSAGE = "Usuario guardado con éxito.";
     public String ERROR_MESSAGE = "Error al guardar usuario.";
     public String INVALID_DATA_MESSAGE = "Por favor, complete todos los campos correctamente.";
-    
-    public UserFormDialogConstants() {
-        HEIGHT = 650;
-    }
+    public int HEIGHT_EDIT = 650;
+    public int HEIGHT_CREATE = 800;
 }

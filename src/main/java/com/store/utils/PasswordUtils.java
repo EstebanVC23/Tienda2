@@ -9,11 +9,6 @@ public class PasswordUtils {
     private static final int SALT_LENGTH = 16;
     private static final String ALGORITHM = "SHA-256";
     
-    /**
-     * Encripta una contraseña utilizando un salt aleatorio y el algoritmo SHA-256.
-     * @param password La contraseña a encriptar.
-     * @return La contraseña encriptada en formato Base64.
-     */
     public static String encrypt(String password) {
         try {
             SecureRandom random = new SecureRandom();
@@ -34,13 +29,11 @@ public class PasswordUtils {
         }
     }
     
-    /**
-     * Verifica si una contraseña coincide con su hash almacenado.
-     * @param password La contraseña a verificar.
-     * @param storedHash El hash almacenado en formato Base64.
-     * @return true si la contraseña coincide, false en caso contrario.
-     */
     public static boolean verify(String password, String storedHash) {
+        if (password == null || storedHash == null || storedHash.isEmpty()) {
+            return false;
+        }
+
         try {
             byte[] combined = Base64.getDecoder().decode(storedHash);
             
@@ -55,15 +48,50 @@ public class PasswordUtils {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
             digest.update(salt);
             byte[] testHash = digest.digest(password.getBytes());
-        
+            
             for (int i = 0; i < testHash.length; i++) {
-                if (testHash[i] != combined[i + SALT_LENGTH]) {
+                if (testHash[i] != combined[SALT_LENGTH + i]) {
                     return false;
                 }
             }
             return true;
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error al verificar contraseña", e);
+        } catch (NoSuchAlgorithmException | IllegalArgumentException e) {
+            System.err.println("Error al verificar contraseña: " + e.getMessage());
+            return false;
         }
+    }
+
+    public static boolean isHashed(String password) {
+        if (password == null || password.isEmpty()) {
+            return false;
+        }
+        try {
+            byte[] decoded = Base64.getDecoder().decode(password);
+            return decoded.length > SALT_LENGTH;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    // Método main para pruebas
+    public static void main(String[] args) {
+        String password = "123";
+        String wrongPassword = "123";
+        
+        // Encriptar contraseña
+        String encrypted = encrypt(password);
+        System.out.println("Contraseña encriptada: " + encrypted);
+        
+        // Verificar contraseña correcta
+        boolean result1 = verify(password, encrypted);
+        System.out.println("Verificación con contraseña correcta: " + result1);
+        
+        // Verificar contraseña incorrecta
+        boolean result2 = verify(wrongPassword, encrypted);
+        System.out.println("Verificación con contraseña incorrecta: " + result2);
+        
+        // Verificar con hash vacío
+        boolean result3 = verify(password, "");
+        System.out.println("Verificación con hash vacío: " + result3);
     }
 }
