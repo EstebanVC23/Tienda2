@@ -2,13 +2,14 @@ package com.store.view.panels.profile;
 
 import com.store.models.Usuario;
 import com.store.services.UsuarioServicio;
+import com.store.view.panels.BasePanel;
 import com.store.view.panels.profile.fields.*;
 import com.store.view.components.dialogs.ChangePasswordDialog;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class UserProfilePanel extends JPanel {
+public class UserProfilePanel extends BasePanel {
     private final UserProfileController controller;
     private ProfileSectionPanel profileSection;
     private ProfileActionsPanel actionsPanel;
@@ -66,13 +67,13 @@ public class UserProfilePanel extends JPanel {
             profileSection.getTelefono(),
             profileSection.getTipoDocumento(),
             profileSection.getNumeroDocumento(),
-            profileSection.getDireccion() // Ahora obtenemos la dirección de profileSection
+            profileSection.getDireccion()
         );
         
         if(resultado) {
-            JOptionPane.showMessageDialog(this, "Perfil actualizado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            showSelectionMessage("Perfil actualizado correctamente", "Éxito");
         } else {
-            JOptionPane.showMessageDialog(this, "Error al actualizar el perfil", "Error", JOptionPane.ERROR_MESSAGE);
+            showSelectionMessage("Error al actualizar el perfil", "Error");
         }
     }
 
@@ -87,10 +88,14 @@ public class UserProfilePanel extends JPanel {
             );
             
             if(cambioExitoso) {
-                JOptionPane.showMessageDialog(this, "Contraseña cambiada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                showSelectionMessage("Contraseña cambiada correctamente", "Éxito");
             } else {
-                JOptionPane.showMessageDialog(this, "Contraseña actual incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                showSelectionMessage("Contraseña actual incorrecta", "Error");
             }
         }
+    }
+
+    @Override
+    public void refreshTable() {
     }
 }

@@ -40,7 +40,7 @@ public class AdminFilterPanel extends JPanel {
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                onFilterChange.accept(getFilterText());
+                SwingUtilities.invokeLater(() -> onFilterChange.accept(getFilterText()));
             }
         });
         
@@ -63,7 +63,8 @@ public class AdminFilterPanel extends JPanel {
                 BorderFactory.createLineBorder(Colors.BORDER),
                 BorderFactory.createEmptyBorder(0, 10, 0, 10)
             ));
-            filterCombo.addActionListener(_ -> onFilterChange.accept(getFilterText()));
+            filterCombo.addActionListener(_ -> 
+                SwingUtilities.invokeLater(() -> onFilterChange.accept(getFilterText())));
             
             filterContainer.add(filterLabel, BorderLayout.WEST);
             filterContainer.add(filterCombo, BorderLayout.CENTER);
@@ -77,10 +78,22 @@ public class AdminFilterPanel extends JPanel {
     }
 
     public String getFilterText() {
-        return searchField.getText();
+        return searchField != null ? searchField.getText() : "";
     }
 
     public String getSelectedFilter() {
-        return filterCombo != null ? (String) filterCombo.getSelectedItem() : null;
+        return filterCombo != null ? (String) filterCombo.getSelectedItem() : "Todos";
+    }
+
+    public void setFilterText(String text) {
+        if (searchField != null) {
+            searchField.setText(text);
+        }
+    }
+
+    public void setSelectedFilter(String filter) {
+        if (filterCombo != null) {
+            filterCombo.setSelectedItem(filter);
+        }
     }
 }

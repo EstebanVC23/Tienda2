@@ -17,6 +17,10 @@ public class CustomTable extends JTable {
             
             @Override
             public Class<?> getColumnClass(int column) {
+                // Verifica si hay filas antes de intentar obtener el valor
+                if (getRowCount() == 0) {
+                    return Object.class;
+                }
                 Object value = getValueAt(0, column);
                 return value != null ? value.getClass() : Object.class;
             }
@@ -27,10 +31,6 @@ public class CustomTable extends JTable {
         
         this.sorter = new TableRowSorter<>(tableModel);
         setRowSorter(sorter);
-        
-        // Configuraciones adicionales para asegurar visibilidad
-        setFillsViewportHeight(true);
-        setAutoCreateColumnsFromModel(true);
     }
 
     public DefaultTableModel getTableModel() {
