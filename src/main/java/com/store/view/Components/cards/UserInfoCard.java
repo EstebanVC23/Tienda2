@@ -1,4 +1,4 @@
-package com.store.view.Components;
+package com.store.view.components.cards;
 
 import javax.swing.*;
 import java.awt.*;

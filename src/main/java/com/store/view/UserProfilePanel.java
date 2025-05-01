@@ -1,10 +1,9 @@
 package com.store.view;
 
-import com.store.view.Components.UserInfoCard;
-
 import javax.swing.*;
 
 import com.store.models.Usuario;
+import com.store.view.components.cards.UserInfoCard;
 
 import java.awt.*;
 

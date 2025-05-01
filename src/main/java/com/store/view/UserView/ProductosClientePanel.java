@@ -2,8 +2,8 @@ package com.store.view.UserView;
 
 import com.store.models.Producto;
 import com.store.services.ProductoServicio;
-import com.store.view.Components.ContentCard;
 import com.store.utils.Colors;
+import com.store.view.components.cards.ContentCard;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -42,7 +42,7 @@ public class ProductosClientePanel extends JPanel {
         setBorder(new EmptyBorder(20, 20, 20, 20));
         
         // Panel superior con título y filtros
-        JPanel topPanel = createTopPanel();
+        JPanel topPanel = createTopPanelProducts();
         
         // Panel central con scroll para los productos
         JPanel centerPanel = createCenterPanel();
@@ -57,7 +57,7 @@ public class ProductosClientePanel extends JPanel {
     /**
      * Crea el panel superior con título, búsqueda y filtros.
      */
-    private JPanel createTopPanel() {
+    private JPanel createTopPanelProducts() {
         JPanel panel = new JPanel(new BorderLayout(20, 10));
         panel.setBackground(new Color(245, 247, 250));
         panel.setBorder(new EmptyBorder(0, 0, 20, 0));
@@ -118,7 +118,6 @@ public class ProductosClientePanel extends JPanel {
         searchPanel.add(searchLabel, BorderLayout.NORTH);
         searchPanel.add(searchInputPanel, BorderLayout.CENTER);
         
-        // Panel de filtro por categoría
         JPanel filterPanel = new JPanel(new BorderLayout());
         filterPanel.setBackground(new Color(245, 247, 250));
         
@@ -134,7 +133,6 @@ public class ProductosClientePanel extends JPanel {
         ));
         categoriaCombo.addItem("Todas las categorías");
         
-        // Obtener y añadir categorías disponibles
         List<String> categorias = productoServicio.obtenerCategorias();
         for (String categoria : categorias) {
             categoriaCombo.addItem(categoria);
@@ -150,7 +148,6 @@ public class ProductosClientePanel extends JPanel {
         filterPanel.add(categoriaLabel, BorderLayout.NORTH);
         filterPanel.add(categoriaCombo, BorderLayout.CENTER);
         
-        // Organizar paneles de búsqueda y filtro
         JPanel filterControlsPanel = new JPanel(new GridLayout(1, 2, 15, 0));
         filterControlsPanel.setBackground(new Color(245, 247, 250));
         filterControlsPanel.add(searchPanel);
@@ -158,7 +155,6 @@ public class ProductosClientePanel extends JPanel {
         
         searchFilterPanel.add(filterControlsPanel, BorderLayout.CENTER);
         
-        // Agregar todo al panel superior
         panel.add(titlePanel, BorderLayout.NORTH);
         panel.add(searchFilterPanel, BorderLayout.CENTER);
         

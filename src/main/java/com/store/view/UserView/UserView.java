@@ -4,8 +4,8 @@ import com.store.models.Usuario;
 import com.store.services.ProductoServicio;
 import com.store.services.UsuarioServicio;
 import com.store.view.UserProfilePanel;
+import com.store.view.components.NavBar.*;
 import com.store.Auth.Login;
-import com.store.view.Components.NavBar.*;
 
 import javax.swing.*;
 import java.awt.*;

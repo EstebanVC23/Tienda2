@@ -1,4 +1,4 @@
-package com.store.view.Components.NavBar;
+package com.store.view.components.NavBar;
 
 import javax.swing.*;
 
