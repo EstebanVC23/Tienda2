@@ -11,7 +11,6 @@ import com.store.services.UsuarioServicio;
  * NOTA: 
  * Borrar los comentarios de las clases y usar javadoc para generar la documentación.
  * modularizar el código en paquetes y clases
- * recrear el diseño de los dialogs de productos iguales al de los de usuarios
  * estudiar POO
  * usar interfaces para los servicios
  * identificar los métodos que no se usan y eliminarlos
