@@ -45,7 +45,11 @@ public class UsersPanel extends CrudPanel<Usuario> {
         String[] columnNames = {"ID", "Nombre", "Apellido", "Email", "Documento", "Teléfono", "Rol", "Estado"};
         this.table = new CustomTable(columnNames);
         
-        panel.add(table, BorderLayout.CENTER);
+        // Asegurar que la tabla esté dentro de un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        panel.add(scrollPane, BorderLayout.CENTER);
+        
         return panel;
     }
 

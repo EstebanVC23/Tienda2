@@ -10,7 +10,6 @@ import com.store.services.UsuarioServicio;
  * 
  * NOTA: 
  * Borrar los comentarios de las clases y usar javadoc para generar la documentación.
- * los titulos de las tablas no aparecen
  * modularizar el código en paquetes y clases
  * recrear el diseño de los dialogs de productos iguales al de los de usuarios
  * estudiar POO

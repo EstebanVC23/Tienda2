@@ -43,10 +43,14 @@ public class ProductosPanel extends CrudPanel<Producto> {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Color.WHITE);
         
-        String[] columnNames = {"Código", "Nombre", "Descripción", "Precio", "Stock", "Categoría", "Proveedor"};
+        String[] columnNames = {"ID", "Nombre", "Apellido", "Email", "Documento", "Teléfono", "Rol", "Estado"};
         this.table = new CustomTable(columnNames);
         
-        panel.add(table, BorderLayout.CENTER);
+        // Asegurar que la tabla esté dentro de un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        panel.add(scrollPane, BorderLayout.CENTER);
+        
         return panel;
     }
 

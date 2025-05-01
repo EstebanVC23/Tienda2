@@ -47,11 +47,6 @@ public class UserFormDialog extends JDialog {
         formPanel = FormStyler.createFormPanel();
         formPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.BORDER));
         
-        // Campos del formulario
-        if (userToEdit.getId() != 0) {
-            addReadOnlyField("ID:", String.valueOf(userToEdit.getId()));
-        }
-        
         JTextField nombreField = addTextField("Nombre:", userToEdit.getNombre());
         JTextField apellidoField = addTextField("Apellido:", userToEdit.getApellido());
         JTextField emailField = addTextField("Email:", userToEdit.getEmail());
@@ -107,16 +102,6 @@ public class UserFormDialog extends JDialog {
         formPanel.add(combo);
         formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
         return combo;
-    }
-
-    private void addReadOnlyField(String label, String value) {
-        formPanel.add(FormStyler.createFormLabel(label));
-        JTextField field = FormStyler.createFormTextField();
-        field.setText(value);
-        field.setEditable(false);
-        field.setBackground(Colors.BACKGROUND);
-        formPanel.add(field);
-        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
     }
 
     private JPanel createDocumentPanel() {

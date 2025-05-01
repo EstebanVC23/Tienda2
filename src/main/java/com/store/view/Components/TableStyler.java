@@ -17,13 +17,18 @@ public class TableStyler {
         table.setGridColor(Colors.BORDER);
         table.setShowGrid(true);
         table.setIntercellSpacing(new Dimension(0, 1));
+        table.setFillsViewportHeight(true);
         
-        // Estilo para el header
+        // Estilo para el header (asegurando visibilidad)
         JTableHeader header = table.getTableHeader();
-        header.setFont(Fonts.SECTION_TITLE);
-        header.setBackground(Colors.PRIMARY_BLUE);
-        header.setForeground(Color.WHITE);
-        header.setPreferredSize(new Dimension(header.getWidth(), 35));
+        if (header != null) {
+            header.setFont(Fonts.SECTION_TITLE);
+            header.setBackground(Colors.PRIMARY_BLUE);
+            header.setForeground(Color.WHITE);
+            header.setPreferredSize(new Dimension(header.getWidth(), 35));
+            header.setReorderingAllowed(false);
+            header.setResizingAllowed(true);
+        }
         
         // Renderer para celdas
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
