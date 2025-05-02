@@ -4,22 +4,45 @@ import com.store.models.Producto;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.components.dialogs.FormStyler;
+import com.store.view.components.shared.FormInputComponents;
+import com.store.view.components.shared.RadioButtonGroup;
 import com.store.view.components.dialogs.constants.StockDialogConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
-public class StockDialog extends AbstractFormDialog {
+/**
+ * Diálogo para gestionar el stock de productos.
+ * Permite agregar o quitar unidades del inventario de un producto existente.
+ * 
+ * <p>Características principales:
+ * <ul>
+ *   <li>Muestra información detallada del producto</li>
+ *   <li>Permite especificar cantidad a agregar/quitar</li>
+ *   <li>Validación de datos antes de aplicar cambios</li>
+ *   <li>Integración con el servicio de productos</li>
+ * </ul>
+ */
+public class StockDialog extends BaseEntityFormDialog {
+    /** Producto cuyo stock se está gestionando */
     private final Producto producto;
+    /** Servicio para operaciones de productos */
     private final ProductoServicioImpl productoServicio;
+    /** Constantes de configuración del diálogo */
     private final StockDialogConstants constants;
     
+    /** Spinner para seleccionar la cantidad */
     private JSpinner cantidadSpinner;
-    private JRadioButton addButton;
-    private JRadioButton removeButton;
+    /** Grupo de radio buttons para seleccionar acción */
+    private RadioButtonGroup stockActionGroup;
 
+    /**
+     * Constructor del diálogo de gestión de stock.
+     * @param parent Ventana padre para posicionamiento relativo
+     * @param producto Producto a gestionar
+     * @param productoServicio Servicio para operaciones de stock
+     */
     public StockDialog(JFrame parent, Producto producto, ProductoServicioImpl productoServicio) {
         super(parent, "Gestionar Stock");
         this.producto = producto;
@@ -28,11 +51,17 @@ public class StockDialog extends AbstractFormDialog {
         
         setSize(constants.WIDTH, constants.HEIGHT);
         setupLayout();
-        centerOnParent();;
+        centerOnParent();
     }
 
+    /**
+     * Configura el diseño del diálogo.
+     * Implementación del método abstracto de la clase base.
+     */
     @Override
     protected void setupLayout() {
+        setupCommonLayout();
+        
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
         mainPanel.setBackground(Colors.BACKGROUND);
@@ -41,20 +70,26 @@ public class StockDialog extends AbstractFormDialog {
         JPanel infoPanel = createInfoPanel();
         mainPanel.add(infoPanel, BorderLayout.NORTH);
         
-        // Panel de formulario
-        formPanel = FormStyler.createFormPanel();
-        formPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Colors.BORDER));
-        
         // Campos del formulario
-        cantidadSpinner = addSpinner("Cantidad:", 0, 1, 0, 9999);
-        addRadioButtons();
+        cantidadSpinner = FormInputComponents.createIntegerSpinner(0, 1, 0, 9999);
+        addCustomField("Cantidad:", cantidadSpinner);
         
-        mainPanel.add(formPanel, BorderLayout.CENTER);
-        mainPanel.add(createButtonPanel(this::updateStock), BorderLayout.SOUTH);
+        stockActionGroup = new RadioButtonGroup("Agregar stock", "Quitar stock");
+        addCustomField("Acción:", stockActionGroup.getContainer());
+        
+        JScrollPane scrollPane = new JScrollPane(formPanel);
+        scrollPane.setBorder(null);
+        
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(createButtonPanel(this::saveForm), BorderLayout.SOUTH);
         
         setContentPane(mainPanel);
     }
 
+    /**
+     * Crea el panel superior con información del producto.
+     * @return JPanel configurado con los datos del producto
+     */
     private JPanel createInfoPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Colors.BACKGROUND);
@@ -64,11 +99,10 @@ public class StockDialog extends AbstractFormDialog {
         nameLabel.setFont(Fonts.SUBTITLE);
         nameLabel.setForeground(Colors.PRIMARY_TEXT);
         
+        String stockColor = producto.getStock() < constants.LOW_STOCK_THRESHOLD ? "#e53935" : "#43a047";
         JLabel detailsLabel = new JLabel(String.format(
             "<html>Código: <b>%s</b> • Stock actual: <b style='color:%s'>%d</b></html>",
-            producto.getCodigo(),
-            producto.getStock() < constants.LOW_STOCK_THRESHOLD ? "#e53935" : "#43a047",
-            producto.getStock()
+            producto.getCodigo(), stockColor, producto.getStock()
         ));
         detailsLabel.setFont(Fonts.BODY);
         detailsLabel.setForeground(Colors.SECONDARY_TEXT);
@@ -78,54 +112,25 @@ public class StockDialog extends AbstractFormDialog {
         return panel;
     }
 
-    private JSpinner addSpinner(String label, int value, int step, int min, int max) {
-        formPanel.add(FormStyler.createFormLabel(label));
-        JSpinner spinner = FormStyler.createFormSpinner();
-        SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step);
-        spinner.setModel(model);
-        formPanel.add(spinner);
-        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
-        return spinner;
-    }
-
-    private void addRadioButtons() {
-        JPanel radioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
-        radioPanel.setBackground(Colors.PANEL_BACKGROUND);
-        
-        addButton = new JRadioButton("Agregar stock");
-        removeButton = new JRadioButton("Quitar stock");
-        
-        ButtonGroup group = new ButtonGroup();
-        group.add(addButton);
-        group.add(removeButton);
-        addButton.setSelected(true);
-        
-        styleRadioButton(addButton);
-        styleRadioButton(removeButton);
-        
-        radioPanel.add(addButton);
-        radioPanel.add(removeButton);
-        
-        formPanel.add(radioPanel);
-    }
-
-    private void styleRadioButton(JRadioButton radio) {
-        radio.setFont(Fonts.BODY);
-        radio.setBackground(Colors.PANEL_BACKGROUND);
-        radio.setFocusPainted(false);
-        radio.setIcon(UIManager.getIcon("RadioButton.icon"));
-        radio.setSelectedIcon(UIManager.getIcon("RadioButton.selectedIcon"));
-    }
-
-    private void updateStock() {
+    /**
+     * Maneja la lógica de guardado del stock.
+     * Implementación del método abstracto de la clase base.
+     */
+    @Override
+    protected void saveForm() {
         try {
             int cantidad = (Integer) cantidadSpinner.getValue();
-            if (removeButton.isSelected()) cantidad = -cantidad;
+            if (stockActionGroup.isSelected("Quitar stock")) {
+                cantidad = -cantidad;
+            }
             
-            boolean success = productoServicio.actualizarStock(producto.getCodigo(), cantidad);
+            boolean success = productoServicio.actualizarStock(
+                producto.getCodigo(), cantidad);
             
             if (success) {
-                JOptionPane.showMessageDialog(this, constants.SUCCESS_MESSAGE, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                    constants.SUCCESS_MESSAGE, 
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
                 showError(constants.ERROR_MESSAGE);
@@ -133,10 +138,5 @@ public class StockDialog extends AbstractFormDialog {
         } catch (Exception ex) {
             showError(constants.INVALID_NUMBER_MESSAGE);
         }
-    }
-
-    @Override
-    protected void saveForm() {
-        updateStock();
     }
 }

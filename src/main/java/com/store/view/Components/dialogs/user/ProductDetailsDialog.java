@@ -6,82 +6,49 @@ import com.store.utils.Fonts;
 import com.store.view.components.dialogs.constants.ProductDetailsConstants;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
 
-public class ProductDetailsDialog extends JDialog {
+public class ProductDetailsDialog extends BaseDetailsDialog {
+    private final Producto producto;
     private final ProductDetailsConstants constants;
 
-    public ProductDetailsDialog(Producto producto) {
+    public ProductDetailsDialog(Window parent, Producto producto) {
+        super(parent, "Detalles del Producto", 700, 500);
+        this.producto = producto;
         this.constants = new ProductDetailsConstants();
-        initializeDialog();
-        setupUI(producto);
+        setupLayout();
     }
 
-    private void initializeDialog() {
-        setTitle(constants.TITLE);
-        setSize(constants.WIDTH, constants.HEIGHT);
-        setModal(true);
-        setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
-        setResizable(false);
-        getRootPane().setBorder(new EmptyBorder(
-            constants.ROOT_PADDING, constants.ROOT_PADDING,
-            constants.ROOT_PADDING, constants.ROOT_PADDING));
-    }
-
-    private void setupUI(Producto producto) {
+    @Override
+    protected void setupLayout() {
         JPanel mainPanel = createMainPanel();
-        JPanel contentPanel = createContentPanel(producto);
-        JPanel buttonPanel = createButtonPanel();
-        
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        mainPanel.add(createContentPanel(), BorderLayout.CENTER);
+        mainPanel.add(createButtonPanel(), BorderLayout.SOUTH);
         add(mainPanel);
     }
 
-    private JPanel createMainPanel() {
-        JPanel panel = new JPanel(new BorderLayout(0, 0));
-        panel.setBorder(new CompoundBorder(
-            new MatteBorder(1, 1, 1, 1, Colors.BORDER),
-            new EmptyBorder(
-                constants.MAIN_PADDING, constants.MAIN_PADDING,
-                constants.MAIN_PADDING, constants.MAIN_PADDING)
-        ));
-        panel.setBackground(Color.WHITE);
-        return panel;
-    }
-
-    private JPanel createContentPanel(Producto producto) {
-        JPanel panel = new JPanel(new BorderLayout(
-            constants.CONTENT_HGAP, 0));
+    private JPanel createContentPanel() {
+        JPanel panel = new JPanel(new BorderLayout(15, 0));
         panel.setBackground(Color.WHITE);
         
-        panel.add(createImagePanel(producto), BorderLayout.WEST);
-        panel.add(createDetailsPanel(producto), BorderLayout.CENTER);
+        panel.add(createImagePanel(), BorderLayout.WEST);
+        panel.add(createDetailsPanel(), BorderLayout.CENTER);
         return panel;
     }
 
-    private JPanel createImagePanel(Producto producto) {
+    private JPanel createImagePanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setPreferredSize(new Dimension(
-            constants.IMAGE_SIZE, constants.IMAGE_SIZE));
+        panel.setPreferredSize(new Dimension(200, 200));
         panel.setBackground(new Color(245, 247, 250));
         panel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Colors.BORDER, 1),
-            new EmptyBorder(
-                constants.IMAGE_PADDING, constants.IMAGE_PADDING,
-                constants.IMAGE_PADDING, constants.IMAGE_PADDING)
+            new EmptyBorder(10, 10, 10, 10)
         ));
         
         try {
             ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("Img/card.jpeg"));
-            Image scaled = icon.getImage().getScaledInstance(
-                constants.IMAGE_SIZE - 20, constants.IMAGE_SIZE - 20, 
-                Image.SCALE_SMOOTH);
+            Image scaled = icon.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
             panel.add(new JLabel(new ImageIcon(scaled), SwingConstants.CENTER));
         } catch (Exception e) {
             panel.add(createNoImageLabel());
@@ -90,24 +57,24 @@ public class ProductDetailsDialog extends JDialog {
     }
 
     private JLabel createNoImageLabel() {
-        JLabel label = new JLabel(constants.NO_IMAGE_TEXT, SwingConstants.CENTER);
+        JLabel label = new JLabel("No hay imagen disponible", SwingConstants.CENTER);
         label.setFont(Fonts.BODY);
         label.setForeground(Colors.SECONDARY_TEXT);
         return label;
     }
 
-    private JPanel createDetailsPanel(Producto producto) {
+    private JPanel createDetailsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
         
-        panel.add(createHeaderPanel(producto));
-        panel.add(createInfoPanel(producto));
-        panel.add(createDescriptionPanel(producto));
+        panel.add(createHeaderPanel());
+        panel.add(createInfoPanel());
+        panel.add(createDescriptionPanel());
         return panel;
     }
 
-    private JPanel createHeaderPanel(Producto producto) {
+    private JPanel createHeaderPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
@@ -122,19 +89,17 @@ public class ProductDetailsDialog extends JDialog {
         priceLabel.setForeground(Colors.ACCENT);
         
         panel.add(nameLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, constants.NAME_PRICE_SPACING)));
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
         panel.add(priceLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, constants.HEADER_BOTTOM_SPACING)));
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
         return panel;
     }
 
-    private JPanel createInfoPanel(Producto producto) {
-        JPanel panel = new JPanel(new GridLayout(0, 2, 
-            constants.INFO_HGAP, constants.INFO_VGAP));
+    private JPanel createInfoPanel() {
+        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 5));
         panel.setBackground(Color.WHITE);
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.setBorder(new EmptyBorder(
-            0, 0, constants.INFO_BOTTOM_SPACING, 0));
+        panel.setBorder(new EmptyBorder(0, 0, 15, 0));
         
         addInfoItem(panel, "Categoría", producto.getCategoria());
         addInfoItem(panel, "Stock disponible", String.valueOf(producto.getStock()));
@@ -162,13 +127,13 @@ public class ProductDetailsDialog extends JDialog {
         return label;
     }
 
-    private JPanel createDescriptionPanel(Producto producto) {
+    private JPanel createDescriptionPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        JLabel title = new JLabel(constants.DESCRIPTION_TITLE);
+        JLabel title = new JLabel("Descripción");
         title.setFont(Fonts.SECTION_TITLE);
         title.setForeground(Colors.PRIMARY_TEXT);
         
@@ -178,60 +143,27 @@ public class ProductDetailsDialog extends JDialog {
         description.setWrapStyleWord(true);
         description.setEditable(false);
         description.setBackground(Color.WHITE);
-        description.setBorder(new EmptyBorder(
-            constants.DESCRIPTION_TOP_SPACING, 0, 0, 0));
+        description.setBorder(new EmptyBorder(10, 0, 0, 0));
         
         panel.add(title);
-        panel.add(Box.createRigidArea(new Dimension(0, constants.DESCRIPTION_TITLE_SPACING)));
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
         panel.add(description);
         return panel;
     }
 
     private JPanel createButtonPanel() {
-        JPanel panel = new JPanel(new FlowLayout(
-            FlowLayout.RIGHT, 
-            constants.BUTTON_HGAP, 0));
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(new EmptyBorder(
-            constants.BUTTON_TOP_SPACING, 0, 0, 0));
-        
-        JButton closeButton = createSecondaryButton(constants.CLOSE_TEXT);
-        closeButton.addActionListener((ActionEvent _) -> dispose());
-        
-        JButton addButton = createPrimaryButton(constants.ADD_TO_CART_TEXT);
-        
-        panel.add(closeButton);
-        panel.add(addButton);
-        return panel;
+        return createButtonPanel(
+            constants.ADD_TO_CART_TEXT,
+            constants.CLOSE_TEXT,
+            this::addToCart,
+            this::dispose
+        );
     }
 
-    private JButton createPrimaryButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(Fonts.BUTTON);
-        button.setBackground(Colors.PRIMARY_BLUE);
-        button.setForeground(Color.WHITE);
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Colors.DARK_BLUE, 1),
-            new EmptyBorder(
-                constants.BUTTON_VERTICAL_PADDING, constants.BUTTON_HORIZONTAL_PADDING,
-                constants.BUTTON_VERTICAL_PADDING, constants.BUTTON_HORIZONTAL_PADDING)
-        ));
-        return button;
-    }
-
-    private JButton createSecondaryButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(Fonts.BUTTON);
-        button.setBackground(Color.WHITE);
-        button.setForeground(Colors.PRIMARY_TEXT);
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(Colors.BORDER, 1),
-            new EmptyBorder(
-                constants.BUTTON_VERTICAL_PADDING, constants.BUTTON_HORIZONTAL_PADDING,
-                constants.BUTTON_VERTICAL_PADDING, constants.BUTTON_HORIZONTAL_PADDING)
-        ));
-        return button;
+    private void addToCart() {
+        // Lógica para añadir al carrito
+        JOptionPane.showMessageDialog(this, 
+            "Producto añadido al carrito", 
+            "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -177,9 +177,45 @@ public class ProductCard extends BaseCard {
     }
 
     /**
-     * Muestra el diálogo con los detalles completos del producto.
+     * Muestra un diálogo modal con los detalles completos del producto.
+     * El diálogo se centra respecto a la ventana padre de la aplicación y
+     * muestra información detallada del producto actual.
+     * 
+     * @throws IllegalStateException si el producto es nulo o no está inicializado correctamente
      */
     protected void showProductDetails() {
-        new ProductDetailsDialog(producto).setVisible(true);
+        if (producto == null) {
+            throw new IllegalStateException("No se puede mostrar detalles: el producto es nulo");
+        }
+        
+        Window parentWindow = null;
+        try {
+            parentWindow = SwingUtilities.getWindowAncestor(this);
+        } catch (Exception e) {
+            parentWindow = null;
+        }
+        
+        ProductDetailsDialog detailsDialog;
+        try {
+            detailsDialog = new ProductDetailsDialog(parentWindow, producto);
+            detailsDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            
+            if (parentWindow != null) {
+                detailsDialog.setLocationRelativeTo(parentWindow);
+            } else {
+                detailsDialog.setLocationRelativeTo(null);
+            }
+            
+            detailsDialog.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                parentWindow,
+                "Error al mostrar los detalles del producto",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+            throw new RuntimeException("Error al crear el diálogo de detalles", e);
+        }
     }
 }
