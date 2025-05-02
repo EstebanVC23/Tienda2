@@ -4,9 +4,10 @@ import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.auth.components.LoginForm;
 import com.store.view.auth.constants.AuthConstants;
 import com.store.view.auth.controller.LoginController;
+import com.store.view.components.dialogs.auth.LoginForm;
+
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;

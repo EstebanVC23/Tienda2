@@ -4,10 +4,9 @@ import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.auth.components.RegisterActionsPanel;
-import com.store.view.auth.components.RegisterForm;
 import com.store.view.auth.constants.AuthConstants;
 import com.store.view.auth.controller.RegisterController;
+import com.store.view.components.dialogs.auth.RegisterForm;
 
 import javax.swing.*;
 import java.awt.*;

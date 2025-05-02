@@ -1,4 +1,4 @@
-package com.store.view.auth.components;
+package com.store.view.components.dialogs.auth;
 
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
