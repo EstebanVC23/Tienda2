@@ -5,24 +5,26 @@ import com.store.services.UsuarioServicioImpl;
 import com.store.view.auth.Login;
 
 /**
- * Clase principal de la aplicación.
- * Inicializa la aplicación y carga los datos desde archivos JSON.
- * 
- * NOTA: 
- * dialog admin y users, falta documentar
- * modularizar el código en paquetes y clases
- * estudiar POO
- * identificar los métodos que no se usan y eliminarlos
- * crear un readme.md con la información de la aplicación
- * 
+ * Clase principal que inicia la aplicación de tienda.
+ * <p>
+ * Esta clase se encarga de:
+ * <ul>
+ *   <li>Inicializar los servicios necesarios</li>
+ *   <li>Crear y mostrar la ventana de login</li>
+ *   <li>Servir como punto de entrada de la aplicación</li>
+ * </ul>
  */
 public class App {
+    /**
+     * Punto de entrada principal de la aplicación.
+     * 
+     * @param args Argumentos de línea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
         UsuarioServicioImpl usuarioServicio = new UsuarioServicioImpl();
         ProductoServicioImpl productoServicio = new ProductoServicioImpl();
 
         Login login = new Login(usuarioServicio, productoServicio);
-
         login.setVisible(true);
     }
 }

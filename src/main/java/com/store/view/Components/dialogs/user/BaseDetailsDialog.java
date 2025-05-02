@@ -8,14 +8,33 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
+/**
+ * Clase base abstracta para diálogos de detalles con funcionalidad común.
+ * Proporciona métodos para crear paneles principales, paneles de botones y botones estilizados.
+ */
 public abstract class BaseDetailsDialog extends JDialog {
+    /** Espaciado predeterminado para los bordes del diálogo */
     protected static final int DEFAULT_PADDING = 15;
     
+    /**
+     * Constructor base para diálogos de detalles.
+     * 
+     * @param parent Ventana padre del diálogo
+     * @param title Título del diálogo
+     * @param width Ancho del diálogo
+     * @param height Alto del diálogo
+     */
     public BaseDetailsDialog(Window parent, String title, int width, int height) {
         super(parent, title, ModalityType.APPLICATION_MODAL);
         initializeDialog(width, height);
     }
 
+    /**
+     * Inicializa la configuración básica del diálogo.
+     * 
+     * @param width Ancho del diálogo
+     * @param height Alto del diálogo
+     */
     private void initializeDialog(int width, int height) {
         setSize(width, height);
         setResizable(false);
@@ -23,6 +42,11 @@ public abstract class BaseDetailsDialog extends JDialog {
         getRootPane().setBorder(new EmptyBorder(DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING, DEFAULT_PADDING));
     }
 
+    /**
+     * Crea el panel principal del diálogo con bordes y espaciado configurados.
+     * 
+     * @return JPanel configurado como panel principal
+     */
     protected JPanel createMainPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new CompoundBorder(
@@ -33,6 +57,15 @@ public abstract class BaseDetailsDialog extends JDialog {
         return panel;
     }
 
+    /**
+     * Crea un panel de botones con acciones primaria y secundaria.
+     * 
+     * @param primaryActionText Texto del botón primario
+     * @param secondaryActionText Texto del botón secundario
+     * @param primaryAction Acción a ejecutar al hacer clic en el botón primario
+     * @param secondaryAction Acción a ejecutar al hacer clic en el botón secundario
+     * @return JPanel con los botones configurados
+     */
     protected JPanel createButtonPanel(String primaryActionText, String secondaryActionText, 
                                      Runnable primaryAction, Runnable secondaryAction) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
@@ -50,6 +83,13 @@ public abstract class BaseDetailsDialog extends JDialog {
         return panel;
     }
 
+    /**
+     * Crea un botón con estilo configurable.
+     * 
+     * @param text Texto del botón
+     * @param primary Indica si es un botón primario (estilo diferente)
+     * @return JButton configurado según los parámetros
+     */
     protected JButton createButton(String text, boolean primary) {
         JButton button = new JButton(text);
         button.setFont(Fonts.BUTTON);
@@ -74,5 +114,9 @@ public abstract class BaseDetailsDialog extends JDialog {
         return button;
     }
 
+    /**
+     * Método abstracto que las clases concretas deben implementar
+     * para configurar el diseño específico del diálogo.
+     */
     protected abstract void setupLayout();
 }

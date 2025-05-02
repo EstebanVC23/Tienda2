@@ -6,7 +6,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Clase utilitaria para estilizar componentes de formularios de manera consistente.
+ * Proporciona métodos estáticos para crear y configurar componentes de UI con el estilo de la aplicación.
+ */
 public class FormStyler {
+    /**
+     * Crea y configura un panel base para formularios.
+     * 
+     * @return JPanel configurado con el layout y estilo adecuados para contener elementos de formulario
+     */
     public static JPanel createFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -15,6 +24,12 @@ public class FormStyler {
         return panel;
     }
 
+    /**
+     * Crea y configura una etiqueta para formularios.
+     * 
+     * @param text Texto a mostrar en la etiqueta
+     * @return JLabel configurado con el estilo de formulario
+     */
     public static JLabel createFormLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(Fonts.BOLD_BODY);
@@ -24,6 +39,11 @@ public class FormStyler {
         return label;
     }
 
+    /**
+     * Crea y configura un campo de texto para formularios.
+     * 
+     * @return JTextField configurado con el estilo de formulario
+     */
     public static JTextField createFormTextField() {
         JTextField field = new JTextField();
         field.setFont(Fonts.BODY);
@@ -36,6 +56,11 @@ public class FormStyler {
         return field;
     }
 
+    /**
+     * Crea y configura un área de texto para formularios.
+     * 
+     * @return JTextArea configurado con el estilo de formulario
+     */
     public static JTextArea createFormTextArea() {
         JTextArea area = new JTextArea(3, 20);
         area.setFont(Fonts.BODY);
@@ -49,6 +74,11 @@ public class FormStyler {
         return area;
     }
 
+    /**
+     * Crea y configura un combo box para formularios.
+     * 
+     * @return JComboBox configurado con el estilo de formulario
+     */
     public static JComboBox<String> createFormComboBox() {
         JComboBox<String> combo = new JComboBox<>();
         combo.setFont(Fonts.BODY);
@@ -59,7 +89,8 @@ public class FormStyler {
         ));
         combo.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, 
+                    boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 setBorder(new EmptyBorder(3, 5, 3, 5));
                 return this;
@@ -68,6 +99,11 @@ public class FormStyler {
         return combo;
     }
 
+    /**
+     * Crea y configura un spinner para formularios.
+     * 
+     * @return JSpinner configurado con el estilo de formulario
+     */
     public static JSpinner createFormSpinner() {
         JSpinner spinner = new JSpinner();
         spinner.setFont(Fonts.BODY);
