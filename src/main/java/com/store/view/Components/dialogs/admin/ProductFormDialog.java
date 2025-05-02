@@ -4,47 +4,42 @@ import com.store.models.Producto;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.components.buttons.CustomButton;
 import com.store.view.components.dialogs.FormStyler;
 import com.store.view.components.dialogs.constants.ProductFormDialogConstants;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import javax.swing.border.EmptyBorder;
 
-public class ProductFormDialog extends JDialog {
+public class ProductFormDialog extends AbstractFormDialog {
     private final ProductoServicioImpl productoServicio;
     private final Producto productToEdit;
     private final ProductFormDialogConstants constants;
     
-    private JPanel formPanel;
-    private JLabel errorLabel;
-
     public ProductFormDialog(JPanel parent, Producto producto, ProductoServicioImpl productoServicio) {
         super(SwingUtilities.getWindowAncestor(parent), 
-              producto == null ? "Nuevo Producto" : "Editar Producto", 
-              ModalityType.APPLICATION_MODAL);
+              producto == null ? "Nuevo Producto" : "Editar Producto");
+        
         this.productoServicio = productoServicio;
         this.productToEdit = producto == null ? new Producto() : producto;
         this.constants = new ProductFormDialogConstants();
         
-        initUI();
-        setupLayout();
-    }
-
-    private void initUI() {
+        // Configurar tamaño antes de hacer visible
         setSize(constants.WIDTH, constants.HEIGHT);
+        setupLayout();
+        
+        // Centrar después de configurar el tamaño y antes de hacer visible
         setLocationRelativeTo(getOwner());
-        setResizable(false);
     }
 
-    private void setupLayout() {
+    @Override
+    protected void setupLayout() {
+        // Creamos un nuevo panel principal
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
         mainPanel.setBackground(Colors.BACKGROUND);
         
-        // Panel de formulario
+        // Configuramos el panel del formulario
         formPanel = FormStyler.createFormPanel();
         formPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Colors.BORDER));
         
@@ -70,7 +65,6 @@ public class ProductFormDialog extends JDialog {
             productoServicio.obtenerProveedores(), 
             productToEdit.getProveedor());
         
-        // Panel de error
         errorLabel = new JLabel(" ");
         errorLabel.setForeground(Colors.ERROR_RED);
         errorLabel.setFont(Fonts.SMALL);
@@ -78,20 +72,14 @@ public class ProductFormDialog extends JDialog {
         
         JScrollPane scrollPane = new JScrollPane(formPanel);
         scrollPane.setBorder(null);
+        
         mainPanel.add(scrollPane, BorderLayout.CENTER);
-        mainPanel.add(createButtonPanel(nombreField, descripcionArea, precioSpinner, 
-                       stockSpinner, categoriaCombo, proveedorCombo), 
-                     BorderLayout.SOUTH);
-        add(mainPanel);
-    }
-
-    private JTextField addTextField(String label, String value) {
-        formPanel.add(FormStyler.createFormLabel(label));
-        JTextField field = FormStyler.createFormTextField();
-        field.setText(value);
-        formPanel.add(field);
-        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
-        return field;
+        mainPanel.add(createButtonPanel(() -> saveProduct(
+            nombreField, descripcionArea, precioSpinner, 
+            stockSpinner, categoriaCombo, proveedorCombo
+        )), BorderLayout.SOUTH);
+        
+        setContentPane(mainPanel);
     }
 
     private void addReadOnlyField(String label, String value) {
@@ -101,24 +89,6 @@ public class ProductFormDialog extends JDialog {
         field.setEditable(false);
         formPanel.add(field);
         formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
-    }
-
-    private void addCustomField(String label, JComponent component) {
-        if (!label.isEmpty()) {
-            formPanel.add(FormStyler.createFormLabel(label));
-        }
-        formPanel.add(component);
-        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
-    }
-
-    private JComboBox<String> addComboBox(String label, List<String> items, String selected) {
-        formPanel.add(FormStyler.createFormLabel(label));
-        JComboBox<String> combo = FormStyler.createFormComboBox();
-        items.forEach(combo::addItem);
-        if (selected != null) combo.setSelectedItem(selected);
-        formPanel.add(combo);
-        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
-        return combo;
     }
 
     private JTextArea createTextArea(String text) {
@@ -147,27 +117,6 @@ public class ProductFormDialog extends JDialog {
         spinner.setEditor(editor);
         
         return spinner;
-    }
-
-    private JPanel createButtonPanel(JTextField nombreField, JTextArea descripcionArea,
-                                   JSpinner precioSpinner, JSpinner stockSpinner,
-                                   JComboBox<String> categoriaCombo, JComboBox<String> proveedorCombo) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        panel.setBackground(Colors.BACKGROUND);
-        panel.setBorder(new EmptyBorder(10, 0, 0, 0));
-        
-        CustomButton cancelButton = new CustomButton("Cancelar", Colors.SECONDARY_GRAY);
-        cancelButton.addActionListener(_ -> dispose());
-        
-        CustomButton saveButton = new CustomButton("Guardar", Colors.PRIMARY_BLUE);
-        saveButton.addActionListener(_ -> saveProduct(
-            nombreField, descripcionArea, precioSpinner, 
-            stockSpinner, categoriaCombo, proveedorCombo
-        ));
-        
-        panel.add(cancelButton);
-        panel.add(saveButton);
-        return panel;
     }
 
     private void saveProduct(JTextField nombreField, JTextArea descripcionArea,
@@ -212,8 +161,8 @@ public class ProductFormDialog extends JDialog {
         }
     }
 
-    private void showError(String message) {
-        errorLabel.setText(message);
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    @Override
+    protected void saveForm() {
+        // Implementación vacía ya que usamos saveProduct directamente
     }
 }

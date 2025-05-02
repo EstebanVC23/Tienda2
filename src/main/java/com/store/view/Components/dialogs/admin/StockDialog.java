@@ -4,7 +4,6 @@ import com.store.models.Producto;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.components.buttons.CustomButton;
 import com.store.view.components.dialogs.FormStyler;
 import com.store.view.components.dialogs.constants.StockDialogConstants;
 
@@ -12,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
-public class StockDialog extends JDialog {
+public class StockDialog extends AbstractFormDialog {
     private final Producto producto;
     private final ProductoServicioImpl productoServicio;
     private final StockDialogConstants constants;
@@ -22,23 +21,18 @@ public class StockDialog extends JDialog {
     private JRadioButton removeButton;
 
     public StockDialog(JFrame parent, Producto producto, ProductoServicioImpl productoServicio) {
-        super(parent, "Gestionar Stock", true);
+        super(parent, "Gestionar Stock");
         this.producto = producto;
         this.productoServicio = productoServicio;
         this.constants = new StockDialogConstants();
         
-        initUI();
-        setupLayout();
-        setupListeners();
-    }
-
-    private void initUI() {
         setSize(constants.WIDTH, constants.HEIGHT);
-        setLocationRelativeTo(getOwner());
-        setResizable(false);
+        setupLayout();
+        centerOnParent();;
     }
 
-    private void setupLayout() {
+    @Override
+    protected void setupLayout() {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
         mainPanel.setBackground(Colors.BACKGROUND);
@@ -48,16 +42,17 @@ public class StockDialog extends JDialog {
         mainPanel.add(infoPanel, BorderLayout.NORTH);
         
         // Panel de formulario
-        JPanel formPanel = FormStyler.createFormPanel();
+        formPanel = FormStyler.createFormPanel();
         formPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Colors.BORDER));
         
         // Campos del formulario
-        cantidadSpinner = addSpinner(formPanel, "Cantidad:", 0, 1, 0, 9999);
-        addRadioButtons(formPanel);
+        cantidadSpinner = addSpinner("Cantidad:", 0, 1, 0, 9999);
+        addRadioButtons();
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
-        mainPanel.add(createButtonPanel(), BorderLayout.SOUTH);
-        add(mainPanel);
+        mainPanel.add(createButtonPanel(this::updateStock), BorderLayout.SOUTH);
+        
+        setContentPane(mainPanel);
     }
 
     private JPanel createInfoPanel() {
@@ -83,17 +78,17 @@ public class StockDialog extends JDialog {
         return panel;
     }
 
-    private JSpinner addSpinner(JPanel panel, String label, int value, int step, int min, int max) {
-        panel.add(FormStyler.createFormLabel(label));
+    private JSpinner addSpinner(String label, int value, int step, int min, int max) {
+        formPanel.add(FormStyler.createFormLabel(label));
         JSpinner spinner = FormStyler.createFormSpinner();
         SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step);
         spinner.setModel(model);
-        panel.add(spinner);
-        panel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
+        formPanel.add(spinner);
+        formPanel.add(Box.createRigidArea(new Dimension(0, constants.FIELD_SPACING)));
         return spinner;
     }
 
-    private void addRadioButtons(JPanel panel) {
+    private void addRadioButtons() {
         JPanel radioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         radioPanel.setBackground(Colors.PANEL_BACKGROUND);
         
@@ -111,7 +106,7 @@ public class StockDialog extends JDialog {
         radioPanel.add(addButton);
         radioPanel.add(removeButton);
         
-        panel.add(radioPanel);
+        formPanel.add(radioPanel);
     }
 
     private void styleRadioButton(JRadioButton radio) {
@@ -120,26 +115,6 @@ public class StockDialog extends JDialog {
         radio.setFocusPainted(false);
         radio.setIcon(UIManager.getIcon("RadioButton.icon"));
         radio.setSelectedIcon(UIManager.getIcon("RadioButton.selectedIcon"));
-    }
-
-    private JPanel createButtonPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        panel.setBackground(Colors.BACKGROUND);
-        panel.setBorder(new EmptyBorder(10, 0, 0, 0));
-        
-        CustomButton cancelButton = new CustomButton("Cancelar", Colors.SECONDARY_GRAY);
-        cancelButton.addActionListener(_ -> dispose());
-        
-        CustomButton saveButton = new CustomButton("Aplicar", Colors.PRIMARY_BLUE);
-        saveButton.addActionListener(_ -> updateStock());
-        
-        panel.add(cancelButton);
-        panel.add(saveButton);
-        return panel;
-    }
-
-    private void setupListeners() {
-        // Validaciones adicionales si son necesarias
     }
 
     private void updateStock() {
@@ -153,10 +128,15 @@ public class StockDialog extends JDialog {
                 JOptionPane.showMessageDialog(this, constants.SUCCESS_MESSAGE, "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, constants.ERROR_MESSAGE, "Error", JOptionPane.ERROR_MESSAGE);
+                showError(constants.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, constants.INVALID_NUMBER_MESSAGE, "Error", JOptionPane.ERROR_MESSAGE);
+            showError(constants.INVALID_NUMBER_MESSAGE);
         }
+    }
+
+    @Override
+    protected void saveForm() {
+        updateStock();
     }
 }
