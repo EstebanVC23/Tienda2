@@ -1,67 +1,58 @@
-package com.store.view.Auth;
+package com.store.view.auth;
 
-import com.store.services.ProductoServicio;
-import com.store.services.UsuarioServicio;
+import com.store.services.ProductoServicioImpl;
+import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
-import com.store.utils.Fonts;
-import com.store.view.Auth.constants.AuthConstants;
 import com.store.view.components.forauth.PanelIzquierdoInicio;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase base abstracta para las ventanas de autenticación (login y registro).
+ * Proporciona la estructura común y funcionalidad básica para las ventanas de autenticación.
+ */
 public abstract class AuthBaseFrame extends JFrame {
-    protected final UsuarioServicio usuarioServicio;
-    protected final ProductoServicio productoServicio;
+    protected final UsuarioServicioImpl usuarioServicio;
+    protected final ProductoServicioImpl productoServicio;
     
-    public AuthBaseFrame(UsuarioServicio usuarioServicio, ProductoServicio productoServicio, String title) {
+    /**
+     * Constructor base para las ventanas de autenticación.
+     * @param usuarioServicio Servicio para gestión de usuarios
+     * @param productoServicio Servicio para gestión de productos
+     * @param title Título de la ventana
+     */
+    public AuthBaseFrame(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, String title) {
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
         
         setTitle(title);
-        setSize(AuthConstants.WINDOW_SIZE);
+        setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new GridLayout(1, 2));
+        getContentPane().setBackground(Colors.PANEL_BACKGROUND);
     }
     
+    /**
+     * Añade el panel izquierdo común a la ventana de autenticación.
+     * @param title Título principal del panel
+     * @param subtitle Subtítulo del panel
+     */
     protected void addLeftPanel(String title, String subtitle) {
         PanelIzquierdoInicio panelIzquierdo = new PanelIzquierdoInicio(title, subtitle);
         add(panelIzquierdo);
     }
     
+    /**
+     * Crea y configura el panel derecho donde irán los formularios.
+     * @return JPanel configurado para el lado derecho de la ventana
+     */
     protected JPanel createRightPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(Colors.PANEL_BACKGROUND);
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(
-            AuthConstants.PANEL_PADDING.top,
-            AuthConstants.PANEL_PADDING.left,
-            AuthConstants.PANEL_PADDING.bottom,
-            AuthConstants.PANEL_PADDING.right
-        ));
-        return panel;
-    }
-    
-    protected JLabel createTitleLabel(String text) {
-        JLabel label = new JLabel(text);
-        label.setForeground(Colors.PRIMARY_TEXT);
-        label.setFont(Fonts.TITLE.deriveFont(AuthConstants.TITLE_FONT_SIZE));
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        return label;
-    }
-    
-    protected JPanel createFormPanel() {
-        JPanel panel = new JPanel();
-        panel.setOpaque(false);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        return panel;
-    }
-    
-    protected JPanel createButtonPanel() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
-        panel.setOpaque(false);
+        panel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
         return panel;
     }
 }

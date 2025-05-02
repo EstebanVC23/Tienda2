@@ -1,102 +1,72 @@
 package com.store.view.components.NavBar;
 
 import javax.swing.*;
-
-import com.store.utils.Colors;
-
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
+import com.store.utils.Colors;
+import com.store.view.components.buttons.NavButton;
 
+/**
+ * Barra de navegación principal que contiene el logo de la aplicación y los botones
+ * de navegación. Maneja el estado activo de los botones y proporciona una interfaz
+ * consistente para la navegación entre secciones.
+ */
 public class Navbar extends JPanel {
-    private JButton activeButton;
+    private NavButton activeButton;
     
+    /**
+     * Construye una nueva barra de navegación con los botones especificados.
+     * @param navActionListener Manejador de eventos para las acciones de los botones
+     * @param options Opciones de navegación que se mostrarán como botones
+     */
     public Navbar(ActionListener navActionListener, String[] options) {
         setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
-        setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(207, 216, 220)),
-            BorderFactory.createEmptyBorder(5, 20, 5, 20)
-        ));
+        setBackground(Colors.PANEL_BACKGROUND);
+        setBorder(createNavbarBorder());
         
-        JPanel navbarContent = new JPanel();
-        navbarContent.setLayout(new BorderLayout());
-        navbarContent.setBackground(Color.WHITE);
-        
-        // Panel del logo
-        JPanel logoPanel = createLogoPanel();
-        
-        // Panel de botones de navegación (ahora centrado)
-        JPanel buttonsPanel = createButtonsPanel(navActionListener, options);
-        
-        navbarContent.add(logoPanel, BorderLayout.WEST);
-        navbarContent.add(buttonsPanel, BorderLayout.CENTER);
-        
+        JPanel navbarContent = createNavbarContent(navActionListener, options);
         add(navbarContent, BorderLayout.CENTER);
     }
     
-    private JPanel createLogoPanel() {
-        JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
-        logoPanel.setBackground(Color.WHITE);
-        
-        JLabel logoIcon = new JLabel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(Colors.PRIMARY_BLUE);
-                g2.fillOval(0, 0, getWidth(), getHeight());
-                g2.setColor(Color.WHITE);
-                g2.setFont(new Font("Segoe UI", Font.BOLD, 14));
-                FontMetrics fm = g2.getFontMetrics();
-                String text = "MC";
-                int x = (getWidth() - fm.stringWidth(text)) / 2;
-                int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g2.drawString(text, x, y);
-                g2.dispose();
-            }
-        };
-        logoIcon.setPreferredSize(new Dimension(32, 32));
-        
-        JLabel logoLabel = new JLabel("MotoCoreBD");
-        logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        logoLabel.setForeground(Colors.DARK_BLUE);
-        
-        logoPanel.add(logoIcon);
-        logoPanel.add(logoLabel);
-        
-        return logoPanel;
+    /**
+     * Crea el borde compuesto para la barra de navegación.
+     * @return Border configurado para la barra
+     */
+    private Border createNavbarBorder() {
+        return BorderFactory.createCompoundBorder(
+            BorderFactory.createMatteBorder(0, 0, 2, 0, Colors.BORDER),
+            BorderFactory.createEmptyBorder(5, 20, 5, 20)
+        );
     }
     
-    private JPanel createButtonsPanel(ActionListener listener, String[] buttonLabels) {
-        JPanel centeringPanel = new JPanel(new GridBagLayout());
-        centeringPanel.setBackground(Color.WHITE);
+    /**
+     * Crea el contenido principal de la barra de navegación.
+     * @param navActionListener Manejador de eventos para los botones
+     * @param options Opciones de navegación
+     * @return Panel con los componentes de la barra de navegación
+     */
+    private JPanel createNavbarContent(ActionListener navActionListener, String[] options) {
+        JPanel content = new JPanel(new BorderLayout());
+        content.setBackground(Colors.PANEL_BACKGROUND);
         
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        buttonsPanel.setBackground(Color.WHITE);
-
-        for (String label : buttonLabels) {
-            NavButton button = new NavButton(label);
-            button.addActionListener(listener);
-            buttonsPanel.add(button);
-            
-            if (label.equals("Employees")) {
-                setActiveButton(button);
-            }
-        }
+        content.add(new LogoPanel(), BorderLayout.WEST);
+        content.add(new NavButtonsPanel(navActionListener, options, this), BorderLayout.CENTER);
         
-        centeringPanel.add(buttonsPanel);
-        return centeringPanel;
+        return content;
     }
     
-    public void setActiveButton(JButton button) {
-        if (activeButton != null && activeButton instanceof NavButton) {
-            ((NavButton) activeButton).setActive(false);
+    /**
+     * Establece el botón activo en la barra de navegación.
+     * @param button Botón que se marcará como activo
+     */
+    public void setActiveButton(NavButton button) {
+        if (activeButton != null) {
+            activeButton.setActive(false);
         }
-        
         activeButton = button;
-        if (activeButton instanceof NavButton) {
-            ((NavButton) activeButton).setActive(true);
+        if (activeButton != null) {
+            activeButton.setActive(true);
         }
     }
 }

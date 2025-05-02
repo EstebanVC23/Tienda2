@@ -1,23 +1,29 @@
 package com.store.view.AdminView;
 
 import com.store.models.Usuario;
-import com.store.services.ProductoServicio;
-import com.store.services.UsuarioServicio;
-import com.store.view.Auth.Login;
+import com.store.services.ProductoServicioImpl;
+import com.store.services.UsuarioServicioImpl;
+import com.store.view.auth.Login;
 import com.store.view.components.NavBar.Navbar;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Vista principal del panel de administración.
+ * Proporciona una interfaz para gestionar usuarios, productos y mostrar el dashboard.
+ */
 public class AdminView extends JFrame {
 
     private final Usuario usuario;
-    private final UsuarioServicio usuarioServicio;
-    private final ProductoServicio productoServicio;
+    private final UsuarioServicioImpl usuarioServicio;
+    private final ProductoServicioImpl productoServicio;
     private final JPanel mainContent;
     private final AdminContentManager contentManager;
 
+    /**
+     * Enumeración que representa los paneles disponibles en la interfaz de administración.
+     */
     private enum AdminPanel {
         DASHBOARD("Dashboard"), 
         USERS("Usuarios"), 
@@ -29,12 +35,23 @@ public class AdminView extends JFrame {
             this.label = label;
         }
         
+        /**
+         * Obtiene la etiqueta del panel.
+         * @return String con el nombre del panel
+         */
         public String getLabel() {
             return label;
         }
     }
 
-    public AdminView(Usuario usuario, UsuarioServicio usuarioServicio, ProductoServicio productoServicio) {
+    /**
+     * Constructor de la vista de administración.
+     * @param usuario Usuario administrador
+     * @param usuarioServicio Servicio para gestión de usuarios
+     * @param productoServicio Servicio para gestión de productos
+     * @throws IllegalArgumentException Si el usuario no tiene rol de administrador
+     */
+    public AdminView(Usuario usuario, UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
         if (!usuario.getRol().equals("ADMIN")) {
             throw new IllegalArgumentException("El usuario no tiene permisos de administrador");
         }
@@ -54,6 +71,9 @@ public class AdminView extends JFrame {
         initUI();
     }
     
+    /**
+     * Configura las propiedades básicas de la ventana.
+     */
     private void configureWindow() {
         setTitle("Panel de Administración - " + usuario.getNombre());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,6 +83,9 @@ public class AdminView extends JFrame {
         setResizable(false);
     }
     
+    /**
+     * Inicializa los componentes de la interfaz de usuario.
+     */
     private void initUI() {
         String[] navOptions = {
             AdminPanel.DASHBOARD.getLabel(),
@@ -71,7 +94,6 @@ public class AdminView extends JFrame {
         };
         
         Navbar navBar = new Navbar(this::handleNavigation, navOptions);
-        
         LogoutPanel logoutPanel = new LogoutPanel(this::handleLogout);
         
         contentManager.showDashboard();
@@ -81,6 +103,10 @@ public class AdminView extends JFrame {
         add(logoutPanel, BorderLayout.SOUTH);
     }
     
+    /**
+     * Maneja la navegación entre los diferentes paneles.
+     * @param e Evento de acción que contiene la opción seleccionada
+     */
     private void handleNavigation(ActionEvent e) {
         String option = e.getActionCommand();
         switch (option) {
@@ -96,6 +122,10 @@ public class AdminView extends JFrame {
         }
     }
     
+    /**
+     * Maneja el cierre de sesión del administrador.
+     * @param e Evento de acción del botón de logout
+     */
     private void handleLogout(ActionEvent e) {
         int confirm = JOptionPane.showConfirmDialog(
             this,

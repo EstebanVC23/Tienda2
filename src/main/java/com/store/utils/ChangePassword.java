@@ -4,13 +4,21 @@ import com.google.gson.*;
 import java.io.*;
 import java.nio.file.*;
 
+/**
+ * Utilidad para cambiar contraseñas de usuarios almacenados en un archivo JSON.
+ * Proporciona funcionalidad para actualizar contraseñas y crear la estructura de archivos necesaria.
+ */
 public class ChangePassword {
+    
+    /**
+     * Punto de entrada principal para cambiar una contraseña de usuario.
+     * @param args Argumentos de línea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
         String email = "esvca";
         String password = "321";
         String filePath = "src/main/resources/json/usuarios.json";
         
-        // Verificar si el directorio existe, si no, crearlo
         try {
             Path directoryPath = Paths.get(filePath).getParent();
             if (directoryPath != null && !Files.exists(directoryPath)) {
@@ -25,10 +33,8 @@ public class ChangePassword {
         
         JsonArray jsonArray;
         
-        // Verificar si el archivo existe
         if (Files.exists(Paths.get(filePath))) {
             try {
-                // Leer el archivo JSON existente
                 String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
                 JsonElement jsonElement = JsonParser.parseString(jsonString);
                 
@@ -54,7 +60,7 @@ public class ChangePassword {
             JsonObject jsonObject = element.getAsJsonObject();
             
             if (jsonObject.has("email") && email.equals(jsonObject.get("email").getAsString())) {
-                String encryptedPassword = PasswordUtils.encrypt(password); // Encriptar la contraseña "123"
+                String encryptedPassword = PasswordUtils.encrypt(password);
                 jsonObject.addProperty("password", encryptedPassword);
                 UserFound = true;
                 System.out.println("Se ha cambiado la contraseña del usuario " + email + " a '" + password + "' (hasheada).");
@@ -62,18 +68,15 @@ public class ChangePassword {
             }
         }
         
-        // Si no se encontró el usuario root, crearlo
         if (!UserFound) {
             System.out.println("El usuario " + email + " no existe.");
         }
         
-        // Guardar los cambios en el archivo JSON
         try (FileWriter writer = new FileWriter(filePath)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(jsonArray, writer);
             System.out.println("Archivo JSON guardado correctamente en: " + filePath);
             
-            // Mostrar la ruta absoluta para referencia
             Path absolutePath = Paths.get(filePath).toAbsolutePath();
             System.out.println("Ruta absoluta del archivo: " + absolutePath);
         } catch (IOException e) {

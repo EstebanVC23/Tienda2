@@ -8,10 +8,20 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.function.Consumer;
 
+/**
+ * Panel de filtros para interfaces de administración con campo de búsqueda
+ * y selector de filtros opcional.
+ */
 public class AdminFilterPanel extends JPanel {
     private JTextField searchField;
     private JComboBox<String> filterCombo;
 
+    /**
+     * Crea un panel de filtros para administración.
+     * @param label Texto para la etiqueta del campo de búsqueda
+     * @param filterOptions Opciones para el combobox de filtrado (puede ser null)
+     * @param onFilterChange Callback que se ejecuta al cambiar cualquier filtro
+     */
     public AdminFilterPanel(String label, String[] filterOptions, Consumer<String> onFilterChange) {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -23,7 +33,6 @@ public class AdminFilterPanel extends JPanel {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         searchPanel.setBackground(Color.WHITE);
 
-        // Campo de búsqueda
         JPanel searchContainer = new JPanel(new BorderLayout(5, 0));
         searchContainer.setBackground(Color.WHITE);
         
@@ -47,7 +56,6 @@ public class AdminFilterPanel extends JPanel {
         searchContainer.add(searchLabel, BorderLayout.WEST);
         searchContainer.add(searchField, BorderLayout.CENTER);
         
-        // Filtro de estado (si aplica)
         if (filterOptions != null) {
             JPanel filterContainer = new JPanel(new BorderLayout(5, 0));
             filterContainer.setBackground(Color.WHITE);
@@ -77,20 +85,36 @@ public class AdminFilterPanel extends JPanel {
         add(searchPanel, BorderLayout.EAST);
     }
 
+    /**
+     * Obtiene el texto actual del campo de búsqueda.
+     * @return Texto ingresado en el campo de búsqueda
+     */
     public String getFilterText() {
         return searchField != null ? searchField.getText() : "";
     }
 
+    /**
+     * Obtiene el filtro seleccionado actualmente.
+     * @return Opción seleccionada en el combobox o "Todos" si no hay combobox
+     */
     public String getSelectedFilter() {
         return filterCombo != null ? (String) filterCombo.getSelectedItem() : "Todos";
     }
 
+    /**
+     * Establece el texto del campo de búsqueda.
+     * @param text Texto a establecer en el campo de búsqueda
+     */
     public void setFilterText(String text) {
         if (searchField != null) {
             searchField.setText(text);
         }
     }
 
+    /**
+     * Establece el filtro seleccionado en el combobox.
+     * @param filter Opción a seleccionar en el combobox
+     */
     public void setSelectedFilter(String filter) {
         if (filterCombo != null) {
             filterCombo.setSelectedItem(filter);

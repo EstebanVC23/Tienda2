@@ -1,150 +1,147 @@
-package com.store.view.Auth;
+package com.store.view.auth;
 
-import com.store.models.Usuario;
-import com.store.services.ProductoServicio;
-import com.store.services.UsuarioServicio;
+import com.store.services.ProductoServicioImpl;
+import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.Auth.constants.AuthConstants;
-import com.store.view.AdminView.AdminView;
-import com.store.view.UserView.UserView;
-import com.store.view.components.buttons.CustomButton;
-import com.store.view.components.forauth.CampoEntrada;
-
+import com.store.view.auth.components.LoginForm;
+import com.store.view.auth.constants.AuthConstants;
+import com.store.view.auth.controller.LoginController;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
+/**
+ * Vista de inicio de sesión que extiende de AuthBaseFrame.
+ * Proporciona la interfaz gráfica para el login de usuarios.
+ */
 public class Login extends AuthBaseFrame {
-    private CampoEntrada campoCorreo;
-    private CampoEntrada campoPassword;
-    private CustomButton botonIngresar;
-    private CustomButton botonRegistrarse;
+    private LoginForm loginForm;
+    private LoginController controller;
 
-    public Login(UsuarioServicio usuarioServicio, ProductoServicio productoServicio) {
+    /**
+     * Constructor de la vista de login.
+     * @param usuarioServicio Servicio para gestión de usuarios
+     * @param productoServicio Servicio para gestión de productos
+     */
+    public Login(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
         super(usuarioServicio, productoServicio, "Login");
+        this.controller = new LoginController(this, usuarioServicio, productoServicio);
         initializeComponents();
     }
 
+    /**
+     * Inicializa los componentes de la vista.
+     */
     private void initializeComponents() {
         addLeftPanel(AuthConstants.LOGIN_TITLE, AuthConstants.LOGIN_SUBTITLE);
         createRightPanelContent();
+        controller.configureEvents();
     }
 
+    /**
+     * Crea y configura el contenido del panel derecho.
+     */
     private void createRightPanelContent() {
         JPanel panelDerecho = createRightPanel();
+        panelDerecho.setLayout(new GridBagLayout());
         
-        // Panel título
-        JLabel labelTitulo = createTitleLabel(AuthConstants.LOGIN_FORM_TITLE);
-        panelDerecho.add(labelTitulo, BorderLayout.NORTH);
+        GridBagConstraints gbc = createTitleConstraints();
+        JLabel labelTitulo = createTitleLabel();
+        panelDerecho.add(labelTitulo, gbc);
         
-        // Panel formulario
-        JPanel panelFormulario = createFormPanel();
-        panelFormulario.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = AuthConstants.LOGIN_FORM_PADDING;
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.anchor = GridBagConstraints.CENTER;
-
-        // Campos de entrada
-        campoCorreo = new CampoEntrada(
-            AuthConstants.TEXT_FIELD_TYPE, 
-            AuthConstants.EMAIL_LABEL, 
-            AuthConstants.INPUT_FIELD_SIZE.width, 
-            AuthConstants.INPUT_FIELD_SIZE.height
-        );
+        loginForm = new LoginForm();
         
-        campoPassword = new CampoEntrada(
-            AuthConstants.PASSWORD_FIELD_TYPE, 
-            AuthConstants.PASSWORD_LABEL, 
-            AuthConstants.INPUT_FIELD_SIZE.width, 
-            AuthConstants.INPUT_FIELD_SIZE.height
-        );
+        gbc = createFormConstraints();
+        panelDerecho.add(loginForm, gbc);
         
-        // Botón principal
-        botonIngresar = new CustomButton(
-            AuthConstants.LOGIN_BUTTON_TEXT, 
-            Colors.PRIMARY,
-            Colors.ACTIVE_TEXT
-        );
-        botonIngresar.setPreferredSize(AuthConstants.LOGIN_BUTTON_SIZE);
-        botonIngresar.setFont(Fonts.BUTTON.deriveFont(AuthConstants.LOGIN_BUTTON_FONT_SIZE));
-        botonIngresar.setRound(true);
-        
-        // Botón secundario (enlace)
-        botonRegistrarse = new CustomButton(
-            AuthConstants.REGISTER_LINK_TEXT,
-            Colors.BACKGROUND, // Fondo transparente
-            Colors.PRIMARY_BLUE // Texto azul
-        );
-        botonRegistrarse.setBorder(BorderFactory.createEmptyBorder());
-        botonRegistrarse.setContentAreaFilled(false);
-        botonRegistrarse.setFont(Fonts.BODY.deriveFont(AuthConstants.SECONDARY_BUTTON_FONT_SIZE));
-        botonRegistrarse.setHoverColor(Colors.BACKGROUND);
-        botonRegistrarse.setPressedColor(Colors.BACKGROUND);
-
-        // Agregar componentes al formulario
-        panelFormulario.add(campoCorreo, gbc);
-        panelFormulario.add(campoPassword, gbc);
-        panelFormulario.add(botonIngresar, gbc);
-        panelFormulario.add(botonRegistrarse, gbc);
-
-        panelDerecho.add(panelFormulario, BorderLayout.CENTER);
         add(panelDerecho);
-        
-        configureEvents();
     }
 
-    private void configureEvents() {
-        botonIngresar.addActionListener(this::handleLogin);
-        botonRegistrarse.addActionListener(_ -> openRegister());
+    /**
+     * Crea las restricciones para el título del formulario.
+     * @return GridBagConstraints configurado
+     */
+    private GridBagConstraints createTitleConstraints() {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 0, 10, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.1;
+        return gbc;
     }
 
-    private void handleLogin(ActionEvent e) {
-        String correo = campoCorreo.getText().trim();
-        String password = campoPassword.getText().trim();
-
-        if (correo.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, 
-                AuthConstants.EMPTY_FIELDS_LOGIN, 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Usuario usuarioLogin = new Usuario();
-        usuarioLogin.setEmail(correo);
-        usuarioLogin.setPassword(password);
-
-        if (!usuarioServicio.validarUsuario(usuarioLogin)) {
-            JOptionPane.showMessageDialog(this, 
-                AuthConstants.LOGIN_ERROR, 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Usuario dataUser = usuarioServicio.obtenerUsuarioPorEmail(correo);
-        JOptionPane.showMessageDialog(this, 
-            String.format(AuthConstants.LOGIN_SUCCESS, dataUser.getNombre()), 
-            "Éxito",
-            JOptionPane.INFORMATION_MESSAGE);
-
-        openUserView(dataUser);
+    /**
+     * Crea el label del título del formulario.
+     * @return JLabel configurado
+     */
+    private JLabel createTitleLabel() {
+        JLabel label = new JLabel(AuthConstants.LOGIN_FORM_TITLE, SwingConstants.CENTER);
+        label.setForeground(Colors.PRIMARY_TEXT);
+        label.setFont(Fonts.TITLE);
+        return label;
     }
 
-    private void openUserView(Usuario usuario) {
-        if ("ADMIN".equalsIgnoreCase(usuario.getRol())) {
-            new AdminView(usuario, usuarioServicio, productoServicio).setVisible(true);
-        } else {
-            new UserView(usuario, productoServicio, usuarioServicio).setVisible(true);
-        }
-        dispose();
+    /**
+     * Crea las restricciones para el formulario.
+     * @return GridBagConstraints configurado
+     */
+    private GridBagConstraints createFormConstraints() {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy = 1;
+        gbc.weighty = 0.9;
+        gbc.fill = GridBagConstraints.BOTH;
+        return gbc;
     }
 
-    private void openRegister() {
-        new Registro(usuarioServicio, productoServicio).setVisible(true);
-        dispose();
+    /**
+     * Obtiene el correo ingresado en el formulario.
+     * @return String con el correo electrónico
+     */
+    public String getCorreo() {
+        return loginForm.getCorreo();
+    }
+
+    /**
+     * Obtiene la contraseña ingresada en el formulario.
+     * @return String con la contraseña
+     */
+    public String getPassword() {
+        return loginForm.getPassword();
+    }
+
+    /**
+     * Añade un listener para el botón de login.
+     * @param listener ActionListener para el evento
+     */
+    public void addLoginListener(ActionListener listener) {
+        loginForm.addLoginListener(listener);
+    }
+
+    /**
+     * Añade un listener para el botón de registro.
+     * @param listener ActionListener para el evento
+     */
+    public void addRegisterListener(ActionListener listener) {
+        loginForm.addRegisterListener(listener);
+    }
+
+    /**
+     * Muestra un mensaje de error.
+     * @param message Mensaje a mostrar
+     */
+    public void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Muestra un mensaje de éxito.
+     * @param message Mensaje a mostrar
+     */
+    public void showSuccess(String message) {
+        JOptionPane.showMessageDialog(this, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 }

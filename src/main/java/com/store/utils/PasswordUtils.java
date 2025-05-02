@@ -5,10 +5,20 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+/**
+ * Clase utilitaria para el manejo seguro de contraseñas.
+ * Proporciona métodos para encriptar, verificar y validar contraseñas usando hashing con salt.
+ */
 public class PasswordUtils {
     private static final int SALT_LENGTH = 16;
     private static final String ALGORITHM = "SHA-256";
     
+    /**
+     * Encripta una contraseña usando salt y algoritmo SHA-256.
+     * @param password Contraseña a encriptar
+     * @return String con la contraseña encriptada en formato Base64 (salt + hash)
+     * @throws RuntimeException Si el algoritmo de hash no está disponible
+     */
     public static String encrypt(String password) {
         try {
             SecureRandom random = new SecureRandom();
@@ -29,6 +39,12 @@ public class PasswordUtils {
         }
     }
     
+    /**
+     * Verifica si una contraseña coincide con un hash almacenado.
+     * @param password Contraseña a verificar
+     * @param storedHash Hash almacenado para comparación
+     * @return true si la contraseña coincide, false en caso contrario o si hay error
+     */
     public static boolean verify(String password, String storedHash) {
         if (password == null || storedHash == null || storedHash.isEmpty()) {
             return false;
@@ -61,6 +77,11 @@ public class PasswordUtils {
         }
     }
 
+    /**
+     * Determina si un string parece ser un hash de contraseña válido.
+     * @param password String a evaluar
+     * @return true si el string parece ser un hash válido, false en caso contrario
+     */
     public static boolean isHashed(String password) {
         if (password == null || password.isEmpty()) {
             return false;
@@ -73,24 +94,23 @@ public class PasswordUtils {
         }
     }
 
-    // Método main para pruebas
+    /**
+     * Método de prueba para demostrar la funcionalidad de la clase.
+     * @param args Argumentos de línea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
         String password = "123";
         String wrongPassword = "123";
         
-        // Encriptar contraseña
         String encrypted = encrypt(password);
         System.out.println("Contraseña encriptada: " + encrypted);
         
-        // Verificar contraseña correcta
         boolean result1 = verify(password, encrypted);
         System.out.println("Verificación con contraseña correcta: " + result1);
         
-        // Verificar contraseña incorrecta
         boolean result2 = verify(wrongPassword, encrypted);
         System.out.println("Verificación con contraseña incorrecta: " + result2);
         
-        // Verificar con hash vacío
         boolean result3 = verify(password, "");
         System.out.println("Verificación con hash vacío: " + result3);
     }

@@ -1,7 +1,7 @@
 package com.store.view.panels.profile;
 
 import com.store.models.Usuario;
-import com.store.services.UsuarioServicio;
+import com.store.services.UsuarioServicioImpl;
 import com.store.view.panels.BasePanel;
 import com.store.view.panels.profile.fields.*;
 import com.store.view.components.dialogs.ChangePasswordDialog;
@@ -9,23 +9,39 @@ import com.store.view.components.dialogs.ChangePasswordDialog;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel principal que muestra y permite la edición del perfil de usuario.
+ * Contiene secciones para información personal y acciones como guardar cambios o cambiar contraseña.
+ * Extiende de BasePanel para mantener consistencia en la interfaz.
+ */
 public class UserProfilePanel extends BasePanel {
     private final UserProfileController controller;
     private ProfileSectionPanel profileSection;
     private ProfileActionsPanel actionsPanel;
 
-    public UserProfilePanel(UsuarioServicio usuarioServicio, Usuario usuario) {
+    /**
+     * Construye un nuevo panel de perfil de usuario.
+     * @param usuarioServicio Servicio para operaciones con usuarios
+     * @param usuario Usuario cuyo perfil se mostrará y editará
+     */
+    public UserProfilePanel(UsuarioServicioImpl usuarioServicio, Usuario usuario) {
         this.controller = new UserProfileController(usuarioServicio, usuario);
         initComponents();
         setupLayout();
         setupListeners();
     }
 
+    /**
+     * Inicializa los componentes principales del panel.
+     */
     private void initComponents() {
         profileSection = new ProfileSectionPanel(controller.getUsuario());
         actionsPanel = new ProfileActionsPanel();
     }
 
+    /**
+     * Configura el diseño del panel y añade los componentes.
+     */
     private void setupLayout() {
         setLayout(new BorderLayout(0, 15));
         setBackground(UserProfileConstants.BACKGROUND);
@@ -40,6 +56,10 @@ public class UserProfilePanel extends BasePanel {
         add(actionsPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Crea el panel del encabezado con el título principal.
+     * @return JPanel configurado como encabezado
+     */
     private JPanel createHeaderPanel() {
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(UserProfileConstants.BACKGROUND);
@@ -54,11 +74,17 @@ public class UserProfilePanel extends BasePanel {
         return headerPanel;
     }
 
+    /**
+     * Configura los listeners para los botones de acciones.
+     */
     private void setupListeners() {
         actionsPanel.getSaveButton().addActionListener(_ -> handleSaveProfile());
         actionsPanel.getChangePasswordButton().addActionListener(_ -> handleChangePassword());
     }
 
+    /**
+     * Maneja el evento de guardar el perfil, recolectando los datos y actualizando mediante el controlador.
+     */
     private void handleSaveProfile() {
         boolean resultado = controller.actualizarPerfil(
             profileSection.getNombre(),
@@ -77,6 +103,10 @@ public class UserProfilePanel extends BasePanel {
         }
     }
 
+    /**
+     * Maneja el evento de cambiar contraseña, mostrando el diálogo correspondiente
+     * y procesando el resultado mediante el controlador.
+     */
     private void handleChangePassword() {
         ChangePasswordDialog dialog = new ChangePasswordDialog((JFrame)SwingUtilities.getWindowAncestor(this));
         dialog.setVisible(true);
@@ -95,7 +125,11 @@ public class UserProfilePanel extends BasePanel {
         }
     }
 
+    /**
+     * Método heredado de BasePanel. No implementa funcionalidad en este panel.
+     */
     @Override
     public void refreshTable() {
+        // No se requiere implementación para este panel
     }
 }

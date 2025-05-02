@@ -2,11 +2,12 @@ package com.store.view.components.forauth;
 
 import javax.swing.*;
 import java.awt.*;
+import com.store.utils.Colors;
+import com.store.utils.Fonts;
 
 /**
- * Clase PanelIzquierdoInicio que extiende JPanel.
- * Esta clase representa un panel con un título, un subtítulo y una imagen, con
- * un fondo personalizado.
+ * Panel personalizado para la sección izquierda de la pantalla de inicio.
+ * Muestra un título, subtítulo e imagen con fondo degradado azul.
  */
 public class PanelIzquierdoInicio extends JPanel {
     private JLabel labelLogo;
@@ -14,10 +15,9 @@ public class PanelIzquierdoInicio extends JPanel {
     private String subtitulo;
 
     /**
-     * Constructor de la clase PanelIzquierdoInicio.
-     *
-     * @param titulo    Texto del título principal.
-     * @param subtitulo Texto del subtítulo.
+     * Construye un nuevo panel con título y subtítulo especificados.
+     * @param titulo Texto principal a mostrar en el panel
+     * @param subtitulo Texto secundario a mostrar bajo el título
      */
     public PanelIzquierdoInicio(String titulo, String subtitulo) {
         this.titulo = titulo;
@@ -29,33 +29,28 @@ public class PanelIzquierdoInicio extends JPanel {
     }
 
     /**
-     * Método privado que configura los componentes del panel.
+     * Configura y organiza los componentes visuales del panel.
      */
     private void crearPanel() {
         labelLogo = new JLabel(titulo, JLabel.CENTER);
-        labelLogo.setForeground(Color.WHITE);
-        labelLogo.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        labelLogo.setForeground(Colors.ACTIVE_TEXT);
+        labelLogo.setFont(Fonts.TITLE);
 
         JLabel subTitulo = new JLabel(subtitulo, JLabel.CENTER);
-        subTitulo.setForeground(new Color(236, 240, 241, 200)); // Color gris claro con transparencia
+        subTitulo.setForeground(Colors.SECONDARY_GRAY);
     
         JPanel panelCentro = new JPanel();
         panelCentro.setOpaque(false);
         panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 
-        // Carga de la imagen corregida
         ImageIcon iconoOriginal = null;
         try {
-            // Usa getResourceAsStream para mejor manejo de recursos
             java.io.InputStream imgStream = getClass().getResourceAsStream("/Img/store.jpg");
             if (imgStream != null) {
                 iconoOriginal = new ImageIcon(javax.imageio.ImageIO.read(imgStream));
-            } else {
-                System.err.println("No se encontró el recurso: /Img/store.jpg");
             }
         } catch (Exception e) {
             System.err.println("Error al cargar la imagen: " + e.getMessage());
-            e.printStackTrace();
         }
 
         JLabel iconoLabel;
@@ -65,10 +60,9 @@ public class PanelIzquierdoInicio extends JPanel {
             ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
             iconoLabel = new JLabel(iconoEscalado);
         } else {
-            // Fallback visual si no se carga la imagen
             iconoLabel = new JLabel("LOGO");
-            iconoLabel.setForeground(Color.WHITE);
-            iconoLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+            iconoLabel.setForeground(Colors.ACTIVE_TEXT);
+            iconoLabel.setFont(Fonts.SUBTITLE);
             iconoLabel.setPreferredSize(new Dimension(120, 120));
             iconoLabel.setMinimumSize(new Dimension(120, 120));
             iconoLabel.setMaximumSize(new Dimension(120, 120));
@@ -90,10 +84,8 @@ public class PanelIzquierdoInicio extends JPanel {
     }
 
     /**
-     * Sobrescribe el método paintComponent para personalizar el fondo del panel con
-     * un gradiente de color.
-     *
-     * @param g Objeto Graphics que permite dibujar en el panel.
+     * Pinta el fondo del panel con un degradado de azul claro a oscuro.
+     * @param g Objeto Graphics usado para el renderizado
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -102,8 +94,8 @@ public class PanelIzquierdoInicio extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         GradientPaint gradient = new GradientPaint(
-                0, 0, new Color(41, 128, 185), // Azul claro y brillante (parte superior)
-                0, getHeight(), new Color(26, 83, 119) // Azul más oscuro (parte inferior)
+                0, 0, Colors.SECONDARY_BLUE,
+                0, getHeight(), Colors.DARK_BLUE
         );
 
         g2d.setPaint(gradient);

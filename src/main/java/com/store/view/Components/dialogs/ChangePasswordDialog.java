@@ -5,12 +5,20 @@ import com.store.utils.Fonts;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Diálogo para cambiar la contraseña de usuario.
+ * Permite al usuario ingresar su contraseña actual y confirmar la nueva contraseña.
+ */
 public class ChangePasswordDialog extends JDialog {
     private final JPasswordField currentPasswordField;
     private final JPasswordField newPasswordField;
     private final JPasswordField confirmPasswordField;
     private boolean passwordChanged = false;
 
+    /**
+     * Crea un nuevo diálogo para cambio de contraseña.
+     * @param parent Ventana padre para centrar el diálogo
+     */
     public ChangePasswordDialog(JFrame parent) {
         super(parent, "Cambiar Contraseña", true);
         currentPasswordField = new JPasswordField(20);
@@ -19,6 +27,9 @@ public class ChangePasswordDialog extends JDialog {
         initializeUI();
     }
 
+    /**
+     * Inicializa la interfaz de usuario del diálogo.
+     */
     private void initializeUI() {
         setLayout(new GridBagLayout());
         setSize(400, 250);
@@ -57,6 +68,11 @@ public class ChangePasswordDialog extends JDialog {
         add(createConfirmButton(), gbc);
     }
 
+    /**
+     * Crea una etiqueta con estilo para el formulario.
+     * @param text Texto a mostrar en la etiqueta
+     * @return JLabel configurado
+     */
     private JLabel createLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(Fonts.BOLD_BODY);
@@ -64,6 +80,10 @@ public class ChangePasswordDialog extends JDialog {
         return label;
     }
 
+    /**
+     * Crea el botón de confirmación con estilo.
+     * @return JButton configurado
+     */
     private JButton createConfirmButton() {
         JButton button = new JButton("Confirmar");
         button.setFont(Fonts.BUTTON);
@@ -80,12 +100,19 @@ public class ChangePasswordDialog extends JDialog {
         return button;
     }
 
+    /**
+     * Valida que las nuevas contraseñas coincidan.
+     * Muestra mensaje de error si no coinciden.
+     */
     private void validatePasswordChange() {
         String newPass = new String(newPasswordField.getPassword());
         String confirmPass = new String(confirmPasswordField.getPassword());
         
         if(!newPass.equals(confirmPass)) {
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                "Las contraseñas no coinciden", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -93,14 +120,26 @@ public class ChangePasswordDialog extends JDialog {
         dispose();
     }
 
+    /**
+     * Obtiene la contraseña actual ingresada.
+     * @return Contraseña actual como String
+     */
     public String getCurrentPassword() {
         return new String(currentPasswordField.getPassword());
     }
 
+    /**
+     * Obtiene la nueva contraseña ingresada.
+     * @return Nueva contraseña como String
+     */
     public String getNewPassword() {
         return new String(newPasswordField.getPassword());
     }
 
+    /**
+     * Indica si el usuario confirmó el cambio de contraseña.
+     * @return true si las contraseñas coincidieron y se confirmó el cambio
+     */
     public boolean isPasswordChanged() {
         return passwordChanged;
     }

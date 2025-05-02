@@ -6,11 +6,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Panel de filtros para productos que combina un campo de búsqueda
+ * y un selector de categorías.
+ */
 public class ProductFilterPanel extends JPanel {
     private final JTextField searchField;
     private final JComboBox<String> categoryCombo;
 
+    /**
+     * Crea un panel de filtros para productos con las categorías especificadas.
+     * 
+     * @param categories Lista de categorías disponibles para filtrar
+     */
     public ProductFilterPanel(List<String> categories) {
+        // Inicialización directa de los campos final
+        this.searchField = new JTextField(20);
+        this.categoryCombo = new JComboBox<>();
+        
         setLayout(new FlowLayout(FlowLayout.LEFT, 20, 15));
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createCompoundBorder(
@@ -18,7 +31,16 @@ public class ProductFilterPanel extends JPanel {
             BorderFactory.createEmptyBorder(15, 25, 15, 25)
         ));
 
-        // Panel de búsqueda
+        add(createSearchPanel());
+        add(createCategoryPanel(categories));
+    }
+
+    /**
+     * Crea el panel de búsqueda con un campo de texto.
+     * 
+     * @return JPanel con el campo de búsqueda
+     */
+    private JPanel createSearchPanel() {
         JPanel searchPanel = new JPanel(new BorderLayout(10, 0));
         searchPanel.setBackground(Color.WHITE);
 
@@ -26,7 +48,6 @@ public class ProductFilterPanel extends JPanel {
         searchLabel.setFont(Fonts.SECTION_TITLE);
         searchLabel.setForeground(Colors.PRIMARY_TEXT);
 
-        searchField = new JTextField(20);
         searchField.setFont(Fonts.BODY);
         searchField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Colors.BORDER),
@@ -36,7 +57,16 @@ public class ProductFilterPanel extends JPanel {
         searchPanel.add(searchLabel, BorderLayout.WEST);
         searchPanel.add(searchField, BorderLayout.CENTER);
 
-        // Panel de categorías
+        return searchPanel;
+    }
+
+    /**
+     * Crea el panel de selección de categorías con un combobox.
+     * 
+     * @param categories Lista de categorías disponibles
+     * @return JPanel con el combobox de categorías
+     */
+    private JPanel createCategoryPanel(List<String> categories) {
         JPanel categoryPanel = new JPanel(new BorderLayout(10, 0));
         categoryPanel.setBackground(Color.WHITE);
 
@@ -44,7 +74,6 @@ public class ProductFilterPanel extends JPanel {
         categoryLabel.setFont(Fonts.SECTION_TITLE);
         categoryLabel.setForeground(Colors.PRIMARY_TEXT);
 
-        categoryCombo = new JComboBox<>();
         categoryCombo.setFont(Fonts.BODY);
         categoryCombo.setBackground(Color.WHITE);
         categoryCombo.setBorder(BorderFactory.createCompoundBorder(
@@ -57,14 +86,23 @@ public class ProductFilterPanel extends JPanel {
         categoryPanel.add(categoryLabel, BorderLayout.WEST);
         categoryPanel.add(categoryCombo, BorderLayout.CENTER);
 
-        add(searchPanel);
-        add(categoryPanel);
+        return categoryPanel;
     }
 
+    /**
+     * Obtiene el campo de texto para búsqueda.
+     * 
+     * @return Referencia al JTextField de búsqueda
+     */
     public JTextField getSearchField() {
         return searchField;
     }
 
+    /**
+     * Obtiene el combobox de selección de categorías.
+     * 
+     * @return Referencia al JComboBox de categorías
+     */
     public JComboBox<String> getCategoryCombo() {
         return categoryCombo;
     }

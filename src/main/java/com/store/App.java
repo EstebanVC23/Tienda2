@@ -1,15 +1,15 @@
 package com.store;
 
-import com.store.services.ProductoServicio;
-import com.store.services.UsuarioServicio;
-import com.store.view.Auth.Login;
+import com.store.services.ProductoServicioImpl;
+import com.store.services.UsuarioServicioImpl;
+import com.store.view.auth.Login;
 
 /**
  * Clase principal de la aplicación.
  * Inicializa la aplicación y carga los datos desde archivos JSON.
  * 
  * NOTA: 
- * Borrar los comentarios de las clases y usar javadoc para generar la documentación.
+ * dialog admin y users, falta documentar
  * modularizar el código en paquetes y clases
  * estudiar POO
  * usar interfaces para los servicios
@@ -19,8 +19,8 @@ import com.store.view.Auth.Login;
  */
 public class App {
     public static void main(String[] args) {
-        UsuarioServicio usuarioServicio = new UsuarioServicio();
-        ProductoServicio productoServicio = new ProductoServicio();
+        UsuarioServicioImpl usuarioServicio = new UsuarioServicioImpl();
+        ProductoServicioImpl productoServicio = new ProductoServicioImpl();
 
         Login login = new Login(usuarioServicio, productoServicio);
 

@@ -1,7 +1,7 @@
 package com.store.view.components.dialogs.admin;
 
 import com.store.models.Usuario;
-import com.store.services.UsuarioServicio;
+import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.utils.PasswordUtils;
@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.border.EmptyBorder;
 
 public class UserFormDialog extends JDialog {
-    private final UsuarioServicio usuarioServicio;
+    private final UsuarioServicioImpl usuarioServicio;
     private final Usuario userToEdit;
     private final UserFormDialogConstants constants;
     
@@ -26,7 +26,7 @@ public class UserFormDialog extends JDialog {
     private JPasswordField confirmPasswordField;
     private boolean isNewUser;
 
-    public UserFormDialog(Window parent, Usuario usuario, UsuarioServicio usuarioServicio) {
+    public UserFormDialog(Window parent, Usuario usuario, UsuarioServicioImpl usuarioServicio) {
         super(parent, usuario == null ? "Nuevo Usuario" : "Editar Usuario", ModalityType.APPLICATION_MODAL);
         this.usuarioServicio = usuarioServicio;
         this.userToEdit = usuario == null ? new Usuario() : usuario;

@@ -1,7 +1,8 @@
 package com.store.view.panels.admin;
 
 import com.store.models.Producto;
-import com.store.services.ProductoServicio;
+import com.store.services.ProductoServicioImpl;
+import com.store.utils.Colors;
 import com.store.view.components.filters.AdminFilterPanel;
 import com.store.view.components.tables.CustomTable;
 import com.store.view.components.dialogs.admin.ProductFormDialog;
@@ -13,40 +14,72 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Panel de administración para la gestión de productos.
+ * Proporciona funcionalidades CRUD completas (Crear, Leer, Actualizar, Eliminar)
+ * para productos, incluyendo gestión de stock e interfaz de usuario consistente.
+ */
 public class ProductosPanel extends CrudPanel<Producto> {
-    private final ProductoServicio productoServicio;
+    private final ProductoServicioImpl productoServicio;
     
-    public ProductosPanel(ProductoServicio productoServicio) {
+    private static final String[] COLUMN_NAMES = {
+        "Código", "Nombre", "Descripción", "Precio", "Stock", "Categoría", "Proveedor"
+    };
+
+    /**
+     * Constructor del panel de gestión de productos.
+     * @param productoServicio Servicio para operaciones con productos
+     */
+    public ProductosPanel(ProductoServicioImpl productoServicio) {
         super("Gestión de Productos");
         this.productoServicio = productoServicio;
         refreshTable();
     }
 
+    /**
+     * Configura el panel de filtros para la búsqueda de productos.
+     * Se utiliza un panel de filtro personalizado que permite buscar productos
+     * por nombre, código o categoría.
+     */
     @Override
     protected void setupFilterPanel() {
-        filterPanel = new AdminFilterPanel("Buscar:", null, this::applyFilter);
+        filterPanel = new AdminFilterPanel("Buscar productos:", null, this::applyFilter);
     }
 
+    /**
+     * Crea el panel de botones de acción para el CRUD de productos.
+     * Incluye botones para crear, editar, eliminar y gestionar stock de productos.
+     * @return Panel con los botones de acción
+     */
     @Override
     protected JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        buttonPanel.setBackground(Color.WHITE);
-        buttonPanel.add(createActionButton("Nuevo Producto", new Color(76, 175, 80), () -> showProductFormDialog(null)));
-        buttonPanel.add(createActionButton("Editar", new Color(33, 150, 243), this::editSelectedProduct));
-        buttonPanel.add(createActionButton("Gestionar Stock", new Color(255, 152, 0), this::manageStock));
-        buttonPanel.add(createActionButton("Eliminar", new Color(244, 67, 54), this::deleteSelectedProduct));
+        buttonPanel.setBackground(Colors.PANEL_BACKGROUND);
+        
+        buttonPanel.add(createActionButton("Nuevo Producto", Colors.SUCCESS_GREEN, 
+            () -> showProductFormDialog(null)));
+        buttonPanel.add(createActionButton("Editar", Colors.PRIMARY_BLUE, 
+            this::editSelectedProduct));
+        buttonPanel.add(createActionButton("Gestionar Stock", Colors.WARNING_ORANGE, 
+            this::manageStock));
+        buttonPanel.add(createActionButton("Eliminar", Colors.ERROR_RED, 
+            this::deleteSelectedProduct));
+        
         return buttonPanel;
     }
 
+    /**
+     * Crea el panel de la tabla de productos.
+     * Configura la tabla con los nombres de las columnas y el modelo de datos.
+     * @return Panel con la tabla de productos
+     */
     @Override
     protected JPanel createTablePanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Colors.PANEL_BACKGROUND);
         
-        String[] columnNames = {"ID", "Nombre", "Apellido", "Email", "Documento", "Teléfono", "Rol", "Estado"};
-        this.table = new CustomTable(columnNames);
+        this.table = new CustomTable(COLUMN_NAMES);
         
-        // Asegurar que la tabla esté dentro de un JScrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -54,6 +87,10 @@ public class ProductosPanel extends CrudPanel<Producto> {
         return panel;
     }
 
+    /**
+     * Aplica filtro de búsqueda a la tabla de productos.
+     * @param filterText Texto para filtrar los productos
+     */
     private void applyFilter(String filterText) {
         if (filterText.trim().isEmpty()) {
             table.getSorter().setRowFilter(null);
@@ -62,10 +99,13 @@ public class ProductosPanel extends CrudPanel<Producto> {
         }
     }
 
+    /**
+     * Edita el producto seleccionado en la tabla.
+     */
     private void editSelectedProduct() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorMessage("Seleccione un producto");
             return;
         }
         
@@ -74,10 +114,13 @@ public class ProductosPanel extends CrudPanel<Producto> {
         if (producto != null) showProductFormDialog(producto);
     }
 
+    /**
+     * Elimina el producto seleccionado previa confirmación.
+     */
     private void deleteSelectedProduct() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorMessage("Seleccione un producto");
             return;
         }
         
@@ -90,11 +133,15 @@ public class ProductosPanel extends CrudPanel<Producto> {
             if (success) {
                 refreshTable();
             } else {
-                JOptionPane.showMessageDialog(this, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+                showErrorMessage("Error al eliminar el producto");
             }
         }
     }
 
+    /**
+     * Muestra el diálogo de formulario para crear/editar productos.
+     * @param producto Producto a editar (null para crear nuevo)
+     */
     private void showProductFormDialog(Producto producto) {
         ProductFormDialog dialog = new ProductFormDialog(this, producto, productoServicio);
         dialog.addWindowListener(new WindowAdapter() {
@@ -107,10 +154,13 @@ public class ProductosPanel extends CrudPanel<Producto> {
         dialog.setVisible(true);
     }
 
+    /**
+     * Muestra el diálogo para gestionar el stock del producto seleccionado.
+     */
     private void manageStock() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un producto", "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorMessage("Seleccione un producto");
             return;
         }
         
@@ -118,7 +168,6 @@ public class ProductosPanel extends CrudPanel<Producto> {
         Producto producto = productoServicio.obtenerProductoPorCodigo(codigo);
         
         if (producto != null) {
-            // Obtener el JFrame principal para usarlo como parent del diálogo
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             StockDialog dialog = new StockDialog(parentFrame, producto, productoServicio);
             dialog.addWindowListener(new WindowAdapter() {
@@ -132,6 +181,9 @@ public class ProductosPanel extends CrudPanel<Producto> {
         }
     }
 
+    /**
+     * Refresca la tabla de productos con los datos actuales del servicio.
+     */
     @Override
     public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -149,5 +201,13 @@ public class ProductosPanel extends CrudPanel<Producto> {
                 p.getProveedor()
             });
         }
+    }
+
+    /**
+     * Muestra un mensaje de error al usuario.
+     * @param message Mensaje de error a mostrar
+     */
+    private void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }

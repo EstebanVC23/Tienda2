@@ -7,7 +7,16 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Utilidad para estilizar componentes de formularios con un diseño consistente.
+ * Proporciona métodos estáticos para crear componentes de formulario pre-estilizados.
+ */
 public class FormStyler {
+    
+    /**
+     * Crea un panel base para formularios con estilo predefinido.
+     * @return JPanel configurado con layout vertical, padding y color de fondo
+     */
     public static JPanel createFormPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -16,6 +25,11 @@ public class FormStyler {
         return panel;
     }
 
+    /**
+     * Crea una etiqueta para formularios con estilo consistente.
+     * @param text Texto a mostrar en la etiqueta
+     * @return JLabel estilizado para formularios
+     */
     public static JLabel createFormLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(Fonts.BOLD_BODY);
@@ -25,6 +39,10 @@ public class FormStyler {
         return label;
     }
 
+    /**
+     * Crea un campo de texto para formularios con estilo predefinido.
+     * @return JTextField estilizado con tamaño máximo y borde
+     */
     public static JTextField createFormTextField() {
         JTextField field = new JTextField();
         field.setFont(Fonts.BODY);
@@ -34,6 +52,10 @@ public class FormStyler {
         return field;
     }
 
+    /**
+     * Crea un área de texto para formularios con estilo consistente.
+     * @return JTextArea configurado con wrap de texto y borde
+     */
     public static JTextArea createFormTextArea() {
         JTextArea area = new JTextArea(3, 20);
         area.setFont(Fonts.BODY);
@@ -44,6 +66,11 @@ public class FormStyler {
         return area;
     }
 
+    /**
+     * Crea un combobox para formularios con estilo personalizado.
+     * @param <T> Tipo de los elementos del combobox
+     * @return JComboBox estilizado con renderer personalizado
+     */
     public static <T> JComboBox<T> createFormComboBox() {
         JComboBox<T> combo = new JComboBox<>();
         combo.setFont(Fonts.BODY);
@@ -61,6 +88,10 @@ public class FormStyler {
         return combo;
     }
 
+    /**
+     * Crea un spinner para formularios con estilo consistente.
+     * @return JSpinner configurado con editor numérico y borde
+     */
     public static JSpinner createFormSpinner() {
         JSpinner spinner = new JSpinner();
         spinner.setFont(Fonts.BODY);
@@ -72,6 +103,10 @@ public class FormStyler {
         return spinner;
     }
 
+    /**
+     * Crea un borde consistente para campos de formulario.
+     * @return Border compuesto con línea y padding interno
+     */
     private static Border createFieldBorder() {
         return BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Colors.BORDER, 1),

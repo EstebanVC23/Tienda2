@@ -1,7 +1,7 @@
 package com.store.view.components.dialogs.admin;
 
 import com.store.models.Producto;
-import com.store.services.ProductoServicio;
+import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.FormStyler;
@@ -14,14 +14,14 @@ import java.util.List;
 import javax.swing.border.EmptyBorder;
 
 public class ProductFormDialog extends JDialog {
-    private final ProductoServicio productoServicio;
+    private final ProductoServicioImpl productoServicio;
     private final Producto productToEdit;
     private final ProductFormDialogConstants constants;
     
     private JPanel formPanel;
     private JLabel errorLabel;
 
-    public ProductFormDialog(JPanel parent, Producto producto, ProductoServicio productoServicio) {
+    public ProductFormDialog(JPanel parent, Producto producto, ProductoServicioImpl productoServicio) {
         super(SwingUtilities.getWindowAncestor(parent), 
               producto == null ? "Nuevo Producto" : "Editar Producto", 
               ModalityType.APPLICATION_MODAL);

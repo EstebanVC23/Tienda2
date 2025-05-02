@@ -1,7 +1,7 @@
 package com.store.view.components.dialogs.admin;
 
 import com.store.models.Producto;
-import com.store.services.ProductoServicio;
+import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.FormStyler;
@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
 
 public class StockDialog extends JDialog {
     private final Producto producto;
-    private final ProductoServicio productoServicio;
+    private final ProductoServicioImpl productoServicio;
     private final StockDialogConstants constants;
     
     private JSpinner cantidadSpinner;
     private JRadioButton addButton;
     private JRadioButton removeButton;
 
-    public StockDialog(JFrame parent, Producto producto, ProductoServicio productoServicio) {
+    public StockDialog(JFrame parent, Producto producto, ProductoServicioImpl productoServicio) {
         super(parent, "Gestionar Stock", true);
         this.producto = producto;
         this.productoServicio = productoServicio;

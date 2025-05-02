@@ -6,22 +6,21 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Clase ProductoServicio.
- * 
- * Gestiona productos en el archivo productos.json, incluyendo creación,
- * actualización, eliminación y recuperación de productos.
+ * Implementación concreta de {@link IProductoServicio} que gestiona productos
+ * utilizando un repositorio JSON como almacenamiento.
  */
-public class ProductoServicio {
-    private ProductoRepositorioJson productoRepositorio;
+public class ProductoServicioImpl implements IProductoServicio {
 
-    /** 
-     * Constructor de ProductoServicio. 
-     * Inicializa el repositorio de productos basado en JSON. 
+    private final ProductoRepositorioJson productoRepositorio;
+
+    /**
+     * Constructor que inicializa el repositorio JSON.
      */
-    public ProductoServicio() {
+    public ProductoServicioImpl() {
         this.productoRepositorio = new ProductoRepositorioJson();
     }
 
+    @Override
     public boolean crearProducto(Producto producto) {
         if (producto.getCodigo() == null || producto.getCodigo().isEmpty()) {
             producto.setCodigo(generarCodigoProducto());
@@ -33,42 +32,52 @@ public class ProductoServicio {
         return true;
     }
 
+    @Override
     public boolean actualizarProducto(Producto producto) {
         return productoRepositorio.actualizarProducto(producto);
     }
 
+    @Override
     public boolean eliminarProducto(String codigo) {
         return productoRepositorio.eliminarProducto(codigo);
     }
 
+    @Override
     public Producto obtenerProductoPorCodigo(String codigo) {
         return productoRepositorio.obtenerProductoPorCodigo(codigo);
     }
 
+    @Override
     public List<Producto> listarProductos() {
         return productoRepositorio.obtenerProductos();
     }
 
+    @Override
     public List<Producto> buscarProductosPorNombre(String nombre) {
         return productoRepositorio.buscarProductosPorNombre(nombre);
     }
 
+    @Override
     public List<Producto> obtenerProductosPorCategoria(String categoria) {
         return productoRepositorio.obtenerProductosPorCategoria(categoria);
     }
 
+    @Override
     public List<Producto> obtenerProductosPorProveedor(String proveedor) {
         return productoRepositorio.obtenerProductosPorProveedor(proveedor);
     }
 
+    @Override
     public List<String> obtenerCategorias() {
         return productoRepositorio.obtenerCategorias();
     }
 
+    @Override
     public List<String> obtenerProveedores() {
         return productoRepositorio.obtenerProveedores();
     }
 
+    @Override
     public boolean actualizarStock(String codigo, int cantidad) {
         Producto producto = productoRepositorio.obtenerProductoPorCodigo(codigo);
         if (producto == null) {
@@ -85,7 +94,11 @@ public class ProductoServicio {
         return productoRepositorio.actualizarProducto(producto);
     }
 
+    /**
+     * Genera un código único para productos nuevos.
+     * @return Código con formato "PROD-XXXXXX" (6 caracteres aleatorios)
+     */
     private String generarCodigoProducto() {
-        return "PROD-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        return "PROD-" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
     }
 }

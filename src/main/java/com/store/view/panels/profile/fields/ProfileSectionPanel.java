@@ -7,6 +7,11 @@ import com.store.view.panels.profile.UserProfileConstants;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel que muestra y permite la edición de la información del perfil de usuario.
+ * Contiene campos para los datos personales, información de contacto y documentos.
+ * El diseño utiliza GridBagLayout para una disposición organizada de los campos.
+ */
 public class ProfileSectionPanel extends JPanel {
     private JTextField nombreField;
     private JTextField apellidoField;
@@ -14,8 +19,12 @@ public class ProfileSectionPanel extends JPanel {
     private JTextField telefonoField;
     private JComboBox<String> tipoDocumentoField;
     private JTextField numeroDocumentoField;
-    private JTextField direccionField; // Nuevo campo para la dirección
+    private JTextField direccionField;
 
+    /**
+     * Construye un nuevo panel de sección de perfil con los datos del usuario.
+     * @param usuario El objeto Usuario que contiene los datos a mostrar en el perfil
+     */
     public ProfileSectionPanel(Usuario usuario) {
         setLayout(new GridBagLayout());
         setBackground(UserProfileConstants.PANEL_BACKGROUND);
@@ -46,10 +55,14 @@ public class ProfileSectionPanel extends JPanel {
                 usuario.getTipoDocumento());
         numeroDocumentoField = addEditableField(gbc, "Número Documento:", usuario.getNumeroDocumento());
         
-        // Nuevo campo para la dirección
         direccionField = addEditableField(gbc, "Dirección:", usuario.getDireccion());
     }
 
+    /**
+     * Añade un título de sección al panel.
+     * @param gbc Restricciones de diseño para posicionar el título
+     * @param title El texto del título a mostrar
+     */
     private void addSectionTitle(GridBagConstraints gbc, String title) {
         JLabel sectionLabel = new JLabel(title);
         sectionLabel.setFont(UserProfileConstants.SECTION_FONT);
@@ -62,6 +75,13 @@ public class ProfileSectionPanel extends JPanel {
         gbc.gridwidth = 1;
     }
 
+    /**
+     * Añade un campo editable al panel.
+     * @param gbc Restricciones de diseño para posicionar el campo
+     * @param label Etiqueta descriptiva del campo
+     * @param value Valor inicial del campo
+     * @return El campo de texto creado
+     */
     private JTextField addEditableField(GridBagConstraints gbc, String label, String value) {
         add(ProfileFieldFactory.createLabel(label), gbc);
         gbc.gridx++;
@@ -72,6 +92,14 @@ public class ProfileSectionPanel extends JPanel {
         return field;
     }
     
+    /**
+     * Añade un campo de tipo combo box al panel.
+     * @param gbc Restricciones de diseño para posicionar el campo
+     * @param label Etiqueta descriptiva del campo
+     * @param options Opciones disponibles en el combo box
+     * @param selectedValue Valor seleccionado inicialmente
+     * @return El combo box creado
+     */
     private JComboBox<String> addComboBoxField(GridBagConstraints gbc, String label, String[] options, String selectedValue) {
         add(ProfileFieldFactory.createLabel(label), gbc);
         gbc.gridx++;
@@ -100,30 +128,58 @@ public class ProfileSectionPanel extends JPanel {
         return comboBox;
     }
 
+    /**
+     * Obtiene el valor actual del campo Nombre.
+     * @return El texto ingresado en el campo Nombre
+     */
     public String getNombre() {
         return nombreField.getText();
     }
 
+    /**
+     * Obtiene el valor actual del campo Apellido.
+     * @return El texto ingresado en el campo Apellido
+     */
     public String getApellido() {
         return apellidoField.getText();
     }
 
+    /**
+     * Obtiene el valor actual del campo Email.
+     * @return El texto ingresado en el campo Email
+     */
     public String getEmail() {
         return emailField.getText();
     }
 
+    /**
+     * Obtiene el valor actual del campo Teléfono.
+     * @return El texto ingresado en el campo Teléfono
+     */
     public String getTelefono() {
         return telefonoField.getText();
     }
     
+    /**
+     * Obtiene el valor seleccionado actual del campo Tipo Documento.
+     * @return El ítem seleccionado en el combo box de Tipo Documento
+     */
     public String getTipoDocumento() {
         return (String) tipoDocumentoField.getSelectedItem();
     }
     
+    /**
+     * Obtiene el valor actual del campo Número Documento.
+     * @return El texto ingresado en el campo Número Documento
+     */
     public String getNumeroDocumento() {
         return numeroDocumentoField.getText();
     }
 
+    /**
+     * Obtiene el valor actual del campo Dirección.
+     * @return El texto ingresado en el campo Dirección
+     */
     public String getDireccion() {
         return direccionField.getText();
     }

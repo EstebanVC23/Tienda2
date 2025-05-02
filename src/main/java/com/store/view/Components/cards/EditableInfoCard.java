@@ -10,11 +10,22 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 
+/**
+ * Tarjeta editable que permite modificar su valor mediante interacción del usuario.
+ * Extiende de BaseCard para mantener consistencia de estilos.
+ */
 public class EditableInfoCard extends BaseCard {
     private final JLabel valueLabel;
     private final Consumer<String> onUpdate;
     private final EditableCardConstants constants;
 
+    /**
+     * Constructor principal que inicializa la tarjeta editable.
+     * @param label Texto descriptivo del campo
+     * @param value Valor inicial a mostrar
+     * @param onUpdate Callback que se ejecuta al actualizar el valor
+     * @param constants Configuración de constantes para la tarjeta
+     */
     public EditableInfoCard(String label, String value, Consumer<String> onUpdate, 
                           EditableCardConstants constants) {
         super(constants);
@@ -30,10 +41,19 @@ public class EditableInfoCard extends BaseCard {
         setupMouseListeners();
     }
 
+    /**
+     * Constructor alternativo que usa constantes predeterminadas.
+     * @param label Texto descriptivo del campo
+     * @param value Valor inicial a mostrar
+     * @param onUpdate Callback que se ejecuta al actualizar el valor
+     */
     public EditableInfoCard(String label, String value, Consumer<String> onUpdate) {
         this(label, value, onUpdate, new EditableCardConstants());
     }
 
+    /**
+     * Configura los listeners de mouse para interacción.
+     */
     private void setupMouseListeners() {
         addMouseListener(new MouseAdapter() {
             @Override
@@ -55,6 +75,10 @@ public class EditableInfoCard extends BaseCard {
         });
     }
 
+    /**
+     * Maneja la edición del valor mostrado en la tarjeta.
+     * Muestra un diálogo de entrada y actualiza el valor si es válido.
+     */
     private void editValue() {
         String newValue = JOptionPane.showInputDialog(
             this, 

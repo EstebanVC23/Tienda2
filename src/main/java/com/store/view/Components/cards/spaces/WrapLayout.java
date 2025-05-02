@@ -3,23 +3,48 @@ package com.store.view.components.cards.spaces;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Layout personalizado que permite el ajuste automático de componentes en múltiples filas.
+ * Extiende FlowLayout para proporcionar un comportamiento de "wrap" mejorado.
+ */
 public class WrapLayout extends FlowLayout {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructor que inicializa el layout con alineación y espacios especificados.
+     * @param align Alineación de los componentes (LEFT, CENTER, RIGHT)
+     * @param hgap Espacio horizontal entre componentes
+     * @param vgap Espacio vertical entre componentes
+     */
     public WrapLayout(int align, int hgap, int vgap) {
         super(align, hgap, vgap);
     }
 
+    /**
+     * Constructor que inicializa el layout con alineación y espacios por defecto.
+     * @param align Alineación de los componentes (LEFT, CENTER, RIGHT)
+     */
     @Override
     public Dimension preferredLayoutSize(Container target) {
         return layoutSize(target, true);
     }
 
+    /**
+     * Calcula el tamaño mínimo del layout basado en los componentes contenidos.
+     * @param target Contenedor que usa este layout
+     * @return Dimensiones mínimas calculadas para el layout
+     */
     @Override
     public Dimension minimumLayoutSize(Container target) {
         return layoutSize(target, false);
     }
 
+    /**
+     * Calcula el tamaño del layout basado en los componentes contenidos.
+     * @param target Contenedor que usa este layout
+     * @param preferred Indica si debe usarse el tamaño preferido (true) o mínimo (false)
+     * @return Dimensiones calculadas para el layout
+     */
     private Dimension layoutSize(Container target, boolean preferred) {
         synchronized (target.getTreeLock()) {
             int targetWidth = target.getSize().width;
@@ -63,6 +88,12 @@ public class WrapLayout extends FlowLayout {
         }
     }
 
+    /**
+     * Añade una fila de componentes a las dimensiones calculadas.
+     * @param dim Dimensiones acumuladas
+     * @param rowWidth Ancho de la fila actual
+     * @param rowHeight Alto de la fila actual
+     */
     private void addRow(Dimension dim, int rowWidth, int rowHeight) {
         dim.width = Math.max(dim.width, rowWidth);
         if (dim.height > 0) dim.height += getVgap();

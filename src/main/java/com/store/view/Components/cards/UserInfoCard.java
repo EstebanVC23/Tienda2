@@ -6,7 +6,17 @@ import com.store.utils.Fonts;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Componente de tarjeta para mostrar información de usuario.
+ * Muestra un par de valores etiquetados (label-value) en formato vertical.
+ */
 public class UserInfoCard extends BaseCard {
+    
+    /**
+     * Crea una nueva tarjeta de información de usuario.
+     * @param label Texto descriptivo o etiqueta del dato.
+     * @param value Valor de la información a mostrar.
+     */
     public UserInfoCard(String label, String value) {
         super();
         
@@ -16,7 +26,6 @@ public class UserInfoCard extends BaseCard {
         add(labelText, BorderLayout.NORTH);
         add(valueText, BorderLayout.CENTER);
         
-        // Eliminar el efecto hover si no es necesario
         setCursor(Cursor.getDefaultCursor());
     }
 }
