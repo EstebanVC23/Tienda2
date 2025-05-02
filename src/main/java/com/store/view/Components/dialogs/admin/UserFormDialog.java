@@ -5,8 +5,8 @@ import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.utils.PasswordUtils;
-import com.store.view.components.FormStyler;
 import com.store.view.components.buttons.CustomButton;
+import com.store.view.components.dialogs.FormStyler;
 import com.store.view.components.dialogs.constants.UserFormDialogConstants;
 
 import javax.swing.*;

@@ -4,8 +4,8 @@ import com.store.models.Producto;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
-import com.store.view.components.FormStyler;
 import com.store.view.components.buttons.CustomButton;
+import com.store.view.components.dialogs.FormStyler;
 import com.store.view.components.dialogs.constants.StockDialogConstants;
 
 import javax.swing.*;
