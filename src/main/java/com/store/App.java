@@ -12,7 +12,6 @@ import com.store.view.auth.Login;
  * dialog admin y users, falta documentar
  * modularizar el código en paquetes y clases
  * estudiar POO
- * usar interfaces para los servicios
  * identificar los métodos que no se usan y eliminarlos
  * crear un readme.md con la información de la aplicación
  * 

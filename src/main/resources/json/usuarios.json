@@ -1467,5 +1467,18 @@
     "password": "kvnrnaSE8h0xN/wTQzw9fiTfHCsUfjFm7THyI2vJMm0DEiFBiJCLz4CXup1pRekp",
     "rol": "USER",
     "estadoActivo": true
+  },
+  {
+    "id": 1562159,
+    "nombre": "Jose",
+    "apellido": "Maria",
+    "email": "ris",
+    "tipoDocumento": "DNI",
+    "numeroDocumento": "65185",
+    "direccion": "",
+    "telefono": "331562",
+    "password": "BPfL+xlnONcfy8LvXyAmbyRUsM9bY6hyd5jHpyLcdlrczuw7Lad00rATwsqb4FjW",
+    "rol": "Vendedor",
+    "estadoActivo": true
   }
 ]
