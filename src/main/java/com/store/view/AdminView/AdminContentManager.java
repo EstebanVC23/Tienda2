@@ -2,10 +2,14 @@ package com.store.view.AdminView;
 
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.services.UsuarioServicioImpl;
 import com.store.view.panels.admin.ProductosPanel;
+import com.store.view.panels.admin.SalesPanel;
 import com.store.view.panels.admin.UsersPanel;
 import com.store.view.panels.profile.UserProfilePanel;
+
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,6 +23,7 @@ public class AdminContentManager {
     private final Usuario usuario;
     private final UsuarioServicioImpl usuarioServicio;
     private final ProductoServicioImpl productoServicio;
+    private final SaleServiceImpl saleService;
 
     /**
      * Constructor del administrador de contenido.
@@ -28,14 +33,17 @@ public class AdminContentManager {
      * @param productoServicio Servicio para gestión de productos
      */
     public AdminContentManager(JPanel mainContent, Usuario usuario, 
-                             UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
-        this.mainContent = mainContent;
-        this.usuario = usuario;
-        this.usuarioServicio = usuarioServicio;
-        this.productoServicio = productoServicio;
-        this.mainContent.setLayout(new BorderLayout());
-        AdminViewStyles.stylePanel(mainContent);
-    }
+                           UsuarioServicioImpl usuarioServicio, 
+                           ProductoServicioImpl productoServicio,
+                           SaleServiceImpl saleService) {
+    this.mainContent = mainContent;
+    this.usuario = usuario;
+    this.usuarioServicio = usuarioServicio;
+    this.productoServicio = productoServicio;
+    this.saleService = saleService;
+    this.mainContent.setLayout(new BorderLayout());
+    AdminViewStyles.stylePanel(mainContent);
+}
 
     /**
      * Muestra el panel de inicio/dashboard del administrador.
@@ -84,6 +92,21 @@ public class AdminContentManager {
         productosPanel.addRefreshListener(this::refresh);
         panel.add(productosPanel, BorderLayout.CENTER);
 
+        mainContent.add(panel, BorderLayout.CENTER);
+        refresh();
+    }
+
+    public void showSalesPanel() {
+        mainContent.removeAll();
+        JPanel panel = AdminViewStyles.stylePanel(new JPanel(new BorderLayout()));
+        
+        JLabel titleLabel = AdminViewStyles.createSectionTitle("Gestión de Ventas");
+        panel.add(titleLabel, BorderLayout.NORTH);
+        
+        SalesPanel salesPanel = new SalesPanel(saleService);
+        salesPanel.addRefreshListener(this::refresh);
+        panel.add(salesPanel, BorderLayout.CENTER);
+        
         mainContent.add(panel, BorderLayout.CENTER);
         refresh();
     }

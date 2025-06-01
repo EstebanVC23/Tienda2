@@ -3,6 +3,7 @@ package com.store.view.AdminView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.view.auth.Login;
 import com.store.view.components.NavBar.Navbar;
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class AdminView extends JFrame {
     private final Usuario usuario;
     private final UsuarioServicioImpl usuarioServicio;
     private final ProductoServicioImpl productoServicio;
+    private final SaleServiceImpl saleServicio;
     private final JPanel mainContent;
     private final AdminContentManager contentManager;
 
@@ -27,7 +29,8 @@ public class AdminView extends JFrame {
     private enum AdminPanel {
         DASHBOARD("Dashboard"), 
         USERS("Usuarios"), 
-        PRODUCTS("Productos");
+        PRODUCTS("Productos"),
+        SALES("Ventas");
         
         private final String label;
         
@@ -49,9 +52,10 @@ public class AdminView extends JFrame {
      * @param usuario Usuario administrador
      * @param usuarioServicio Servicio para gestión de usuarios
      * @param productoServicio Servicio para gestión de productos
+     * @param saleService Servicio para gestión de ventas
      * @throws IllegalArgumentException Si el usuario no tiene rol de administrador
      */
-    public AdminView(Usuario usuario, UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
+    public AdminView(Usuario usuario, UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, SaleServiceImpl saleServicio) {
         if (!usuario.getRol().equals("ADMIN")) {
             throw new IllegalArgumentException("El usuario no tiene permisos de administrador");
         }
@@ -59,12 +63,14 @@ public class AdminView extends JFrame {
         this.usuario = usuario;
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
+        this.saleServicio = saleServicio;
         this.mainContent = new JPanel(new BorderLayout());
         this.contentManager = new AdminContentManager(
             mainContent, 
             usuario, 
             usuarioServicio, 
-            productoServicio
+            productoServicio,
+            saleServicio
         );
 
         configureWindow();
@@ -90,7 +96,8 @@ public class AdminView extends JFrame {
         String[] navOptions = {
             AdminPanel.DASHBOARD.getLabel(),
             AdminPanel.USERS.getLabel(),
-            AdminPanel.PRODUCTS.getLabel()
+            AdminPanel.PRODUCTS.getLabel(),
+            AdminPanel.SALES.getLabel()
         };
         
         Navbar navBar = new Navbar(this::handleNavigation, navOptions);
@@ -119,6 +126,9 @@ public class AdminView extends JFrame {
             case "Productos":
                 contentManager.showProductsPanel();
                 break;
+            case "Ventas":
+                contentManager.showSalesPanel();
+                break;
         }
     }
     
@@ -135,7 +145,7 @@ public class AdminView extends JFrame {
         );
         
         if (confirm == JOptionPane.YES_OPTION) {
-            new Login(usuarioServicio, productoServicio).setVisible(true);
+            new Login(usuarioServicio, productoServicio, saleServicio).setVisible(true);
             dispose();
         }
     }

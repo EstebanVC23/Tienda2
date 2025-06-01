@@ -2,6 +2,7 @@ package com.store.view.auth;
 
 import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.auth.constants.AuthConstants;
@@ -26,8 +27,8 @@ public class Register extends AuthBaseFrame {
      * @param usuarioServicio Servicio para gestión de usuarios
      * @param productoServicio Servicio para gestión de productos
      */
-    public Register(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
-        super(usuarioServicio, productoServicio, "Registro de Usuario");
+    public Register(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, SaleServiceImpl saleServicio) {
+        super(usuarioServicio, productoServicio, saleServicio,"Registro de Usuario");
         this.controller = new RegisterController(this, usuarioServicio);
         initializeComponents();
     }
@@ -238,7 +239,7 @@ public class Register extends AuthBaseFrame {
      * Abre la vista de login y cierra la actual.
      */
     public void openLogin() {
-        new Login(usuarioServicio, productoServicio).setVisible(true);
+        new Login(usuarioServicio, productoServicio, saleServicio).setVisible(true);
         dispose();
     }
 }

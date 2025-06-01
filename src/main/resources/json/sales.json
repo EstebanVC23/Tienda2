@@ -1,0 +1,209 @@
+[
+  {
+    "id": 1,
+    "date": "2025-06-01T14:30:00",
+    "customerId": 68,
+    "items": [
+      {
+        "product": {
+          "codigo": "P001",
+          "nombre": "Laptop HP Pavilion",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "P004",
+          "nombre": "Teclado Mecánico Logitech G Pro",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 1159.98,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 3,
+    "date": "2025-06-01T16:20:00",
+    "customerId": 71,
+    "items": [
+      {
+        "product": {
+          "codigo": "P009",
+          "nombre": "Tablet Apple iPad Air",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 599.99,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 4,
+    "date": "2025-06-01T17:10:00",
+    "customerId": 72,
+    "items": [
+      {
+        "product": {
+          "codigo": "P014",
+          "nombre": "Consola PlayStation 5",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "P003",
+          "nombre": "Monitor LG UltraWide",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 949.98,
+    "status": "CANCELLED"
+  },
+  {
+    "id": 5,
+    "date": "2025-06-01T18:00:00",
+    "customerId": 68,
+    "items": [
+      {
+        "product": {
+          "codigo": "P002",
+          "nombre": "Smartphone Samsung Galaxy S22",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "P005",
+          "nombre": "Disco Duro Externo WD",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 879.98,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 6,
+    "date": "2025-06-01T19:30:00",
+    "customerId": 70,
+    "items": [
+      {
+        "product": {
+          "codigo": "P008",
+          "nombre": "Router TP-Link Archer AX50",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "P012",
+          "nombre": "SSD Samsung 970 EVO 1TB",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 279.98,
+    "status": "PENDING"
+  },
+  {
+    "id": 7,
+    "date": "2025-06-01T20:15:00",
+    "customerId": 71,
+    "items": [
+      {
+        "product": {
+          "codigo": "P010",
+          "nombre": "Cámara Canon EOS Rebel T7",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 449.99,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 8,
+    "date": "2025-06-01T21:05:00",
+    "customerId": 72,
+    "items": [
+      {
+        "product": {
+          "codigo": "P016",
+          "nombre": "Drone DJI Mini 2",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "P006",
+          "nombre": "Impresora Epson EcoTank",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 729.98,
+    "status": "CANCELLED"
+  }
+]

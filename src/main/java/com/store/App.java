@@ -2,6 +2,7 @@ package com.store;
 
 import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.view.auth.Login;
 
 /**
@@ -23,8 +24,9 @@ public class App {
     public static void main(String[] args) {
         UsuarioServicioImpl usuarioServicio = new UsuarioServicioImpl();
         ProductoServicioImpl productoServicio = new ProductoServicioImpl();
+        SaleServiceImpl saleServicio = new SaleServiceImpl();
 
-        Login login = new Login(usuarioServicio, productoServicio);
+        Login login = new Login(usuarioServicio, productoServicio, saleServicio);
         login.setVisible(true);
     }
 }

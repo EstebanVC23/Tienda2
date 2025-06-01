@@ -2,6 +2,7 @@ package com.store.view.auth.controller;
 
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.services.UsuarioServicioImpl;
 import com.store.view.AdminView.AdminView;
 import com.store.view.UserView.UserView;
@@ -19,6 +20,7 @@ public class LoginController {
     private final Login view;
     private final UsuarioServicioImpl usuarioServicio;
     private final ProductoServicioImpl productoServicio;
+    private final SaleServiceImpl saleServicio;
 
     /**
      * Constructor del controlador de login.
@@ -26,10 +28,11 @@ public class LoginController {
      * @param usuarioServicio Servicio para gestión de usuarios
      * @param productoServicio Servicio para gestión de productos
      */
-    public LoginController(Login view, UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
+    public LoginController(Login view, UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, SaleServiceImpl saleServicio) {
         this.view = view;
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
+        this.saleServicio = saleServicio;
     }
 
     /**
@@ -73,7 +76,7 @@ public class LoginController {
      */
     private void openUserView(Usuario usuario) {
         if ("ADMIN".equalsIgnoreCase(usuario.getRol())) {
-            new AdminView(usuario, usuarioServicio, productoServicio).setVisible(true);
+            new AdminView(usuario, usuarioServicio, productoServicio, saleServicio).setVisible(true);
         } else {
             new UserView(usuario, productoServicio, usuarioServicio).setVisible(true);
         }
@@ -85,7 +88,7 @@ public class LoginController {
      * @param e Evento de acción
      */
     private void openRegister(ActionEvent e) {
-        new Register(usuarioServicio, productoServicio).setVisible(true);
+        new Register(usuarioServicio, productoServicio, saleServicio).setVisible(true);
         view.dispose();
     }
 }

@@ -7,19 +7,30 @@ import java.util.ArrayList;
 public class Sale {
     private int id;
     private Date date;
-    private int customerId;  // Cambié a customerId para clarificar que es un id
+    private int customerId;
     private List<SaleItem> items;
     private double total;
     private SaleStatus status;
 
-    // Constructor vacío inicializa lista y valores por defecto
+    /**
+     * Constructor por defecto que inicializa una venta vacía.
+     * Este constructor es útil para crear una nueva venta
+     * sin necesidad de proporcionar todos los detalles inmediatamente.
+     */
     public Sale() {
         this.items = new ArrayList<>();
         this.total = 0.0;
         this.status = SaleStatus.PENDING;
     }
 
-    // Constructor completo
+    /**
+     * Constructor que permite crear una venta con todos los detalles necesarios.
+     * @param id Identificador único de la venta
+     * @param date Fecha de la venta
+     * @param customerId Identificador del cliente asociado a la venta
+     * @param items Lista de artículos vendidos en esta venta
+     * @param status Estado actual de la venta (PENDING, COMPLETED, CANCELLED)
+     */
     public Sale(int id, Date date, int customerId, List<SaleItem> items, SaleStatus status) {
         this.id = id;
         this.date = date;
@@ -29,7 +40,11 @@ public class Sale {
         this.total = calculateTotal();
     }
 
-    // Método para recalcular el total basado en items
+    /**
+     * Calcula el total de la venta sumando el precio de cada artículo multiplicado por su cantidad.
+     * Este método se invoca al establecer los artículos o al crear una nueva venta.
+     * @return El total calculado de la venta.
+     */
     private double calculateTotal() {
         double sum = 0.0;
         if (items != null) {
@@ -40,7 +55,6 @@ public class Sale {
         return sum;
     }
 
-    // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -61,7 +75,9 @@ public class Sale {
     public SaleStatus getStatus() { return status; }
     public void setStatus(SaleStatus status) { this.status = status; }
 
-    // Puedes agregar método para actualizar total si cambian items manualmente
+    /**
+     * Recalcula el total de la venta.
+     */
     public void recalculateTotal() {
         this.total = calculateTotal();
     }

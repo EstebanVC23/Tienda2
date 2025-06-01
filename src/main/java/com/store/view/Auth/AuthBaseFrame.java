@@ -1,6 +1,7 @@
 package com.store.view.auth;
 
 import com.store.services.ProductoServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.services.UsuarioServicioImpl;
 import com.store.utils.Colors;
 import com.store.view.components.forauth.PanelIzquierdoInicio;
@@ -14,6 +15,7 @@ import java.awt.*;
 public abstract class AuthBaseFrame extends JFrame {
     protected final UsuarioServicioImpl usuarioServicio;
     protected final ProductoServicioImpl productoServicio;
+    protected final SaleServiceImpl saleServicio;
     
     /**
      * Constructor base para las ventanas de autenticación.
@@ -21,9 +23,10 @@ public abstract class AuthBaseFrame extends JFrame {
      * @param productoServicio Servicio para gestión de productos
      * @param title Título de la ventana
      */
-    public AuthBaseFrame(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, String title) {
+    public AuthBaseFrame(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, SaleServiceImpl saleServicio, String title) {
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
+        this.saleServicio = saleServicio;
         
         setTitle(title);
         setSize(1000, 600);

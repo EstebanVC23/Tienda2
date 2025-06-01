@@ -5,6 +5,8 @@ import com.store.utils.Colors;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Clase utilitaria para crear componentes de entrada de formulario estandarizados.
@@ -79,6 +81,22 @@ public class FormInputComponents {
         field.setBorder(border);
         return field;
     }
+
+    /**
+     * Crea un spinner de fechas con estilo estandarizado.
+     *
+     * @param date Fecha inicial
+     * @return JSpinner configurado para selección de fechas
+     */
+    public static JSpinner createDateSpinner(Date date) {
+        SpinnerDateModel model = new SpinnerDateModel(date, null, null, Calendar.DAY_OF_MONTH);
+        JSpinner spinner = new JSpinner(model);
+        spinner.setFont(Fonts.BODY);
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, "dd/MM/yyyy");
+        spinner.setEditor(editor);
+        return spinner;
+    }
+
 
     /**
      * Crea un panel combinado para entrada de documentos (tipo + número).

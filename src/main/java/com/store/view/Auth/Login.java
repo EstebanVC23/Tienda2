@@ -2,6 +2,7 @@ package com.store.view.auth;
 
 import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.auth.constants.AuthConstants;
@@ -25,9 +26,10 @@ public class Login extends AuthBaseFrame {
      * @param usuarioServicio Servicio para gestión de usuarios
      * @param productoServicio Servicio para gestión de productos
      */
-    public Login(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio) {
-        super(usuarioServicio, productoServicio, "Login");
-        this.controller = new LoginController(this, usuarioServicio, productoServicio);
+    public Login(UsuarioServicioImpl usuarioServicio, ProductoServicioImpl productoServicio, 
+                 SaleServiceImpl saleServicio) {
+        super(usuarioServicio, productoServicio, saleServicio,"Login");
+        this.controller = new LoginController(this, usuarioServicio, productoServicio, saleServicio);
         initializeComponents();
     }
 

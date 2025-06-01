@@ -3,6 +3,7 @@ package com.store.view.UserView;
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;
 import com.store.services.UsuarioServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.auth.Login;
@@ -35,6 +36,8 @@ public class UserView extends JFrame {
     private UsuarioServicioImpl usuarioServicio;
     /** Servicio para operaciones con productos */
     private ProductoServicioImpl productoServicio;
+    /** Servicio para operaciones de ventas */
+    private SaleServiceImpl saleServicio;
     /** Panel principal de contenido */
     private JPanel mainContent;
     
@@ -96,7 +99,7 @@ public class UserView extends JFrame {
      * y cerrando la ventana actual.
      */
     private void handleLogout() {
-        new Login(usuarioServicio, productoServicio).setVisible(true);
+        new Login(usuarioServicio, productoServicio, saleServicio).setVisible(true);
         dispose();
     }
     
