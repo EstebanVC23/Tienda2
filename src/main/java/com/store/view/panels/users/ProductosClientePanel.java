@@ -3,6 +3,7 @@ package com.store.view.panels.users;
 import com.store.models.Producto;
 import com.store.services.IShoppingCartService;
 import com.store.services.IProductoServicio;
+import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
@@ -32,9 +33,9 @@ public class ProductosClientePanel extends BasePanel {
         this.titlePanel = new TitlePanel("Productos Disponibles");
         this.filterPanel = new ProductSearchHeader(productoServicio.obtenerCategorias());
         
-        // Inicialización del gridPanel con las constantes
+        // Inicialización del gridPanel con las constantes y el servicio
         GridConstants gridConstants = new GridConstants();
-        this.gridPanel = new ProductGridPanel(gridConstants);
+        this.gridPanel = new ProductGridPanel(gridConstants, (ProductoServicioImpl) productoServicio);
         if (cartService != null && userId != -1) {
             gridPanel.setCartService(cartService, userId);
         }

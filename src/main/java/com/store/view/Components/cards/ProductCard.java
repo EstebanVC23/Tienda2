@@ -2,6 +2,7 @@ package com.store.view.components.cards;
 
 import com.store.models.Producto;
 import com.store.services.IShoppingCartService;
+import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.cards.constants.ProductCardConstants;
@@ -12,25 +13,52 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProductCard extends BaseCard {
     private final Producto producto;
     private final IShoppingCartService cartService;
     private final int userId;
+    private final ProductoServicioImpl productService;
 
-    public ProductCard(Producto producto, IShoppingCartService cartService, int userId) {
+    public ProductCard(Producto producto, IShoppingCartService cartService, int userId, ProductoServicioImpl productService) {
         super();
+        this.productService = productService;
         this.producto = producto;
         this.cartService = cartService;
         this.userId = userId;
         setupCard();
+        setupMouseListeners();
     }
 
     // Constructor adicional para compatibilidad
-    public ProductCard(Producto producto) {
-        this(producto, null, -1); // Valores por defecto para mantener compatibilidad
+    public ProductCard(Producto producto, ProductoServicioImpl productService) {
+        this(producto, null, -1, productService);
     }
 
+    private void setupMouseListeners() {
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    showProductDetails();
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(Cursor.getDefaultCursor());
+            }
+        });
+    }
+
+    // Resto de los métodos de ProductCard permanecen igual...
     protected void setupCard() {
         setPreferredSize(ProductCardConstants.CARD_SIZE);
         add(createImagePanel(), BorderLayout.CENTER);
@@ -168,23 +196,30 @@ public class ProductCard extends BaseCard {
             throw new IllegalStateException("No se puede mostrar detalles: el producto es nulo");
         }
         
-        if (cartService == null || userId == -1) {
-            JOptionPane.showMessageDialog(
-                SwingUtilities.getWindowAncestor(this),
-                "Funcionalidad no disponible",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-            );
-            return;
-        }
+        // Actualizamos el producto antes de mostrar los detalles
+        Producto productoActualizado = productService.obtenerProductoPorCodigo(producto.getCodigo());
         
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
-        ProductDetailsDialog detailsDialog = new ProductDetailsDialog(
-            parentWindow, 
-            producto, 
-            cartService, 
-            userId
-        );
+        ProductDetailsDialog detailsDialog;
+        
+        if (cartService != null && userId != -1) {
+            detailsDialog = new ProductDetailsDialog(
+                parentWindow, 
+                productoActualizado, 
+                cartService, 
+                userId
+            );
+        } else {
+            // Modo solo visualización sin funcionalidad de carrito
+            detailsDialog = new ProductDetailsDialog(
+                parentWindow, 
+                productoActualizado, 
+                null, 
+                -1
+            );
+            detailsDialog.setAddToCartEnabled(false);
+        }
+        
         detailsDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         detailsDialog.setLocationRelativeTo(parentWindow);
         detailsDialog.setVisible(true);

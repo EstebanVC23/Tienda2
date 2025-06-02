@@ -2,6 +2,7 @@ package com.store.view.components.cards.spaces;
 
 import com.store.models.Producto;
 import com.store.services.IShoppingCartService;
+import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.view.components.cards.ProductCard;
 import com.store.view.components.cards.constants.GridConstants;
@@ -15,9 +16,11 @@ public class ProductGridPanel extends JPanel {
     private final GridConstants constants;
     private IShoppingCartService cartService;
     private int userId;
+    private ProductoServicioImpl productService;
 
-    public ProductGridPanel(GridConstants constants) {
+    public ProductGridPanel(GridConstants constants, ProductoServicioImpl productService) {
         this.constants = constants;
+        this.productService = productService;
         setLayout(new BorderLayout());
         setBackground(Colors.BACKGROUND);
         
@@ -60,8 +63,8 @@ public class ProductGridPanel extends JPanel {
         
         productos.forEach(p -> {
             ProductCard card = (cartService != null) 
-                ? new ProductCard(p, cartService, userId)
-                : new ProductCard(p);
+                ? new ProductCard(p, cartService, userId, productService)
+                : new ProductCard(p, productService);
             contentPanel.add(card);
         });
     }
