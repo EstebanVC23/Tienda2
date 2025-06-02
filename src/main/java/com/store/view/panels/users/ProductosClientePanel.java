@@ -1,42 +1,44 @@
 package com.store.view.panels.users;
 
 import com.store.models.Producto;
-import com.store.services.ProductoServicioImpl;
+import com.store.services.IShoppingCartService;
+import com.store.services.IProductoServicio;
 import com.store.utils.Colors;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
 import com.store.view.components.cards.spaces.ProductSearchHeader;
 import com.store.view.panels.BasePanel;
+import com.store.view.components.cards.constants.GridConstants;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
 
-/**
- * Panel que muestra los productos disponibles para los clientes.
- * Incluye funcionalidades de búsqueda, filtrado por categoría y visualización en formato de cuadrícula.
- * Extiende de BasePanel para mantener consistencia en la interfaz.
- */
 public class ProductosClientePanel extends BasePanel {
-    private final ProductoServicioImpl productoServicio;
+    private final IProductoServicio productoServicio;
     private final ProductSearchHeader filterPanel;
     private final ProductGridPanel gridPanel;
     private final JScrollPane scrollPane;
     private final TitlePanel titlePanel;
 
-    /**
-     * Construye un nuevo panel de productos para clientes.
-     * @param productoServicio Servicio para operaciones con productos
-     */
-    public ProductosClientePanel(ProductoServicioImpl productoServicio) {
+    public ProductosClientePanel(IProductoServicio productoServicio, 
+                               IShoppingCartService cartService, 
+                               int userId) {
         this.productoServicio = productoServicio;
         setBackground(Colors.BACKGROUND);
         setBorder(new EmptyBorder(15, 15, 15, 15));
         
         this.titlePanel = new TitlePanel("Productos Disponibles");
         this.filterPanel = new ProductSearchHeader(productoServicio.obtenerCategorias());
-        this.gridPanel = new ProductGridPanel();
+        
+        // Inicialización del gridPanel con las constantes
+        GridConstants gridConstants = new GridConstants();
+        this.gridPanel = new ProductGridPanel(gridConstants);
+        if (cartService != null && userId != -1) {
+            gridPanel.setCartService(cartService, userId);
+        }
+        
         this.scrollPane = createScrollPane();
         
         setupUI();
@@ -44,10 +46,10 @@ public class ProductosClientePanel extends BasePanel {
         loadProducts();
     }
     
-    /**
-     * Crea y configura el panel de desplazamiento para la cuadrícula de productos.
-     * @return JScrollPane configurado
-     */
+    public ProductosClientePanel(IProductoServicio productoServicio) {
+        this(productoServicio, null, -1);
+    }
+    
     private JScrollPane createScrollPane() {
         JScrollPane pane = new JScrollPane(gridPanel.getContentPanel());
         pane.setBorder(null);
@@ -57,9 +59,6 @@ public class ProductosClientePanel extends BasePanel {
         return pane;
     }
     
-    /**
-     * Configura la interfaz de usuario principal del panel.
-     */
     private void setupUI() {
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBackground(Colors.BACKGROUND);
@@ -70,9 +69,6 @@ public class ProductosClientePanel extends BasePanel {
         add(contentPanel, BorderLayout.CENTER);
     }
     
-    /**
-     * Configura los listeners para los eventos de búsqueda y filtrado.
-     */
     private void setupListeners() {
         filterPanel.getSearchField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -83,17 +79,11 @@ public class ProductosClientePanel extends BasePanel {
         filterPanel.getCategoriaCombo().addActionListener(_ -> filterProducts());
     }
     
-    /**
-     * Carga todos los productos disponibles desde el servicio.
-     */
     private void loadProducts() {
         List<Producto> productos = productoServicio.listarProductos();
         gridPanel.displayProducts(productos);
     }
     
-    /**
-     * Filtra los productos según el texto de búsqueda y la categoría seleccionada.
-     */
     private void filterProducts() {
         String searchText = filterPanel.getSearchField().getText().toLowerCase();
         String selectedCategory = (String) filterPanel.getCategoriaCombo().getSelectedItem();
@@ -109,16 +99,10 @@ public class ProductosClientePanel extends BasePanel {
         resetScrollPosition();
     }
     
-    /**
-     * Reinicia la posición de desplazamiento del scroll pane al inicio.
-     */
     private void resetScrollPosition() {
         SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0)));
     }
     
-    /**
-     * Actualiza la lista de productos mostrados (implementación de BasePanel).
-     */
     @Override
     public void refreshTable() {
         loadProducts();

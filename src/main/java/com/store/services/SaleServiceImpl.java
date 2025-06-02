@@ -1,6 +1,7 @@
 package com.store.services;
 
 import com.store.models.Sale;
+import com.store.models.SaleItem;
 import com.store.models.Usuario;
 import com.store.repository.SaleRepositorioJson;
 
@@ -92,5 +93,11 @@ public class SaleServiceImpl implements ISaleService {
                     return fechaVenta != null && !fechaVenta.before(fechaInicio) && !fechaVenta.after(fechaFin);
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SaleItem> obtenerItemsVenta(int saleId) {
+        Sale venta = saleRepositorio.obtenerVentaPorId(saleId);
+        return venta != null ? venta.getItems() : Collections.emptyList();
     }
 }

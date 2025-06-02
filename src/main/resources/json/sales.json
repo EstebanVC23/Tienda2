@@ -1,15 +1,36 @@
 [
   {
     "id": 1,
-    "date": "2025-06-01T14:30:00",
-    "customerId": 68,
+    "date": "2024-01-15T10:30:00",
+    "customerId": 125,
     "items": [
       {
         "product": {
-          "codigo": "P001",
-          "nombre": "Laptop HP Pavilion",
+          "codigo": "",
+          "nombre": "Smartphone Samsung Galaxy A54",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 274.95,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 29,
+    "date": "2024-02-13T12:10:00",
+    "customerId": 234,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Smartwatch Garmin Forerunner",
+          "descripcion": "",
+          "precio": 299.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -18,10 +39,91 @@
       },
       {
         "product": {
-          "codigo": "P004",
-          "nombre": "Teclado Mecánico Logitech G Pro",
+          "codigo": "",
+          "nombre": "Correa silicona",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cargador portátil",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protector pantalla",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 444.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 30,
+    "date": "2024-02-14T16:30:00",
+    "customerId": 456,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Plancha vapor Philips",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tabla planchar",
+          "descripcion": "",
+          "precio": 59.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Agua destilada",
+          "descripcion": "",
+          "precio": 3.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Spray plancha",
+          "descripcion": "",
+          "precio": 8.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -29,41 +131,1664 @@
         "quantity": 2
       }
     ],
-    "total": 1159.98,
+    "total": 185.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 31,
+    "date": "2024-02-15T09:45:00",
+    "customerId": 678,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Batidora KitchenAid",
+          "descripcion": "",
+          "precio": 349.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bol acero inoxidable",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Ganchos amasado",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Recetario repostería",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 462.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 32,
+    "date": "2024-02-16T14:20:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Set cuchillos japoneses",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tabla cortar bambú",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Afilador cuchillos",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protector dedos",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 314.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 33,
+    "date": "2024-02-17T11:35:00",
+    "customerId": 123,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Licuadora Vitamix",
+          "descripcion": "",
+          "precio": 449.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Vaso repuesto",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cuchillas extra",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Libro smoothies",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Espátula limpieza",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 638.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 34,
+    "date": "2024-02-18T15:50:00",
+    "customerId": 345,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Air Fryer Ninja 5.5L",
+          "descripcion": "",
+          "precio": 179.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Accesorios air fryer",
+          "descripcion": "",
+          "precio": 0.0,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Papel pergamino",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Spray aceite",
+          "descripcion": "",
+          "precio": 7.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 263.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 35,
+    "date": "2024-02-19T10:15:00",
+    "customerId": 567,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Procesador alimentos Cuisinart",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Discos rallado",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Empujador seguridad",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bowl procesador",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 329.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 36,
+    "date": "2024-02-20T13:40:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Horno eléctrico Breville",
+          "descripcion": "",
+          "precio": 299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bandeja pizza",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Rejilla horno",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Termómetro carne",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 419.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 37,
+    "date": "2024-02-21T17:25:00",
+    "customerId": 890,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Freidora profunda T-fal",
+          "descripcion": "",
+          "precio": 129.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Aceite freír",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Canasta frita",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Filtros aceite",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 5
+      }
+    ],
+    "total": 267.91,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 38,
+    "date": "2024-02-22T08:30:00",
+    "customerId": 234,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Parrilla George Foreman",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Platos parrilla",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Espátula antiadherente",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Limpiador parrilla",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 174.95,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 39,
+    "date": "2024-02-23T12:05:00",
+    "customerId": 456,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Máquina café expresso",
+          "descripcion": "",
+          "precio": 399.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Molinillo café",
+          "descripcion": "",
+          "precio": 129.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Café grano colombiano",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 5
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tamper café",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Jarra leche",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 704.92,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 40,
+    "date": "2024-02-24T16:45:00",
+    "customerId": 678,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Yogurtera Cuisinart",
+          "descripcion": "",
+          "precio": 79.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Frascos yogur vidrio",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cultivos yogur",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Termómetro digital",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 242.92,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 41,
+    "date": "2024-02-25T09:20:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Deshidratador alimentos",
+          "descripcion": "",
+          "precio": 159.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bandejas extra",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Hojas antiadherentes",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Manual deshidratado",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 334.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 42,
+    "date": "2024-02-26T14:10:00",
+    "customerId": 123,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Máquina helados Cuisinart",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Recipientes helado",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Paletas helado",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Libro recetas helado",
+          "descripcion": "",
+          "precio": 16.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 276.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 43,
+    "date": "2024-02-27T11:55:00",
+    "customerId": 345,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Envasadora vacío FoodSaver",
+          "descripcion": "",
+          "precio": 149.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bolsas vacío rollo",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Contenedores vacío",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cortador bolsas",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 332.91,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 44,
+    "date": "2024-02-28T15:30:00",
+    "customerId": 567,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Balanza cocina digital",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tazas medidoras",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cucharas medidoras",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Jarra medidora vidrio",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 124.93,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 45,
+    "date": "2024-03-01T10:40:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Set ollas acero inoxidable",
+          "descripcion": "",
+          "precio": 299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tapas universales",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protectores mango",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Limpiador acero",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 426.93,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 46,
+    "date": "2024-03-02T13:15:00",
+    "customerId": 890,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Sartenes antiadherentes",
+          "descripcion": "",
+          "precio": 129.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Espátulas silicona",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protectores sartén",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Aceite spray cocina",
+          "descripcion": "",
+          "precio": 6.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 360.9,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 47,
+    "date": "2024-03-03T17:00:00",
+    "customerId": 234,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Olla presión Instant Pot",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Canasta vapor",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Moldes silicona",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Libro recetas olla",
+          "descripcion": "",
+          "precio": 16.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 331.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 48,
+    "date": "2024-03-04T08:25:00",
+    "customerId": 456,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Wok acero carbono",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Espátula wok bambú",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Aceite sésamo",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Salsa soja premium",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Vinagre arroz",
+          "descripcion": "",
+          "precio": 7.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 170.91,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 49,
+    "date": "2024-03-05T12:50:00",
+    "customerId": 678,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Plancha hierro fundido",
+          "descripcion": "",
+          "precio": 79.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Aceite condimento",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Raspador plancha",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Sal gruesa marina",
+          "descripcion": "",
+          "precio": 4.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      }
+    ],
+    "total": 124.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 50,
+    "date": "2024-03-06T16:35:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cazuela barro española",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cucharas madera olivo",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Pimentón dulce",
+          "descripcion": "",
+          "precio": 6.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Azafrán hebras",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Arroz bomba",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 192.92,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 51,
+    "date": "2024-03-07T09:10:00",
+    "customerId": 123,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mortero granito",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Especias molido",
+          "descripcion": "",
+          "precio": 4.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 8
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Hierbas secas",
+          "descripcion": "",
+          "precio": 3.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Frascos especias",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 131.88,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 52,
+    "date": "2024-03-08T14:45:00",
+    "customerId": 345,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mandolina cortadora",
+          "descripcion": "",
+          "precio": 69.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Guante protección",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cuchillas repuesto",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Contenedor verduras",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 160.95,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 53,
+    "date": "2024-03-09T11:20:00",
+    "customerId": 567,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Rallador multiusos",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cepillo limpieza",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protector dedos metal",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bandeja recoger",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 102.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 54,
+    "date": "2024-03-10T15:55:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Pelador automático",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cuchillas pelado",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Recipiente residuos",
+          "descripcion": "",
+          "precio": 16.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Manual instrucciones",
+          "descripcion": "",
+          "precio": 4.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 118.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 55,
+    "date": "2024-03-11T08:30:00",
+    "customerId": 890,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cortador galletas",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Rodillo amasar",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Moldes repostería",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Papel hornear",
+          "descripcion": "",
+          "precio": 7.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 5
+      }
+    ],
+    "total": 144.9,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 56,
+    "date": "2024-03-12T13:05:00",
+    "customerId": 234,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Batidor manual",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Espátula flexible",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bol mezclar vidrio",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Funda protectora",
+          "descripcion": "",
+          "precio": 15.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cargador rápido",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 361.96,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 2,
+    "date": "2024-01-16T14:22:00",
+    "customerId": 267,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Laptop Dell Inspiron",
+          "descripcion": "",
+          "precio": 699.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mouse inalámbrico",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Teclado mecánico",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mousepad gaming",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 834.96,
     "status": "COMPLETED"
   },
   {
     "id": 3,
-    "date": "2025-06-01T16:20:00",
-    "customerId": 71,
+    "date": "2024-01-17T09:15:00",
+    "customerId": 89,
     "items": [
       {
         "product": {
-          "codigo": "P009",
-          "nombre": "Tablet Apple iPad Air",
+          "codigo": "",
+          "nombre": "Auriculares Sony WH-1000XM4",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 249.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
         },
         "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Estuche para auriculares",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable auxiliar",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
       }
     ],
-    "total": 599.99,
+    "total": 289.95,
     "status": "COMPLETED"
   },
   {
     "id": 4,
-    "date": "2025-06-01T17:10:00",
-    "customerId": 72,
+    "date": "2024-01-18T16:45:00",
+    "customerId": 456,
     "items": [
       {
         "product": {
-          "codigo": "P014",
-          "nombre": "Consola PlayStation 5",
+          "codigo": "",
+          "nombre": "Tablet iPad Air",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 599.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -72,10 +1797,46 @@
       },
       {
         "product": {
-          "codigo": "P003",
-          "nombre": "Monitor LG UltraWide",
+          "codigo": "",
+          "nombre": "Apple Pencil",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 129.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Funda iPad",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protector de pantalla",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Soporte para tablet",
+          "descripcion": "",
+          "precio": 24.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -83,20 +1844,20 @@
         "quantity": 1
       }
     ],
-    "total": 949.98,
-    "status": "CANCELLED"
+    "total": 824.94,
+    "status": "COMPLETED"
   },
   {
     "id": 5,
-    "date": "2025-06-01T18:00:00",
-    "customerId": 68,
+    "date": "2024-01-19T11:30:00",
+    "customerId": 673,
     "items": [
       {
         "product": {
-          "codigo": "P002",
-          "nombre": "Smartphone Samsung Galaxy S22",
+          "codigo": "",
+          "nombre": "Smart TV Samsung 55\"",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 799.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -105,10 +1866,34 @@
       },
       {
         "product": {
-          "codigo": "P005",
-          "nombre": "Disco Duro Externo WD",
+          "codigo": "",
+          "nombre": "Soporte de pared",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable HDMI 4K",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Control remoto universal",
+          "descripcion": "",
+          "precio": 34.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -116,20 +1901,20 @@
         "quantity": 1
       }
     ],
-    "total": 879.98,
+    "total": 924.95,
     "status": "COMPLETED"
   },
   {
     "id": 6,
-    "date": "2025-06-01T19:30:00",
-    "customerId": 70,
+    "date": "2024-01-20T13:20:00",
+    "customerId": 234,
     "items": [
       {
         "product": {
-          "codigo": "P008",
-          "nombre": "Router TP-Link Archer AX50",
+          "codigo": "",
+          "nombre": "Consola PlayStation 5",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 499.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -138,10 +1923,46 @@
       },
       {
         "product": {
-          "codigo": "P012",
-          "nombre": "SSD Samsung 970 EVO 1TB",
+          "codigo": "",
+          "nombre": "Juego FIFA 24",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 59.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Control adicional",
+          "descripcion": "",
+          "precio": 69.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Headset gaming",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Base de carga",
+          "descripcion": "",
+          "precio": 29.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -149,20 +1970,56 @@
         "quantity": 1
       }
     ],
-    "total": 279.98,
-    "status": "PENDING"
+    "total": 809.94,
+    "status": "COMPLETED"
   },
   {
     "id": 7,
-    "date": "2025-06-01T20:15:00",
-    "customerId": 71,
+    "date": "2024-01-21T15:10:00",
+    "customerId": 789,
     "items": [
       {
         "product": {
-          "codigo": "P010",
-          "nombre": "Cámara Canon EOS Rebel T7",
+          "codigo": "",
+          "nombre": "Cámara Canon EOS R6",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 1299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Lente 50mm f/1.8",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tarjeta SD 64GB",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Trípode profesional",
+          "descripcion": "",
+          "precio": 129.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -170,20 +2027,20 @@
         "quantity": 1
       }
     ],
-    "total": 449.99,
+    "total": 1704.94,
     "status": "COMPLETED"
   },
   {
     "id": 8,
-    "date": "2025-06-01T21:05:00",
-    "customerId": 72,
+    "date": "2024-01-22T08:45:00",
+    "customerId": 345,
     "items": [
       {
         "product": {
-          "codigo": "P016",
-          "nombre": "Drone DJI Mini 2",
+          "codigo": "",
+          "nombre": "Refrigerador LG 500L",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 899.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -192,10 +2049,169 @@
       },
       {
         "product": {
-          "codigo": "P006",
-          "nombre": "Impresora Epson EcoTank",
+          "codigo": "",
+          "nombre": "Filtro de agua",
           "descripcion": "",
-          "precio": 0.0,
+          "precio": 45.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Organizadores",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      }
+    ],
+    "total": 1071.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 9,
+    "date": "2024-01-23T12:00:00",
+    "customerId": 567,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Lavadora Whirlpool 15kg",
+          "descripcion": "",
+          "precio": 649.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Detergente eco",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Suavizante",
+          "descripcion": "",
+          "precio": 8.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      }
+    ],
+    "total": 763.92,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 10,
+    "date": "2024-01-24T17:30:00",
+    "customerId": 123,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Microondas Panasonic",
+          "descripcion": "",
+          "precio": 189.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Platos aptos microondas",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Recipientes vidrio",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 344.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 11,
+    "date": "2024-01-25T10:15:00",
+    "customerId": 678,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Aspiradora Dyson V12",
+          "descripcion": "",
+          "precio": 399.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Filtros adicionales",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cepillos especiales",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Soporte de pared",
+          "descripcion": "",
+          "precio": 24.99,
           "stock": 0,
           "categoria": "",
           "proveedor": ""
@@ -203,7 +2219,967 @@
         "quantity": 1
       }
     ],
-    "total": 729.98,
-    "status": "CANCELLED"
+    "total": 534.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 12,
+    "date": "2024-01-26T14:40:00",
+    "customerId": 901,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cafetera Nespresso",
+          "descripcion": "",
+          "precio": 179.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cápsulas variadas",
+          "descripcion": "",
+          "precio": 0.75,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 50
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tazas espresso",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Descalcificador",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 282.46,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 13,
+    "date": "2024-01-27T09:25:00",
+    "customerId": 432,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bicicleta Trek Mountain",
+          "descripcion": "",
+          "precio": 899.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Casco protector",
+          "descripcion": "",
+          "precio": 59.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Luces LED",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Candado seguridad",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Botella agua",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 1067.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 14,
+    "date": "2024-01-28T16:20:00",
+    "customerId": 765,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tenis Nike Air Max",
+          "descripcion": "",
+          "precio": 129.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Calcetines deportivos",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 6
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Plantillas gel",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Limpiador calzado",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 244.93,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 15,
+    "date": "2024-01-29T11:55:00",
+    "customerId": 198,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Chaqueta North Face",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Gorra térmica",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Guantes táctiles",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Bufanda lana",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 289.96,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 16,
+    "date": "2024-01-30T13:10:00",
+    "customerId": 543,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mochila Patagonia 40L",
+          "descripcion": "",
+          "precio": 149.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Botella térmica",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Linterna LED",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Brújula digital",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Kit primeros auxilios",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 334.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 17,
+    "date": "2024-02-01T15:35:00",
+    "customerId": 876,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Perfume Chanel No. 5",
+          "descripcion": "",
+          "precio": 159.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Crema hidratante",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Mascarilla facial",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Serum vitamina C",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 364.93,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 18,
+    "date": "2024-02-02T08:20:00",
+    "customerId": 321,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Reloj Apple Watch Series 9",
+          "descripcion": "",
+          "precio": 399.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Correa deportiva",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cargador inalámbrico",
+          "descripcion": "",
+          "precio": 79.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Protector pantalla",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 599.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 19,
+    "date": "2024-02-03T12:45:00",
+    "customerId": 654,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Libro \"Cien años de soledad\"",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Kindle Paperwhite",
+          "descripcion": "",
+          "precio": 139.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Funda Kindle",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Lámpara lectura",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Marcapáginas set",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 244.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 20,
+    "date": "2024-02-04T17:15:00",
+    "customerId": 987,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Guitarra Fender Stratocaster",
+          "descripcion": "",
+          "precio": 899.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Amplificador 20W",
+          "descripcion": "",
+          "precio": 149.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable jack",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Púas variadas",
+          "descripcion": "",
+          "precio": 4.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 5
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Soporte guitarra",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 1149.89,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 21,
+    "date": "2024-02-05T09:30:00",
+    "customerId": 210,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Monitor Dell 27\" 4K",
+          "descripcion": "",
+          "precio": 449.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Brazo monitor doble",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable DisplayPort",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 1039.95,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 22,
+    "date": "2024-02-06T14:20:00",
+    "customerId": 456,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Silla gaming DXRacer",
+          "descripcion": "",
+          "precio": 299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cojín lumbar",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Reposapiés",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Alfombrilla silla",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 419.96,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 23,
+    "date": "2024-02-07T11:05:00",
+    "customerId": 789,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Drone DJI Mini 3",
+          "descripcion": "",
+          "precio": 599.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Batería extra",
+          "descripcion": "",
+          "precio": 89.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tarjeta microSD 128GB",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Estuche transporte",
+          "descripcion": "",
+          "precio": 79.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Hélices repuesto",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      }
+    ],
+    "total": 919.93,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 24,
+    "date": "2024-02-08T16:50:00",
+    "customerId": 123,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Impresora HP LaserJet",
+          "descripcion": "",
+          "precio": 299.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Papel A4 5000 hojas",
+          "descripcion": "",
+          "precio": 49.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Tóner negro",
+          "descripcion": "",
+          "precio": 79.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable USB-B",
+          "descripcion": "",
+          "precio": 14.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 574.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 25,
+    "date": "2024-02-09T10:40:00",
+    "customerId": 345,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Escritorio L-shape",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Organizador escritorio",
+          "descripcion": "",
+          "precio": 29.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Lámpara LED escritorio",
+          "descripcion": "",
+          "precio": 59.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Portapapeles",
+          "descripcion": "",
+          "precio": 12.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 3
+      }
+    ],
+    "total": 328.94,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 26,
+    "date": "2024-02-10T13:25:00",
+    "customerId": 567,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Altavoces Bose SoundLink",
+          "descripcion": "",
+          "precio": 199.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Funda altavoz",
+          "descripcion": "",
+          "precio": 24.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable aux 3.5mm",
+          "descripcion": "",
+          "precio": 9.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 2
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Soporte altavoz",
+          "descripcion": "",
+          "precio": 34.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 279.95,
+    "status": "COMPLETED"
+  },
+  {
+    "id": 27,
+    "date": "2024-02-11T15:15:00",
+    "customerId": 678,
+    "items": [
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Router WiFi 6 ASUS",
+          "descripcion": "",
+          "precio": 149.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Cable ethernet Cat6",
+          "descripcion": "",
+          "precio": 19.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 4
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Switch 8 puertos",
+          "descripcion": "",
+          "precio": 39.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      },
+      {
+        "product": {
+          "codigo": "",
+          "nombre": "Repetidor WiFi",
+          "descripcion": "",
+          "precio": 59.99,
+          "stock": 0,
+          "categoria": "",
+          "proveedor": ""
+        },
+        "quantity": 1
+      }
+    ],
+    "total": 329.94,
+    "status": "COMPLETED"
   }
 ]

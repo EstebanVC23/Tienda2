@@ -1,43 +1,39 @@
 package com.store.view.components.dialogs.user;
 
 import com.store.models.Producto;
+import com.store.services.IShoppingCartService;
 import com.store.view.components.dialogs.constants.ProductDetailsConstants;
 import com.store.view.components.dialogs.user.components.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Diálogo que muestra los detalles completos de un producto, incluyendo imagen,
- * información básica, descripción y acciones disponibles.
- */
 public class ProductDetailsDialog extends BaseDetailsDialog {
     private final Producto producto;
+    private final IShoppingCartService cartService;
+    private final int userId;
     
     private ProductImagePanel imagePanel;
     private ProductHeaderPanel headerPanel;
     private ProductInfoPanel infoPanel;
     private ProductDescriptionPanel descriptionPanel;
     private ProductActionPanel actionPanel;
+    private JButton addToCartButton;
+    private JButton removeFromCartButton;
 
-    /**
-     * Crea un nuevo diálogo de detalles de producto.
-     * 
-     * @param parent Ventana padre del diálogo
-     * @param producto Producto cuyos detalles se mostrarán
-     */
-    public ProductDetailsDialog(Window parent, Producto producto) {
+    public ProductDetailsDialog(Window parent, Producto producto, 
+                             IShoppingCartService cartService, int userId) {
         super(parent, ProductDetailsConstants.TITLE, 
              ProductDetailsConstants.WIDTH, 
              ProductDetailsConstants.HEIGHT);
         this.producto = producto;
+        this.cartService = cartService;
+        this.userId = userId;
         initComponents();
         setupLayout();
+        updateCartButtons();
     }
 
-    /**
-     * Inicializa todos los componentes del diálogo usando las constantes definidas.
-     */
     private void initComponents() {
         this.imagePanel = new ProductImagePanel(
             ProductDetailsConstants.IMAGE_SIZE,
@@ -71,18 +67,17 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
             ProductDetailsConstants.DESCRIPTION_TOP_SPACING
         );
         
+        // Modificamos el actionPanel para incluir ambos botones
+        this.addToCartButton = new JButton(ProductDetailsConstants.ADD_TO_CART_TEXT);
+        this.removeFromCartButton = new JButton(ProductDetailsConstants.REMOVE_FROM_CART_TEXT);
+        
         this.actionPanel = new ProductActionPanel(
             this::addToCart,
-            this::dispose,
-            ProductDetailsConstants.ADD_TO_CART_TEXT,
-            ProductDetailsConstants.CLOSE_TEXT
+            this::removeFromCart,
+            this::dispose
         );
     }
 
-    /**
-     * Configura el diseño principal del diálogo, organizando los componentes
-     * en un layout BorderLayout con la imagen a la izquierda y los detalles a la derecha.
-     */
     @Override
     protected void setupLayout() {
         JPanel mainPanel = createMainPanel();
@@ -101,11 +96,6 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
         setContentPane(mainPanel);
     }
 
-    /**
-     * Crea el panel que contiene los detalles del producto (encabezado, información y descripción).
-     * 
-     * @return JPanel con los componentes de detalles organizados verticalmente
-     */
     private JPanel createDetailsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -118,13 +108,43 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
         return panel;
     }
 
-    /**
-     * Maneja la acción de agregar el producto al carrito, mostrando un mensaje de confirmación.
-     */
     private void addToCart() {
-        JOptionPane.showMessageDialog(this,
-            ProductDetailsConstants.ADD_TO_CART_MESSAGE,
-            ProductDetailsConstants.ADD_TO_CART_TITLE,
-            JOptionPane.INFORMATION_MESSAGE);
+        boolean success = cartService.addToCart(userId, producto, 1);
+        if (success) {
+            JOptionPane.showMessageDialog(this,
+                ProductDetailsConstants.ADD_TO_CART_SUCCESS_MESSAGE,
+                ProductDetailsConstants.ADD_TO_CART_TITLE,
+                JOptionPane.INFORMATION_MESSAGE);
+            updateCartButtons();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                ProductDetailsConstants.ADD_TO_CART_ERROR_MESSAGE,
+                ProductDetailsConstants.ADD_TO_CART_TITLE,
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void removeFromCart() {
+        boolean success = cartService.removeFromCart(userId, producto.getCodigo());
+        if (success) {
+            JOptionPane.showMessageDialog(this,
+                ProductDetailsConstants.REMOVE_FROM_CART_SUCCESS_MESSAGE,
+                ProductDetailsConstants.REMOVE_FROM_CART_TITLE,
+                JOptionPane.INFORMATION_MESSAGE);
+            updateCartButtons();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                ProductDetailsConstants.REMOVE_FROM_CART_ERROR_MESSAGE,
+                ProductDetailsConstants.REMOVE_FROM_CART_TITLE,
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void updateCartButtons() {
+        boolean isInCart = cartService.getCartItems(userId).stream()
+            .anyMatch(item -> item.getProduct().getCodigo().equals(producto.getCodigo()));
+        
+        addToCartButton.setVisible(!isInCart);
+        removeFromCartButton.setVisible(isInCart);
     }
 }

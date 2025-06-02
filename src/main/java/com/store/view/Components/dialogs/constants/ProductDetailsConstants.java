@@ -1,67 +1,49 @@
 package com.store.view.components.dialogs.constants;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 
-/**
- * Clase que contiene constantes para la configuración del diálogo de detalles de producto.
- * Agrupa todas las constantes relacionadas con dimensiones, textos, colores y espaciados
- * utilizados en el diálogo de detalles de producto.
- */
 public class ProductDetailsConstants {
-    /** Título del diálogo */
     public static final String TITLE = "Detalles del Producto";
-    /** Ancho del diálogo */
-    public static final int WIDTH = 700;
-    /** Alto del diálogo */
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     
-    // Constantes para la imagen del producto
-    /** Tamaño del panel de imagen */
-    public static final Dimension IMAGE_SIZE = new Dimension(200, 200);
-    /** Reducción de tamaño para la imagen dentro del panel */
-    public static final int IMAGE_SCALE_OFFSET = 20;
-    /** Relleno interno del panel de imagen */
-    public static final int IMAGE_PADDING = 10;
-    /** Color de fondo del panel de imagen */
-    public static final Color IMAGE_BG_COLOR = new Color(245, 247, 250);
-    /** Texto alternativo cuando no hay imagen disponible */
-    public static final String NO_IMAGE_TEXT = "No hay imagen disponible";
+    // Image panel constants
+    public static final Dimension IMAGE_SIZE = new Dimension(300, 300);
+    public static final int IMAGE_SCALE_OFFSET = 30;
+    public static final int IMAGE_PADDING = 15;
+    public static final Color IMAGE_BG_COLOR = new Color(245, 245, 245);
+    public static final String NO_IMAGE_TEXT = "Imagen no disponible";
     
-    // Constantes para espaciado del contenido
-    /** Espaciado horizontal entre componentes principales */
-    public static final int CONTENT_HGAP = 15;
-    /** Espaciado vertical entre componentes principales */
-    public static final int CONTENT_VGAP = 0;
-    
-    // Constantes para el encabezado
-    /** Espaciado entre el nombre y el precio del producto */
+    // Header panel constants
     public static final int NAME_PRICE_SPACING = 5;
-    /** Espaciado inferior del panel de encabezado */
     public static final int HEADER_BOTTOM_SPACING = 15;
     
-    // Constantes para el panel de información
-    /** Espaciado horizontal entre elementos de información */
-    public static final int INFO_HGAP = 10;
-    /** Espaciado vertical entre elementos de información */
+    // Info panel constants
+    public static final int INFO_HGAP = 20;
     public static final int INFO_VGAP = 5;
-    /** Espaciado inferior del panel de información */
-    public static final int INFO_BOTTOM_SPACING = 15;
+    public static final int INFO_BOTTOM_SPACING = 20;
     
-    // Constantes para la descripción
-    /** Título de la sección de descripción */
+    // Description panel constants
     public static final String DESCRIPTION_TITLE = "Descripción";
-    /** Espaciado entre el título y el texto de descripción */
     public static final int DESCRIPTION_TITLE_SPACING = 5;
-    /** Espaciado superior del texto de descripción */
-    public static final int DESCRIPTION_TOP_SPACING = 10;
+    public static final int DESCRIPTION_TOP_SPACING = 5;
     
-    // Constantes para botones y mensajes
-    /** Texto del botón para añadir al carrito */
-    public static final String ADD_TO_CART_TEXT = "Añadir al carrito";
-    /** Texto del botón para cerrar */
+    // Content layout
+    public static final int CONTENT_HGAP = 20;
+    public static final int CONTENT_VGAP = 0;
+    
+    // Action texts
+    public static final String ADD_TO_CART_TEXT = "Agregar al carrito";
+    public static final String REMOVE_FROM_CART_TEXT = "Quitar del carrito";
     public static final String CLOSE_TEXT = "Cerrar";
-    /** Mensaje al añadir producto al carrito */
-    public static final String ADD_TO_CART_MESSAGE = "Producto añadido al carrito";
-    /** Título del mensaje al añadir producto al carrito */
-    public static final String ADD_TO_CART_TITLE = "Éxito";
+    
+    // Messages
+    public static final String ADD_TO_CART_TITLE = "Carrito de compras";
+    public static final String ADD_TO_CART_SUCCESS_MESSAGE = "Producto agregado al carrito";
+    public static final String ADD_TO_CART_ERROR_MESSAGE = "No se pudo agregar el producto al carrito";
+    
+    public static final String REMOVE_FROM_CART_TITLE = "Carrito de compras";
+    public static final String REMOVE_FROM_CART_SUCCESS_MESSAGE = "Producto eliminado del carrito";
+    public static final String REMOVE_FROM_CART_ERROR_MESSAGE = "No se pudo eliminar el producto del carrito";
 }

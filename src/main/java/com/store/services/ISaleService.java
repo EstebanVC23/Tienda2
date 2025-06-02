@@ -1,6 +1,7 @@
 package com.store.services;
 
 import com.store.models.Sale;
+import com.store.models.SaleItem;
 
 import java.util.Date;
 import java.util.List;
@@ -59,4 +60,11 @@ public interface ISaleService {
      * @return Lista de ventas en el rango de fechas especificado
      */
     List<Sale> buscarVentasPorFecha(Date fechaInicio, Date fechaFin);
+
+    /**
+     * Obtiene los artículos vendidos en una venta específica.
+     * @param saleId Id de la venta para la cual se desean los artículos
+     * @return Lista de artículos vendidos en esa venta
+     */
+    List<SaleItem> obtenerItemsVenta(int saleId);
 }
