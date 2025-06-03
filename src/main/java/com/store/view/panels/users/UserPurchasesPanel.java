@@ -28,6 +28,12 @@ public class UserPurchasesPanel extends JPanel {
         "ID", "Fecha", "Total", "Estado"
     };
 
+    /**
+     * Constructor del panel de compras de usuario.
+     * 
+     * @param userId ID del usuario cuyas compras se mostrarán
+     * @param saleService Servicio de ventas para operaciones CRUD
+     */
     public UserPurchasesPanel(int userId, SaleServiceImpl saleService) {
         this.userId = userId;
         this.saleService = saleService;
@@ -39,21 +45,26 @@ public class UserPurchasesPanel extends JPanel {
         refreshTable();
     }
 
+    /**
+     * Inicializa los componentes del panel.
+     */
     private void initComponents() {
-        // Título del panel
         JLabel titleLabel = new JLabel("Mis Compras");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Panel de la tabla
         JPanel tablePanel = createTablePanel();
         add(tablePanel, BorderLayout.CENTER);
 
-        // Configurar doble click para editar
         setupTableDoubleClick();
     }
 
+    /**
+     * Crea el panel que contiene la tabla de compras.
+     * 
+     * @return Panel con la tabla configurada
+     */
     private JPanel createTablePanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(Colors.PANEL_BACKGROUND);
@@ -68,22 +79,27 @@ public class UserPurchasesPanel extends JPanel {
         return panel;
     }
 
+    /**
+     * Actualiza los datos mostrados en la tabla.
+     */
     public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
         List<Sale> userPurchases = saleService.buscarVentasPorCliente(userId);
         for (Sale purchase : userPurchases) {
-            // Añadir todos los datos incluyendo ID (columna 0)
             model.addRow(new Object[]{
-                purchase.getId(),    // Columna 0 (oculta)
-                purchase.getDate(), // Columna 1
-                String.format("%.2f", purchase.getTotal()), // Columna 2
-                purchase.getStatus() // Columna 3
+                purchase.getId(),
+                purchase.getDate(),
+                String.format("%.2f", purchase.getTotal()),
+                purchase.getStatus()
             });
         }
     }
 
+    /**
+     * Configura el listener para editar compras con doble click.
+     */
     private void setupTableDoubleClick() {
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -95,6 +111,9 @@ public class UserPurchasesPanel extends JPanel {
         });
     }
 
+    /**
+     * Edita la compra seleccionada en la tabla.
+     */
     private void editSelectedPurchase() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
@@ -116,12 +135,17 @@ public class UserPurchasesPanel extends JPanel {
         }
     }
 
+    /**
+     * Muestra el diálogo de edición para una compra.
+     * 
+     * @param sale Compra a editar
+     */
     private void showEditDialog(Sale sale) {
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
         SaleDialog dialog = new SaleDialog(parentWindow, 
             sale, 
             saleService,
-            this::refreshTable); // Añadido el callback de refresco
+            this::refreshTable);
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

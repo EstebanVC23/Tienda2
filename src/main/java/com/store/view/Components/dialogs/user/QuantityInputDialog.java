@@ -9,12 +9,22 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 
+/**
+ * Diálogo para seleccionar la cantidad de un producto.
+ */
 public class QuantityInputDialog extends JDialog {
     private int selectedQuantity = 1;
     private boolean confirmed = false;
     private final JSpinner quantitySpinner;
     private final JLabel errorLabel;
     
+    /**
+     * Constructor del diálogo de selección de cantidad.
+     * 
+     * @param parent Ventana padre
+     * @param nombreArticulo Nombre del artículo
+     * @param maxStock Stock máximo disponible
+     */
     public QuantityInputDialog(Window parent, String nombreArticulo, int maxStock) {
         super(parent, "Seleccionar Cantidad", Dialog.ModalityType.APPLICATION_MODAL);
         
@@ -22,38 +32,32 @@ public class QuantityInputDialog extends JDialog {
         setLayout(new BorderLayout());
         setLocationRelativeTo(parent);
         
-        // Panel principal con padding
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(20, 25, 20, 25));
         mainPanel.setBackground(Colors.BACKGROUND);
         
-        // Panel de contenido (vertical)
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(Colors.BACKGROUND);
         
-        // 1. Nombre del artículo
         JLabel articleLabel = new JLabel(nombreArticulo);
         articleLabel.setFont(Fonts.SUBTITLE);
         articleLabel.setForeground(Colors.PRIMARY_TEXT);
         articleLabel.setBorder(new EmptyBorder(0, 0, 15, 0));
         articleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        // 2. Instrucción
         JLabel instructionLabel = new JLabel("Seleccione la cantidad:");
         instructionLabel.setFont(Fonts.BODY);
         instructionLabel.setForeground(Colors.PRIMARY_TEXT);
         instructionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         instructionLabel.setBorder(new EmptyBorder(0, 0, 10, 0));
         
-        // 3. Información de stock
         JLabel stockLabel = new JLabel(String.format("Disponibles: %d unidades", maxStock));
         stockLabel.setFont(Fonts.SMALL);
         stockLabel.setForeground(Colors.SECONDARY_TEXT);
         stockLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         stockLabel.setBorder(new EmptyBorder(0, 0, 15, 0));
         
-        // 4. Selector de cantidad
         quantitySpinner = FormInputComponents.createIntegerSpinner(1, 1, 1, maxStock);
         quantitySpinner.setFont(Fonts.SECTION_TITLE);
         quantitySpinner.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -65,21 +69,18 @@ public class QuantityInputDialog extends JDialog {
         spinnerPanel.setBackground(Colors.BACKGROUND);
         spinnerPanel.add(quantitySpinner);
         
-        // 5. Etiqueta de error
         errorLabel = new JLabel(" ");
         errorLabel.setFont(Fonts.SMALL);
         errorLabel.setForeground(Colors.ERROR_RED);
         errorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         errorLabel.setBorder(new EmptyBorder(5, 0, 0, 0));
         
-        // Agregar componentes
         contentPanel.add(articleLabel);
         contentPanel.add(instructionLabel);
         contentPanel.add(stockLabel);
         contentPanel.add(spinnerPanel);
         contentPanel.add(errorLabel);
         
-        // Panel de botones
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setBackground(Colors.BACKGROUND);
         buttonPanel.setBorder(new EmptyBorder(15, 0, 0, 0));
@@ -113,16 +114,20 @@ public class QuantityInputDialog extends JDialog {
         buttonPanel.add(cancelButton);
         buttonPanel.add(confirmButton);
         
-        // Configuración de teclas
         setupKeyBindings(confirmButton, cancelButton);
         
-        // Ensamblar componentes
         mainPanel.add(contentPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         
         setContentPane(mainPanel);
     }
     
+    /**
+     * Configura los atajos de teclado para el diálogo.
+     * 
+     * @param confirmButton Botón de confirmación
+     * @param cancelButton Botón de cancelación
+     */
     private void setupKeyBindings(CustomButton confirmButton, CustomButton cancelButton) {
         getRootPane().setDefaultButton(confirmButton);
         
@@ -137,10 +142,20 @@ public class QuantityInputDialog extends JDialog {
         });
     }
     
+    /**
+     * Obtiene la cantidad seleccionada.
+     * 
+     * @return Cantidad seleccionada
+     */
     public int getSelectedQuantity() {
         return selectedQuantity;
     }
     
+    /**
+     * Indica si se confirmó la selección.
+     * 
+     * @return true si se confirmó, false en caso contrario
+     */
     public boolean isConfirmed() {
         return confirmed;
     }

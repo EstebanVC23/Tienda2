@@ -20,6 +20,9 @@ import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Panel para visualización y gestión de productos por parte de clientes.
+ */
 public class ProductosClientePanel extends BasePanel {
     private final ProductoServicioImpl productoServicio;
     private final ProductSearchHeader filterPanel;
@@ -29,6 +32,13 @@ public class ProductosClientePanel extends BasePanel {
     private final List<ProductoCarrito> carritoCompras;
     private final SaleServiceImpl saleService;
 
+    /**
+     * Constructor del panel de productos para clientes.
+     * 
+     * @param productoServicio Servicio de productos
+     * @param carritoCompras Lista de productos en el carrito
+     * @param saleService Servicio de ventas
+     */
     public ProductosClientePanel(ProductoServicioImpl productoServicio, 
                                List<ProductoCarrito> carritoCompras,
                                SaleServiceImpl saleService) {
@@ -51,34 +61,43 @@ public class ProductosClientePanel extends BasePanel {
         loadProducts();
     }
 
+    /**
+     * Obtiene la lista de productos en el carrito.
+     * 
+     * @return Lista de ProductoCarrito
+     */
     public List<ProductoCarrito> getCarritoCompras() {
         return carritoCompras;
     }
     
+    /**
+     * Crea el panel de título con botón de carrito.
+     * 
+     * @return Panel de título configurado
+     */
     private TitlePanel createTitlePanelWithCartButton() {
         TitlePanel panel = new TitlePanel("Productos Disponibles");
         
-        // Crear botón para ver el carrito
         JButton cartButton = new JButton("Ver carrito actual");
         cartButton.setBackground(Colors.PRIMARY);
         cartButton.setForeground(Color.WHITE);
         cartButton.setFocusPainted(false);
         cartButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         
-        // Agregar acción al botón
         cartButton.addActionListener(_ -> showCurrentCart());
         
-        // Crear panel para el botón alineado a la derecha
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(Colors.BACKGROUND);
         buttonPanel.add(cartButton);
         
-        // Agregar el panel del botón al TitlePanel
         panel.add(buttonPanel, BorderLayout.EAST);
         
         return panel;
     }
     
+    /**
+     * Muestra el diálogo del carrito de compras actual.
+     */
     private void showCurrentCart() {
         if (carritoCompras.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -91,13 +110,18 @@ public class ProductosClientePanel extends BasePanel {
         CarritoDialog dialog = new CarritoDialog(
             SwingUtilities.getWindowAncestor(this),
             carritoCompras,
-            saleService,  // Usa el servicio que recibió el panel
+            saleService,
             productoServicio,
             ((UserView)SwingUtilities.getWindowAncestor(this)).getUsuario()
         );
         dialog.setVisible(true);
     }
     
+    /**
+     * Crea el panel de desplazamiento para la grilla de productos.
+     * 
+     * @return JScrollPane configurado
+     */
     private JScrollPane createScrollPane() {
         JScrollPane pane = new JScrollPane(gridPanel.getContentPanel());
         pane.setBorder(null);
@@ -107,6 +131,9 @@ public class ProductosClientePanel extends BasePanel {
         return pane;
     }
     
+    /**
+     * Configura la interfaz de usuario principal.
+     */
     private void setupUI() {
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBackground(Colors.BACKGROUND);
@@ -117,6 +144,9 @@ public class ProductosClientePanel extends BasePanel {
         add(contentPanel, BorderLayout.CENTER);
     }
     
+    /**
+     * Configura los listeners para los componentes de filtrado.
+     */
     private void setupListeners() {
         filterPanel.getSearchField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -127,11 +157,17 @@ public class ProductosClientePanel extends BasePanel {
         filterPanel.getCategoriaCombo().addActionListener(_ -> filterProducts());
     }
     
+    /**
+     * Carga los productos en la grilla.
+     */
     private void loadProducts() {
         List<Producto> productos = productoServicio.listarProductos();
         gridPanel.displayProducts(productos);
     }
     
+    /**
+     * Filtra los productos según los criterios seleccionados.
+     */
     private void filterProducts() {
         String searchText = filterPanel.getSearchField().getText().toLowerCase();
         String selectedCategory = (String) filterPanel.getCategoriaCombo().getSelectedItem();
@@ -147,13 +183,19 @@ public class ProductosClientePanel extends BasePanel {
         resetScrollPosition();
     }
     
+    /**
+     * Reinicia la posición de desplazamiento del scroll.
+     */
     private void resetScrollPosition() {
         SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0)));
     }
 
+    /**
+     * Agrega un producto al carrito de compras.
+     * 
+     * @param producto Producto a agregar
+     */
     public void addToCart(Producto producto) {
-        System.out.println("DEBUG: addToCart llamado para: " + producto.getNombre());
-        
         QuantityInputDialog dialog = new QuantityInputDialog(
             SwingUtilities.getWindowAncestor(this),
             producto.getNombre(),
@@ -164,28 +206,16 @@ public class ProductosClientePanel extends BasePanel {
         
         if (dialog.isConfirmed()) {
             int quantity = dialog.getSelectedQuantity();
-            System.out.println("DEBUG: Cantidad confirmada: " + quantity);
             
             Optional<ProductoCarrito> existingProduct = carritoCompras.stream()
                 .filter(p -> p.getProducto().getCodigo().equals(producto.getCodigo()))
                 .findFirst();
             
             if (existingProduct.isPresent()) {
-                System.out.println("DEBUG: Producto ya existe, aumentando cantidad");
                 existingProduct.get().aumentarCantidad(quantity);
             } else {
-                System.out.println("DEBUG: Producto nuevo, agregando al carrito");
                 carritoCompras.add(new ProductoCarrito(producto, quantity));
             }
-            
-            // Mostrar carrito actualizado en terminal
-            System.out.println("=== CARRITO ACTUALIZADO ===");
-            for (ProductoCarrito item : carritoCompras) {
-                System.out.println("- " + item.getProducto().getNombre() + 
-                                " | Cantidad: " + item.getCantidadSeleccionada() + 
-                                " | Subtotal: $" + String.format("%.2f", item.getSubtotal()));
-            }
-            System.out.println("============================");
             
             JOptionPane.showMessageDialog(this,
                 quantity + " unidad(es) de " + producto.getNombre() + " añadidas al carrito",

@@ -16,6 +16,10 @@ import java.text.NumberFormat;
 import java.util.Date;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Diálogo para visualizar y editar los detalles de una venta.
+ * Permite cambiar el estado de la venta y gestionar el stock de productos asociados.
+ */
 public class SaleDialog extends BaseEntityFormDialog {
     private final SaleServiceImpl saleService;
     private final Sale sale;
@@ -27,10 +31,18 @@ public class SaleDialog extends BaseEntityFormDialog {
     private CustomTable productsTable;
     private final Runnable refreshCallback;
 
+    /**
+     * Crea un nuevo diálogo de venta.
+     *
+     * @param parent la ventana padre
+     * @param sale la venta a mostrar/editar
+     * @param saleService el servicio de ventas
+     * @param refreshCallback callback para actualizar la vista principal
+     * @throws IllegalArgumentException si la venta o el servicio son nulos
+     */
     public SaleDialog(Window parent, Sale sale, SaleServiceImpl saleService, Runnable refreshCallback) {
         super(parent, "Editar Venta");
         
-        // Validación mejorada con mensaje más descriptivo
         if (sale == null) {
             throw new IllegalArgumentException("No se ha seleccionado ninguna venta para editar. Por favor seleccione una venta válida.");
         }
@@ -42,7 +54,6 @@ public class SaleDialog extends BaseEntityFormDialog {
         this.saleService = saleService;
         this.sale = sale;
         
-        // Configurar título con ID si existe
         if (sale.getId() != 0) {
             setTitle("Editar Venta #" + sale.getId());
         }
@@ -50,8 +61,6 @@ public class SaleDialog extends BaseEntityFormDialog {
         setSize(750, 620);
         setupLayout();
         centerOnParent();
-        
-        // Configuración para evitar cierre accidental
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
@@ -71,18 +80,15 @@ public class SaleDialog extends BaseEntityFormDialog {
         dateLabel.setFont(Fonts.BODY);
         addCustomField("Fecha:", dateLabel);
 
-        // Tabla de productos
         productsTable = createProductsTable();
         JScrollPane tableScroll = new JScrollPane(productsTable);
         tableScroll.setPreferredSize(new Dimension(650, 200));
         addCustomField("Productos:", tableScroll);
 
-        // Total
         totalLabel = new JLabel(formatCurrency(sale.getTotal()));
         totalLabel.setFont(Fonts.BODY);
         addCustomField("Total:", totalLabel);
 
-        // Combo de estado (único campo editable)
         statusCombo = new JComboBox<>(SaleStatus.values());
         statusCombo.setSelectedItem(sale.getStatus() != null ? sale.getStatus() : SaleStatus.COMPLETED);
         addCustomField("Estado:", statusCombo);
@@ -125,7 +131,6 @@ public class SaleDialog extends BaseEntityFormDialog {
         CustomTable table = new CustomTable(columnNames);
         DefaultTableModel model = table.getTableModel();
 
-        // Validar items de la venta
         if (sale.getItems() != null) {
             NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
             for (SaleItem item : sale.getItems()) {
@@ -143,6 +148,10 @@ public class SaleDialog extends BaseEntityFormDialog {
         return table;
     }
 
+    /**
+     * Guarda los cambios realizados en el diálogo.
+     * Maneja la actualización del estado de la venta y el stock de productos.
+     */
     @Override
     protected void saveForm() {
         try {
@@ -150,13 +159,10 @@ public class SaleDialog extends BaseEntityFormDialog {
             SaleStatus oldStatus = sale.getStatus();
             
             if (newStatus != oldStatus) {
-                // Necesitamos el servicio de productos para actualizar el stock
                 ProductoServicioImpl productoServicio = new ProductoServicioImpl();
                 boolean stockUpdated = true;
                 
-                // Si el nuevo estado es CANCELLED y el anterior no lo era
                 if (newStatus == SaleStatus.CANCELLED && oldStatus != SaleStatus.CANCELLED) {
-                    // Devolver el stock al inventario
                     for (SaleItem item : sale.getItems()) {
                         if (item != null && item.getProduct() != null) {
                             int quantityToReturn = item.getQuantity();
@@ -167,9 +173,7 @@ public class SaleDialog extends BaseEntityFormDialog {
                         }
                     }
                 }
-                // Si el estado anterior era CANCELLED y el nuevo no lo es
                 else if (oldStatus == SaleStatus.CANCELLED && newStatus != SaleStatus.CANCELLED) {
-                    // Quitar el stock del inventario nuevamente
                     for (SaleItem item : sale.getItems()) {
                         if (item != null && item.getProduct() != null) {
                             int quantityToRemove = item.getQuantity();
@@ -186,7 +190,6 @@ public class SaleDialog extends BaseEntityFormDialog {
                     return;
                 }
                 
-                // Actualizar el estado de la venta
                 sale.setStatus(newStatus);
                 boolean success = saleService.actualizarVenta(sale);
                 
@@ -195,14 +198,12 @@ public class SaleDialog extends BaseEntityFormDialog {
                         "Estado actualizado correctamente", 
                         "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     
-                    // Notificar para actualizar la vista
                     if (refreshCallback != null) {
                         refreshCallback.run();
                     }
                 
                 dispose();
                 } else {
-                    // Si falla la actualización, revertir los cambios en el stock
                     if (newStatus == SaleStatus.CANCELLED && oldStatus != SaleStatus.CANCELLED) {
                         for (SaleItem item : sale.getItems()) {
                             if (item != null && item.getProduct() != null) {
@@ -219,7 +220,7 @@ public class SaleDialog extends BaseEntityFormDialog {
                     showError("Error al actualizar el estado de la venta");
                 }
             } else {
-                dispose(); // No hay cambios
+                dispose();
             }
         } catch (Exception ex) {
             showError("Error al guardar cambios: " + ex.getMessage());

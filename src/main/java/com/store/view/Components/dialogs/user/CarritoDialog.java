@@ -22,7 +22,7 @@ import java.util.Date;
 
 /**
  * Diálogo para mostrar el contenido actual del carrito de compras.
- * Muestra los productos en una tabla con sus cantidades y subtotales.
+ * Permite gestionar los productos, eliminar items y realizar la compra.
  */
 public class CarritoDialog extends JDialog {
     private static final int WIDTH = 600;
@@ -36,6 +36,15 @@ public class CarritoDialog extends JDialog {
     private final ProductoServicioImpl productService;
     private final Usuario usuario;
 
+    /**
+     * Crea un nuevo diálogo de carrito de compras.
+     *
+     * @param parent la ventana padre
+     * @param carrito la lista de productos en el carrito
+     * @param saleService el servicio de ventas
+     * @param productService el servicio de productos
+     * @param usuario el usuario que realiza la compra
+     */
     public CarritoDialog(Window parent, List<ProductoCarrito> carrito, 
                         SaleServiceImpl saleService, 
                         ProductoServicioImpl productService,
@@ -61,19 +70,16 @@ public class CarritoDialog extends JDialog {
         mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
         mainPanel.setBackground(Colors.BACKGROUND);
         
-        // Título
         JLabel titleLabel = new JLabel("Productos en el Carrito");
         titleLabel.setFont(Fonts.SECTION_TITLE);
         titleLabel.setBorder(new EmptyBorder(0, 0, 15, 0));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         
-        // Tabla
         setupTable();
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(null);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         
-        // Panel inferior con total y botones
         JPanel bottomPanel = createBottomPanel();
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         
@@ -89,10 +95,8 @@ public class CarritoDialog extends JDialog {
     }
     
     private void updateTableModel() {
-        // Limpiar el modelo
         tableModel.setRowCount(0);
         
-        // Llenar con los datos actuales del carrito
         for (ProductoCarrito item : carrito) {
             tableModel.addRow(new Object[]{
                 item.getProducto().getNombre(),
@@ -108,28 +112,23 @@ public class CarritoDialog extends JDialog {
         panel.setBorder(new EmptyBorder(15, 0, 0, 0));
         panel.setBackground(Colors.BACKGROUND);
         
-        // Total
         updateTotalLabel(panel);
         
-        // Panel de botones
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setBackground(Colors.BACKGROUND);
         
-        // Botón de Eliminar Producto
         CustomButton deleteButton = new CustomButton("Eliminar Producto", Colors.ERROR_RED);
         deleteButton.setRound(true);
         deleteButton.setCornerRadius(8);
         deleteButton.addActionListener(_ -> deleteSelectedProduct());
         buttonPanel.add(deleteButton);
         
-        // Botón de Comprar
         CustomButton buyButton = new CustomButton("Comprar", Colors.PRIMARY);
         buyButton.setRound(true);
         buyButton.setCornerRadius(8);
         buyButton.addActionListener(_ -> processPurchase());
         buttonPanel.add(buyButton);
         
-        // Botón de Cerrar
         CustomButton closeButton = new CustomButton("Cerrar", Colors.SECONDARY_GRAY);
         closeButton.setRound(true);
         closeButton.setCornerRadius(8);
@@ -147,7 +146,6 @@ public class CarritoDialog extends JDialog {
         totalLabel.setFont(Fonts.SECTION_TITLE);
         totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         
-        // Eliminar el label anterior si existe
         Component[] components = panel.getComponents();
         for (Component c : components) {
             if (c instanceof JLabel) {
@@ -158,6 +156,10 @@ public class CarritoDialog extends JDialog {
         panel.add(totalLabel, BorderLayout.CENTER);
     }
     
+    /**
+     * Elimina el producto seleccionado del carrito.
+     * Muestra mensajes de confirmación y actualiza la interfaz.
+     */
     private void deleteSelectedProduct() {
         int selectedRow = table.getSelectedRow();
         
@@ -176,13 +178,8 @@ public class CarritoDialog extends JDialog {
             JOptionPane.YES_NO_OPTION);
         
         if (confirm == JOptionPane.YES_OPTION) {
-            // Eliminar el producto del carrito
             carrito.remove(selectedRow);
-            
-            // Actualizar la tabla
             updateTableModel();
-            
-            // Actualizar el total
             updateTotalLabel((JPanel) getContentPane().getComponent(2));
             
             JOptionPane.showMessageDialog(this, 
@@ -192,8 +189,11 @@ public class CarritoDialog extends JDialog {
         }
     }
 
+    /**
+     * Procesa la compra de los productos en el carrito.
+     * Realiza validaciones de stock, registra la venta y actualiza inventarios.
+     */
     private void processPurchase() {
-        // Confirmar con el usuario antes de proceder
         int confirm = JOptionPane.showConfirmDialog(
             this,
             "¿Está seguro que desea proceder con la compra?",
@@ -205,13 +205,11 @@ public class CarritoDialog extends JDialog {
         }
 
         try {
-            // 1. Crear la venta
             Sale nuevaVenta = new Sale();
             nuevaVenta.setCustomerId(usuario.getId());
             nuevaVenta.setDate(new Date());
             nuevaVenta.setStatus(SaleStatus.COMPLETED);
 
-            // 2. Convertir ProductoCarrito a SaleItem
             List<SaleItem> itemsVenta = carrito.stream()
                 .map(pc -> new SaleItem(pc.getProducto(), pc.getCantidadSeleccionada()))
                 .toList();
@@ -219,7 +217,6 @@ public class CarritoDialog extends JDialog {
             nuevaVenta.setItems(itemsVenta);
             nuevaVenta.recalculateTotal();
 
-            // 3. Verificar stock antes de proceder
             for (ProductoCarrito item : carrito) {
                 Producto producto = item.getProducto();
                 if (producto.getStock() < item.getCantidadSeleccionada()) {
@@ -233,14 +230,12 @@ public class CarritoDialog extends JDialog {
                 }
             }
 
-            // 4. Registrar la venta
             boolean ventaExitosa = saleService.crearVenta(nuevaVenta);
             
             if (!ventaExitosa) {
                 throw new Exception("No se pudo registrar la venta en el sistema");
             }
 
-            // 5. Actualizar stock de productos
             for (ProductoCarrito item : carrito) {
                 Producto producto = item.getProducto();
                 int cantidadVendida = item.getCantidadSeleccionada();
@@ -248,7 +243,6 @@ public class CarritoDialog extends JDialog {
                 productService.actualizarProducto(producto);
             }
 
-            // 6. Mostrar confirmación con detalles
             String mensaje = String.format(
                 "¡Compra realizada con éxito!\n\n" +
                 "Número de venta: %d\n" +
@@ -265,10 +259,7 @@ public class CarritoDialog extends JDialog {
                 "Compra exitosa",
                 JOptionPane.INFORMATION_MESSAGE);
 
-            // Limpiar el carrito
             carrito.clear();
-
-            // 7. Cerrar el diálogo
             dispose();
 
         } catch (Exception e) {

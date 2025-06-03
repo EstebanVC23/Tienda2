@@ -27,6 +27,11 @@ public class SalesPanel extends CrudPanel<Sale> {
         "ID", "Fecha", "Cliente", "Total", "Estado"
     };
 
+    /**
+     * Constructor del panel de ventas.
+     * 
+     * @param saleService Servicio de ventas para operaciones CRUD
+     */
     public SalesPanel(SaleServiceImpl saleService) {
         super("Gestión de Ventas");
         this.saleService = saleService;
@@ -41,7 +46,6 @@ public class SalesPanel extends CrudPanel<Sale> {
 
     @Override
     protected JPanel createButtonPanel() {
-        // Panel vacío ya que no necesitamos botones
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Colors.PANEL_BACKGROUND);
         return buttonPanel;
@@ -60,6 +64,9 @@ public class SalesPanel extends CrudPanel<Sale> {
         return panel;
     }
 
+    /**
+     * Configura el listener para editar ventas con doble click.
+     */
     private void setupTableDoubleClick() {
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -71,6 +78,9 @@ public class SalesPanel extends CrudPanel<Sale> {
         });
     }
 
+    /**
+     * Edita la venta seleccionada en la tabla.
+     */
     private void editSelectedSale() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
@@ -92,10 +102,15 @@ public class SalesPanel extends CrudPanel<Sale> {
         }
     }
 
+    /**
+     * Muestra el diálogo de edición para una venta.
+     * 
+     * @param sale Venta a editar
+     */
     private void showEditDialog(Sale sale) {
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
         SaleDialog dialog = new SaleDialog(parentWindow, 
-            sale, // Cambiado de selectedSale a sale
+            sale,
             saleService,
             this::refreshTable);
         dialog.addWindowListener(new WindowAdapter() {
@@ -107,6 +122,11 @@ public class SalesPanel extends CrudPanel<Sale> {
         dialog.setVisible(true);
     }
 
+    /**
+     * Aplica un filtro de búsqueda a la tabla.
+     * 
+     * @param filterText Texto del filtro
+     */
     private void applyFilter(String filterText) {
         if (filterText.trim().isEmpty()) {
             table.getSorter().setRowFilter(null);

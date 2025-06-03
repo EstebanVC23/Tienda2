@@ -34,17 +34,11 @@ import java.util.List;
  * y estilos consistentes mediante constantes de la aplicación.
  */
 public class UserView extends JFrame {
-    /** Usuario actual con sesión iniciada */
     private Usuario usuario;
-    /** Servicio para operaciones con usuarios */
     private UsuarioServicioImpl usuarioServicio;
-    /** Servicio para operaciones con productos */
     private ProductoServicioImpl productoServicio;
-    /** Servicio para operaciones de ventas */
     private SaleServiceImpl saleServicio;
-    /** Panel principal de contenido */
     private JPanel mainContent;
-    /** Carrito Compras */
     private List<ProductoCarrito> carritoCompras = new ArrayList<>();
     
     /**
@@ -57,10 +51,10 @@ public class UserView extends JFrame {
     public UserView(Usuario usuario, 
                ProductoServicioImpl productoServicio, 
                UsuarioServicioImpl usuarioServicio,
-               SaleServiceImpl saleServicio) {  // Añade este parámetro
+               SaleServiceImpl saleServicio) {
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
-        this.saleServicio = saleServicio;  // Inicializa el servicio
+        this.saleServicio = saleServicio;
         this.usuario = usuario;
         
         configurarVentana();
@@ -191,7 +185,6 @@ public class UserView extends JFrame {
         return panel;
     }
 
-    // En UserView.java añadimos estos métodos:
     public SaleServiceImpl getSaleService() {
         return saleServicio;
     }

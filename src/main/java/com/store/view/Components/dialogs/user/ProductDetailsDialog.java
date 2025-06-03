@@ -9,9 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.function.Consumer;
 
+/**
+ * Diálogo para mostrar los detalles de un producto y permitir agregarlo al carrito.
+ */
 public class ProductDetailsDialog extends BaseDetailsDialog {
     private final Producto producto;
-    private Consumer<ProductoCarrito> onAddToCart; // Callback para agregar al carrito
+    private Consumer<ProductoCarrito> onAddToCart;
     
     private ProductImagePanel imagePanel;
     private ProductHeaderPanel headerPanel;
@@ -19,23 +22,37 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
     private ProductDescriptionPanel descriptionPanel;
     private ProductActionPanel actionPanel;
 
-    // Constructor modificado para recibir el callback
+    /**
+     * Constructor principal que recibe un callback para agregar al carrito.
+     * 
+     * @param parent Ventana padre del diálogo
+     * @param producto Producto a mostrar
+     * @param onAddToCart Callback que se ejecuta al agregar al carrito
+     */
     public ProductDetailsDialog(Window parent, Producto producto, Consumer<ProductoCarrito> onAddToCart) {
         super(parent, ProductDetailsConstants.TITLE, 
              ProductDetailsConstants.WIDTH, 
              ProductDetailsConstants.HEIGHT);
         this.producto = producto;
-        this.onAddToCart = onAddToCart; // Asignar el callback
+        this.onAddToCart = onAddToCart;
         
         initComponents();
         setupLayout();
     }
 
-    // Constructor sobrecargado para mantener compatibilidad (sin callback)
+    /**
+     * Constructor alternativo para compatibilidad (sin callback).
+     * 
+     * @param parent Ventana padre del diálogo
+     * @param producto Producto a mostrar
+     */
     public ProductDetailsDialog(Window parent, Producto producto) {
         this(parent, producto, null);
     }
 
+    /**
+     * Inicializa los componentes del diálogo.
+     */
     private void initComponents() {
         this.imagePanel = new ProductImagePanel(
             ProductDetailsConstants.IMAGE_SIZE,
@@ -69,14 +86,16 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
             ProductDetailsConstants.DESCRIPTION_TOP_SPACING
         );
         
-        // Panel de acción con el callback actualizado
         this.actionPanel = new ProductActionPanel(
-            this::openQuantityDialog, // Acción para agregar al carrito
-            null, // No hay acción de quitar del carrito
-            this::dispose // Acción para cerrar
+            this::openQuantityDialog,
+            null,
+            this::dispose
         );
     }
 
+    /**
+     * Abre el diálogo para seleccionar la cantidad a agregar al carrito.
+     */
     private void openQuantityDialog() {
         QuantityInputDialog quantityDialog = new QuantityInputDialog(
             this, 
@@ -89,14 +108,11 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
         if (quantityDialog.isConfirmed()) {
             int selectedQuantity = quantityDialog.getSelectedQuantity();
             
-            // Si hay callback, usar la lógica real del carrito
             if (onAddToCart != null) {
                 ProductoCarrito productoCarrito = new ProductoCarrito(producto, selectedQuantity);
                 onAddToCart.accept(productoCarrito);
-                // Cerrar el diálogo después de agregar al carrito
                 dispose();
             } else {
-                // Fallback: solo mostrar mensaje (para compatibilidad)
                 JOptionPane.showMessageDialog(
                     this, 
                     String.format("Agregado al carrito: %d unidades de %s", 
@@ -126,6 +142,11 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
         setContentPane(mainPanel);
     }
 
+    /**
+     * Crea el panel que contiene los detalles del producto.
+     * 
+     * @return Panel con los detalles del producto
+     */
     private JPanel createDetailsPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

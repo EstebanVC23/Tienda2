@@ -1,4 +1,4 @@
-package com.store.services;
+ package com.store.services;
 
 import com.store.models.Sale;
 import com.store.models.SaleItem;
@@ -11,15 +11,27 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Implementación del servicio de ventas que gestiona operaciones CRUD y consultas
+ * sobre ventas utilizando un repositorio JSON como almacenamiento.
+ */
 public class SaleServiceImpl implements ISaleService {
 
     private final SaleRepositorioJson saleRepositorio;
     private final IUsuarioServicio usuarioServicio = new UsuarioServicioImpl();
 
+    /**
+     * Constructor que inicializa el servicio con un repositorio JSON.
+     */
     public SaleServiceImpl() {
         this.saleRepositorio = new SaleRepositorioJson();
     }
 
+    /**
+     * Genera un nuevo ID único para una venta basado en el ID más alto existente.
+     * 
+     * @return El nuevo ID generado (máximo ID existente + 1)
+     */
     private int generarNuevoId() {
         List<Sale> ventas = saleRepositorio.obtenerVentas();
         return ventas.stream()
@@ -29,9 +41,10 @@ public class SaleServiceImpl implements ISaleService {
     }
 
     /**
-     * Busca las ventas de un cliente específico por su ID
-     * @param userId ID del cliente
-     * @return Lista de ventas del cliente
+     * Busca las ventas asociadas a un cliente específico por su ID.
+     * 
+     * @param userId ID del cliente cuyas ventas se desean buscar
+     * @return Lista de ventas asociadas al cliente, lista vacía si no se encuentran ventas
      */
     @Override
     public List<Sale> buscarVentasPorCliente(int userId) {
@@ -40,6 +53,12 @@ public class SaleServiceImpl implements ISaleService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Crea una nueva venta en el sistema.
+     * 
+     * @param sale La venta a crear. Si no tiene ID (id = 0), se genera uno automáticamente
+     * @return true si la venta fue creada exitosamente, false si ya existe una venta con el mismo ID
+     */
     @Override
     public boolean crearVenta(Sale sale) {
         if (sale.getId() == 0) {
@@ -52,26 +71,55 @@ public class SaleServiceImpl implements ISaleService {
         return true;
     }
 
+    /**
+     * Actualiza los datos de una venta existente.
+     * 
+     * @param sale La venta con los datos actualizados
+     * @return true si la venta fue actualizada exitosamente, false si no se encontró la venta
+     */
     @Override
     public boolean actualizarVenta(Sale sale) {
         return saleRepositorio.actualizarVenta(sale);
     }
 
+    /**
+     * Elimina una venta del sistema.
+     * 
+     * @param id ID de la venta a eliminar
+     * @return true si la venta fue eliminada exitosamente, false si no se encontró la venta
+     */
     @Override
     public boolean eliminarVenta(int id) {
         return saleRepositorio.eliminarVenta(id);
     }
 
+    /**
+     * Obtiene una venta por su ID único.
+     * 
+     * @param id ID de la venta a buscar
+     * @return La venta encontrada o null si no existe
+     */
     @Override
     public Sale obtenerVentaPorId(int id) {
         return saleRepositorio.obtenerVentaPorId(id);
     }
 
+    /**
+     * Obtiene todas las ventas registradas en el sistema.
+     * 
+     * @return Lista de todas las ventas
+     */
     @Override
     public List<Sale> listarVentas() {
         return saleRepositorio.obtenerVentas();
     }
 
+    /**
+     * Busca ventas asociadas a clientes cuyo nombre coincida con el parámetro.
+     * 
+     * @param nombreCliente Nombre o parte del nombre del cliente a buscar (no case sensitive)
+     * @return Lista de ventas asociadas a clientes que coinciden con el criterio de búsqueda
+     */
     @Override
     public List<Sale> buscarVentasPorCliente(String nombreCliente) {
         String nombreLower = nombreCliente.toLowerCase();
@@ -96,7 +144,13 @@ public class SaleServiceImpl implements ISaleService {
             .collect(Collectors.toList());
     }
 
-
+    /**
+     * Busca ventas realizadas dentro de un rango de fechas específico.
+     * 
+     * @param fechaInicio Fecha de inicio del rango (inclusive)
+     * @param fechaFin Fecha de fin del rango (inclusive)
+     * @return Lista de ventas realizadas dentro del rango especificado
+     */
     @Override
     public List<Sale> buscarVentasPorFecha(Date fechaInicio, Date fechaFin) {
         return saleRepositorio.obtenerVentas().stream()
@@ -107,6 +161,12 @@ public class SaleServiceImpl implements ISaleService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Obtiene los items (productos) asociados a una venta específica.
+     * 
+     * @param saleId ID de la venta cuyos items se desean obtener
+     * @return Lista de items de la venta, lista vacía si no se encuentra la venta
+     */
     @Override
     public List<SaleItem> obtenerItemsVenta(int saleId) {
         Sale venta = saleRepositorio.obtenerVentaPorId(saleId);

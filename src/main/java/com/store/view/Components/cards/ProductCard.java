@@ -19,11 +19,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
 
+/**
+ * Componente de tarjeta de producto que muestra la información de un producto
+ * y permite interactuar con él (ver detalles, añadir al carrito).
+ */
 public class ProductCard extends BaseCard {
     private final Producto producto;
     private final ProductoServicioImpl productService;
     private Consumer<ProductoCarrito> onAddToCart;
 
+    /**
+     * Crea una nueva tarjeta de producto.
+     *
+     * @param producto el producto a mostrar
+     * @param productService el servicio de productos para obtener datos actualizados
+     */
     public ProductCard(Producto producto, ProductoServicioImpl productService) {
         super();
         this.productService = productService;
@@ -32,6 +42,11 @@ public class ProductCard extends BaseCard {
         setupMouseListeners();
     }
 
+    /**
+     * Establece el listener para cuando se añade un producto al carrito.
+     *
+     * @param listener el consumer que recibirá el producto del carrito
+     */
     public void setOnAddToCart(Consumer<ProductoCarrito> listener) {
         this.onAddToCart = listener;
     }
@@ -206,6 +221,11 @@ public class ProductCard extends BaseCard {
         }};
     }
 
+    /**
+     * Muestra el diálogo con los detalles del producto.
+     * 
+     * @throws IllegalStateException si el producto es nulo
+     */
     public void showProductDetails() {
         if (producto == null) {
             throw new IllegalStateException("No se puede mostrar detalles: el producto es nulo");
@@ -215,11 +235,10 @@ public class ProductCard extends BaseCard {
         
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
         
-        // Pasar el callback onAddToCart al diálogo de detalles
         ProductDetailsDialog detailsDialog = new ProductDetailsDialog(
             parentWindow, 
             productoActualizado,
-            this.onAddToCart // Pasar el callback que ya tiene esta tarjeta
+            this.onAddToCart
         );
         
         detailsDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
