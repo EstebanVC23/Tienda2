@@ -6,6 +6,7 @@ import com.store.models.SaleStatus;
 import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
+import com.store.view.components.tables.CustomTable;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ public class SaleDialog extends BaseEntityFormDialog {
     private JLabel customerIdLabel;
     private JLabel totalLabel;
     private JComboBox<SaleStatus> statusCombo;
-    private JTable productsTable;
+    private CustomTable productsTable;
 
     public SaleDialog(Window parent, Sale sale, SaleServiceImpl saleService) {
         super(parent, "Editar Venta");
@@ -116,16 +117,10 @@ public class SaleDialog extends BaseEntityFormDialog {
         return panel;
     }
 
-    private JTable createProductsTable() {
-        DefaultTableModel model = new DefaultTableModel(
-            new Object[]{"Producto", "Cantidad", "Precio Unitario", "Subtotal"}, 
-            0
-        ) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Tabla de solo lectura
-            }
-        };
+    private CustomTable createProductsTable() {
+        String[] columnNames = {"Producto", "Cantidad", "Precio Unitario", "Subtotal"};
+        CustomTable table = new CustomTable(columnNames);
+        DefaultTableModel model = table.getTableModel();
 
         // Validar items de la venta
         if (sale.getItems() != null) {
@@ -141,10 +136,6 @@ public class SaleDialog extends BaseEntityFormDialog {
                 }
             }
         }
-        
-        JTable table = new JTable(model);
-        table.setFillsViewportHeight(true);
-        table.setRowSelectionAllowed(false);
         
         return table;
     }
