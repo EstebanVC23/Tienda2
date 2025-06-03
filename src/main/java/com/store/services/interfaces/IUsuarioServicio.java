@@ -1,4 +1,4 @@
-package com.store.services;
+package com.store.services.interfaces;
 
 import com.store.models.Usuario;
 import java.util.List;

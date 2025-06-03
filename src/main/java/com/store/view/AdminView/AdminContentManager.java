@@ -1,4 +1,4 @@
-package com.store.view.AdminView;
+package com.store.view.adminView;
 
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;

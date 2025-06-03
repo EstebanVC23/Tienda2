@@ -2,6 +2,8 @@ package com.store.services;
 
 import com.store.models.Producto;
 import com.store.repository.ProductoRepositorioJson;
+import com.store.services.interfaces.IProductoServicio;
+
 import java.util.List;
 import java.util.UUID;
 

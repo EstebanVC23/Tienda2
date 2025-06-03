@@ -1,4 +1,4 @@
-package com.store.view.UserView;
+package com.store.view.userView;
 
 import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;

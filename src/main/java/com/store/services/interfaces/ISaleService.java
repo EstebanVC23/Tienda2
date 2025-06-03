@@ -1,4 +1,4 @@
-package com.store.services;
+package com.store.services.interfaces;
 
 import com.store.models.Sale;
 import com.store.models.SaleItem;

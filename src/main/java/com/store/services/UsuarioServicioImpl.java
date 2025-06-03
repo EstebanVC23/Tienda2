@@ -2,6 +2,7 @@ package com.store.services;
 
 import com.store.models.Usuario;
 import com.store.repository.UsuarioRepositorioJson;
+import com.store.services.interfaces.IUsuarioServicio;
 import com.store.utils.PasswordUtils;
 import java.util.List;
 

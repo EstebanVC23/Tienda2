@@ -1,4 +1,4 @@
-package com.store.view.AdminView;
+package com.store.view.adminView;
 
 import com.store.utils.Colors;
 import com.store.utils.Fonts;

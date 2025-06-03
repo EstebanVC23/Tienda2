@@ -4,10 +4,10 @@ import com.store.models.Usuario;
 import com.store.services.ProductoServicioImpl;
 import com.store.services.SaleServiceImpl;
 import com.store.services.UsuarioServicioImpl;
-import com.store.view.AdminView.AdminView;
-import com.store.view.UserView.UserView;
+import com.store.view.adminView.AdminView;
 import com.store.view.auth.Login;
 import com.store.view.auth.constants.AuthConstants;
+import com.store.view.userView.UserView;
 import com.store.view.auth.Register;
 
 import java.awt.event.ActionEvent;

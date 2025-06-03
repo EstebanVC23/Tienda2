@@ -4,6 +4,8 @@ import com.store.models.Sale;
 import com.store.models.SaleItem;
 import com.store.models.Usuario;
 import com.store.repository.SaleRepositorioJson;
+import com.store.services.interfaces.ISaleService;
+import com.store.services.interfaces.IUsuarioServicio;
 
 import java.util.Collections;
 import java.util.Date;

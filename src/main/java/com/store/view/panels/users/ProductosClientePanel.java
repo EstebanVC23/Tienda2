@@ -5,13 +5,13 @@ import com.store.models.ProductoCarrito;
 import com.store.services.ProductoServicioImpl;
 import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
-import com.store.view.UserView.UserView;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
 import com.store.view.components.cards.spaces.ProductSearchHeader;
 import com.store.view.components.dialogs.user.CarritoDialog;
 import com.store.view.components.dialogs.user.QuantityInputDialog;
 import com.store.view.panels.BasePanel;
+import com.store.view.userView.UserView;
 import com.store.view.components.cards.constants.GridConstants;
 
 import javax.swing.*;
