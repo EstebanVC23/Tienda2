@@ -28,6 +28,18 @@ public class SaleServiceImpl implements ISaleService {
                 .orElse(0) + 1;
     }
 
+    /**
+     * Busca las ventas de un cliente específico por su ID
+     * @param userId ID del cliente
+     * @return Lista de ventas del cliente
+     */
+    @Override
+    public List<Sale> buscarVentasPorCliente(int userId) {
+        return saleRepositorio.obtenerVentas().stream()
+                .filter(venta -> venta.getCustomerId() == userId)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public boolean crearVenta(Sale sale) {
         if (sale.getId() == 0) {

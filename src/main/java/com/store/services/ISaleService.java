@@ -67,4 +67,11 @@ public interface ISaleService {
      * @return Lista de artículos vendidos en esa venta
      */
     List<SaleItem> obtenerItemsVenta(int saleId);
+
+    /**
+     * Busca las ventas de un cliente específico por su ID.
+     * @param userId ID del cliente
+     * @return Lista de ventas del cliente
+     */
+    public List<Sale> buscarVentasPorCliente(int userId);
 }

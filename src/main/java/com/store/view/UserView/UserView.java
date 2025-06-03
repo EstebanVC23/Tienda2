@@ -11,6 +11,7 @@ import com.store.view.components.NavBar.*;
 import com.store.view.panels.profile.UserProfilePanel;
 import com.store.view.panels.users.ProductosClientePanel;
 import com.store.models.ProductoCarrito;
+import com.store.view.panels.users.UserPurchasesPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +81,9 @@ public class UserView extends JFrame {
             case "Productos":
                 carritoCompras = mostrarPanelProductos(carritoCompras);
                 break;
+            case "Compras":
+                mainContent.add(new UserPurchasesPanel(usuario.getId(), saleServicio), BorderLayout.CENTER);
+                break;
         }
         
         mainContent.revalidate();
@@ -133,7 +137,7 @@ public class UserView extends JFrame {
     private void inicializarComponentes() {
         Navbar navBar = new Navbar(
             e -> handleNavigation(e.getActionCommand()),
-            new String[]{"Productos", "Dashboard"}
+            new String[]{"Productos", "Compras","Dashboard"}
         );
         
         mainContent = new JPanel(new BorderLayout());
@@ -142,7 +146,7 @@ public class UserView extends JFrame {
         
         JPanel logoutPanel = crearPanelLogout();
         
-        mostrarPanelDashboard();
+        mostrarPanelProductos(carritoCompras);
         
         add(navBar, BorderLayout.NORTH);
         add(mainContent, BorderLayout.CENTER);

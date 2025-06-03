@@ -49,7 +49,7 @@ class NavButtonsPanel extends JPanel {
             NavButton button = crearBotonNavegacion(label, listener, navbar);
             container.add(button);
 
-            if (label.equals("Dashboard")) {
+            if (label.equals("Productos")) {
                 navbar.setActiveButton(button);
             }
         }
