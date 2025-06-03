@@ -76,7 +76,6 @@ public class ProductCard extends BaseCard {
             addButton.setRound(true);
             
             addButton.addActionListener(_ -> {
-                
                 QuantityInputDialog dialog = new QuantityInputDialog(
                     SwingUtilities.getWindowAncestor(this),
                     producto.getStock()
@@ -90,8 +89,6 @@ public class ProductCard extends BaseCard {
                     
                     if (onAddToCart != null) {
                         onAddToCart.accept(productoCarrito);
-                    } else {
-                        System.out.println("DEBUG: onAddToCart es null - NO SE EJECUTÓ");
                     }
                 }
             });

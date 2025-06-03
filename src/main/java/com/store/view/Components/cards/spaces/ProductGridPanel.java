@@ -13,24 +13,16 @@ import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
-
-/**
- * Panel que muestra una cuadrícula de productos.
- * Este panel se encarga de organizar y mostrar
- * los productos en un formato de cuadrícula, permitiendo
- * una visualización clara y ordenada.
- * Utiliza un GridLayout para organizar los productos
- */
 public class ProductGridPanel extends JPanel {
     private final JPanel contentPanel;
     private final GridConstants constants;
     private ProductoServicioImpl productService;
-    private ProductosClientePanel parentPanel; // Referencia al panel padre
+    private ProductosClientePanel parentPanel;
 
     public ProductGridPanel(GridConstants constants, ProductoServicioImpl productService, ProductosClientePanel parentPanel) {
         this.constants = constants;
         this.productService = productService;
-        this.parentPanel = parentPanel; // Asignar la referencia
+        this.parentPanel = parentPanel;
         setLayout(new BorderLayout());
         setBackground(Colors.BACKGROUND);
         
@@ -69,14 +61,7 @@ public class ProductGridPanel extends JPanel {
         productos.forEach(p -> {
             ProductCard card = new ProductCard(p, productService);
                         
-            // CORRECIÓN: Configurar el callback para manejar el ProductoCarrito completo
-            // El ProductCard ya seleccionó la cantidad, solo necesitamos agregarlo al carrito
             card.setOnAddToCart(productoCarrito -> {
-                System.out.println("DEBUG: ProductGridPanel - Recibido ProductoCarrito: " + 
-                                productoCarrito.getProducto().getNombre() + 
-                                " | Cantidad: " + productoCarrito.getCantidadSeleccionada());
-                
-                // Agregar directamente al carrito sin pedir cantidad otra vez
                 agregarProductoCarritoDirecto(productoCarrito);
             });
                         
@@ -85,31 +70,16 @@ public class ProductGridPanel extends JPanel {
     }
 
     private void agregarProductoCarritoDirecto(ProductoCarrito productoCarrito) {
-        System.out.println("DEBUG: Agregando directamente al carrito: " + productoCarrito.getProducto().getNombre());
-        
-        // Buscar si el producto ya existe en el carrito
         Optional<ProductoCarrito> existingProduct = parentPanel.getCarritoCompras().stream()
             .filter(p -> p.getProducto().getCodigo().equals(productoCarrito.getProducto().getCodigo()))
             .findFirst();
         
         if (existingProduct.isPresent()) {
-            System.out.println("DEBUG: Producto ya existe, aumentando cantidad");
             existingProduct.get().aumentarCantidad(productoCarrito.getCantidadSeleccionada());
         } else {
-            System.out.println("DEBUG: Producto nuevo, agregando al carrito");
             parentPanel.getCarritoCompras().add(productoCarrito);
         }
         
-        // Mostrar carrito actualizado en terminal
-        System.out.println("=== CARRITO ACTUALIZADO ===");
-        for (ProductoCarrito item : parentPanel.getCarritoCompras()) {
-            System.out.println("- " + item.getProducto().getNombre() + 
-                            " | Cantidad: " + item.getCantidadSeleccionada() + 
-                            " | Subtotal: $" + String.format("%.2f", item.getSubtotal()));
-        }
-        System.out.println("============================");
-        
-        // Mostrar mensaje de confirmación
         JOptionPane.showMessageDialog(this,
             productoCarrito.getCantidadSeleccionada() + " unidad(es) de " + 
             productoCarrito.getProducto().getNombre() + " añadidas al carrito",
