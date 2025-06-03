@@ -3,6 +3,7 @@ package com.store.view.components.dialogs.admin;
 import com.store.models.Sale;
 import com.store.models.SaleItem;
 import com.store.models.SaleStatus;
+import com.store.services.ProductoServicioImpl;
 import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
@@ -24,8 +25,9 @@ public class SaleDialog extends BaseEntityFormDialog {
     private JLabel totalLabel;
     private JComboBox<SaleStatus> statusCombo;
     private CustomTable productsTable;
+    private final Runnable refreshCallback;
 
-    public SaleDialog(Window parent, Sale sale, SaleServiceImpl saleService) {
+    public SaleDialog(Window parent, Sale sale, SaleServiceImpl saleService, Runnable refreshCallback) {
         super(parent, "Editar Venta");
         
         // Validación mejorada con mensaje más descriptivo
@@ -35,7 +37,8 @@ public class SaleDialog extends BaseEntityFormDialog {
         if (saleService == null) {
             throw new IllegalArgumentException("El servicio de ventas no está disponible.");
         }
-        
+
+        this.refreshCallback = refreshCallback;
         this.saleService = saleService;
         this.sale = sale;
         
@@ -144,8 +147,46 @@ public class SaleDialog extends BaseEntityFormDialog {
     protected void saveForm() {
         try {
             SaleStatus newStatus = (SaleStatus) statusCombo.getSelectedItem();
+            SaleStatus oldStatus = sale.getStatus();
             
-            if (newStatus != sale.getStatus()) {
+            if (newStatus != oldStatus) {
+                // Necesitamos el servicio de productos para actualizar el stock
+                ProductoServicioImpl productoServicio = new ProductoServicioImpl();
+                boolean stockUpdated = true;
+                
+                // Si el nuevo estado es CANCELLED y el anterior no lo era
+                if (newStatus == SaleStatus.CANCELLED && oldStatus != SaleStatus.CANCELLED) {
+                    // Devolver el stock al inventario
+                    for (SaleItem item : sale.getItems()) {
+                        if (item != null && item.getProduct() != null) {
+                            int quantityToReturn = item.getQuantity();
+                            if (!productoServicio.actualizarStock(item.getProduct().getCodigo(), quantityToReturn)) {
+                                stockUpdated = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                // Si el estado anterior era CANCELLED y el nuevo no lo es
+                else if (oldStatus == SaleStatus.CANCELLED && newStatus != SaleStatus.CANCELLED) {
+                    // Quitar el stock del inventario nuevamente
+                    for (SaleItem item : sale.getItems()) {
+                        if (item != null && item.getProduct() != null) {
+                            int quantityToRemove = item.getQuantity();
+                            if (!productoServicio.actualizarStock(item.getProduct().getCodigo(), -quantityToRemove)) {
+                                stockUpdated = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (!stockUpdated) {
+                    showError("No se pudo actualizar el stock de uno o más productos");
+                    return;
+                }
+                
+                // Actualizar el estado de la venta
                 sale.setStatus(newStatus);
                 boolean success = saleService.actualizarVenta(sale);
                 
@@ -153,8 +194,28 @@ public class SaleDialog extends BaseEntityFormDialog {
                     JOptionPane.showMessageDialog(this, 
                         "Estado actualizado correctamente", 
                         "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
+                    
+                    // Notificar para actualizar la vista
+                    if (refreshCallback != null) {
+                        refreshCallback.run();
+                    }
+                
+                dispose();
                 } else {
+                    // Si falla la actualización, revertir los cambios en el stock
+                    if (newStatus == SaleStatus.CANCELLED && oldStatus != SaleStatus.CANCELLED) {
+                        for (SaleItem item : sale.getItems()) {
+                            if (item != null && item.getProduct() != null) {
+                                productoServicio.actualizarStock(item.getProduct().getCodigo(), -item.getQuantity());
+                            }
+                        }
+                    } else if (oldStatus == SaleStatus.CANCELLED && newStatus != SaleStatus.CANCELLED) {
+                        for (SaleItem item : sale.getItems()) {
+                            if (item != null && item.getProduct() != null) {
+                                productoServicio.actualizarStock(item.getProduct().getCodigo(), item.getQuantity());
+                            }
+                        }
+                    }
                     showError("Error al actualizar el estado de la venta");
                 }
             } else {

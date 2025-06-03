@@ -94,7 +94,10 @@ public class SalesPanel extends CrudPanel<Sale> {
 
     private void showEditDialog(Sale sale) {
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
-        SaleDialog dialog = new SaleDialog(parentWindow, sale, saleService);
+        SaleDialog dialog = new SaleDialog(parentWindow, 
+            sale, // Cambiado de selectedSale a sale
+            saleService,
+            this::refreshTable);
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

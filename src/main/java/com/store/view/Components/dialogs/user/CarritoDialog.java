@@ -30,6 +30,7 @@ public class CarritoDialog extends JDialog {
     
     private final List<ProductoCarrito> carrito;
     private CustomTable table;
+    private DefaultTableModel tableModel;
     
     private final SaleServiceImpl saleService;
     private final ProductoServicioImpl productService;
@@ -82,11 +83,18 @@ public class CarritoDialog extends JDialog {
     private void setupTable() {
         String[] columnNames = {"Producto", "Precio Unitario", "Cantidad", "Subtotal"};
         table = new CustomTable(columnNames);
+        tableModel = table.getTableModel();
         
-        DefaultTableModel model = table.getTableModel();
+        updateTableModel();
+    }
+    
+    private void updateTableModel() {
+        // Limpiar el modelo
+        tableModel.setRowCount(0);
         
+        // Llenar con los datos actuales del carrito
         for (ProductoCarrito item : carrito) {
-            model.addRow(new Object[]{
+            tableModel.addRow(new Object[]{
                 item.getProducto().getNombre(),
                 String.format("$%.2f", item.getProducto().getPrecio()),
                 item.getCantidadSeleccionada(),
@@ -95,22 +103,24 @@ public class CarritoDialog extends JDialog {
         }
     }
     
-    // En la clase CarritoDialog, modificamos el método createBottomPanel() para añadir el ActionListener al botón Comprar
     private JPanel createBottomPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new EmptyBorder(15, 0, 0, 0));
         panel.setBackground(Colors.BACKGROUND);
         
         // Total
-        double total = carrito.stream().mapToDouble(ProductoCarrito::getSubtotal).sum();
-        JLabel totalLabel = new JLabel(String.format("Total: $%.2f", total));
-        totalLabel.setFont(Fonts.SECTION_TITLE);
-        totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panel.add(totalLabel, BorderLayout.CENTER);
+        updateTotalLabel(panel);
         
-        // Botones
+        // Panel de botones
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setBackground(Colors.BACKGROUND);
+        
+        // Botón de Eliminar Producto
+        CustomButton deleteButton = new CustomButton("Eliminar Producto", Colors.ERROR_RED);
+        deleteButton.setRound(true);
+        deleteButton.setCornerRadius(8);
+        deleteButton.addActionListener(_ -> deleteSelectedProduct());
+        buttonPanel.add(deleteButton);
         
         // Botón de Comprar
         CustomButton buyButton = new CustomButton("Comprar", Colors.PRIMARY);
@@ -129,6 +139,57 @@ public class CarritoDialog extends JDialog {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         
         return panel;
+    }
+    
+    private void updateTotalLabel(JPanel panel) {
+        double total = carrito.stream().mapToDouble(ProductoCarrito::getSubtotal).sum();
+        JLabel totalLabel = new JLabel(String.format("Total: $%.2f", total));
+        totalLabel.setFont(Fonts.SECTION_TITLE);
+        totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        
+        // Eliminar el label anterior si existe
+        Component[] components = panel.getComponents();
+        for (Component c : components) {
+            if (c instanceof JLabel) {
+                panel.remove(c);
+            }
+        }
+        
+        panel.add(totalLabel, BorderLayout.CENTER);
+    }
+    
+    private void deleteSelectedProduct() {
+        int selectedRow = table.getSelectedRow();
+        
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor seleccione un producto para eliminar", 
+                "Selección requerida", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro que desea eliminar este producto del carrito?",
+            "Confirmar eliminación",
+            JOptionPane.YES_NO_OPTION);
+        
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Eliminar el producto del carrito
+            carrito.remove(selectedRow);
+            
+            // Actualizar la tabla
+            updateTableModel();
+            
+            // Actualizar el total
+            updateTotalLabel((JPanel) getContentPane().getComponent(2));
+            
+            JOptionPane.showMessageDialog(this, 
+                "Producto eliminado del carrito", 
+                "Eliminado", 
+                JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void processPurchase() {
@@ -203,6 +264,9 @@ public class CarritoDialog extends JDialog {
                 mensaje,
                 "Compra exitosa",
                 JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpiar el carrito
+            carrito.clear();
 
             // 7. Cerrar el diálogo
             dispose();

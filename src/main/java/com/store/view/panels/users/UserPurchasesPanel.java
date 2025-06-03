@@ -118,7 +118,10 @@ public class UserPurchasesPanel extends JPanel {
 
     private void showEditDialog(Sale sale) {
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
-        SaleDialog dialog = new SaleDialog(parentWindow, sale, saleService);
+        SaleDialog dialog = new SaleDialog(parentWindow, 
+            sale, 
+            saleService,
+            this::refreshTable); // Añadido el callback de refresco
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
