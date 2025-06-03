@@ -103,7 +103,7 @@ public class AdminView extends JFrame {
         Navbar navBar = new Navbar(this::handleNavigation, navOptions);
         LogoutPanel logoutPanel = new LogoutPanel(this::handleLogout);
         
-        contentManager.showDashboard();
+        contentManager.showProductsPanel();
         
         add(navBar, BorderLayout.NORTH);
         add(mainContent, BorderLayout.CENTER);
