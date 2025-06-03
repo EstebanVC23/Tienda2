@@ -7,6 +7,7 @@ import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.cards.constants.ProductCardConstants;
 import com.store.view.components.dialogs.user.ProductDetailsDialog;
+import com.store.view.components.dialogs.user.QuantityInputDialog;
 import com.store.view.components.buttons.CustomButton;
 
 import javax.swing.*;
@@ -78,6 +79,7 @@ public class ProductCard extends BaseCard {
             addButton.addActionListener(_ -> {
                 QuantityInputDialog dialog = new QuantityInputDialog(
                     SwingUtilities.getWindowAncestor(this),
+                    producto.getNombre(),
                     producto.getStock()
                 );
                 

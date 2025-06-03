@@ -59,12 +59,34 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
             ProductDetailsConstants.DESCRIPTION_TOP_SPACING
         );
         
-        // Panel de acción solo con botón de cerrar
+        // Panel de acción - ya no necesitas crear el botón manualmente
         this.actionPanel = new ProductActionPanel(
-            null, // Sin acción de agregar
-            null, // Sin acción de remover
-            this::dispose
+            this::openQuantityDialog, // Acción para agregar al carrito
+            null, // No hay acción de quitar del carrito
+            this::dispose // Acción para cerrar
         );
+    }
+
+    private void openQuantityDialog() {
+        QuantityInputDialog quantityDialog = new QuantityInputDialog(
+            this, 
+            producto.getNombre(), 
+            producto.getStock()
+        );
+        
+        quantityDialog.setVisible(true);
+        
+        if (quantityDialog.isConfirmed()) {
+            int selectedQuantity = quantityDialog.getSelectedQuantity();
+            // Aquí iría la lógica real para agregar al carrito
+            JOptionPane.showMessageDialog(
+                this, 
+                String.format("Agregado al carrito: %d unidades de %s", 
+                    selectedQuantity, producto.getNombre()),
+                "Producto agregado",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
 
     @Override

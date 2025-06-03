@@ -8,9 +8,9 @@ import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
 import com.store.view.components.cards.spaces.ProductSearchHeader;
 import com.store.view.components.dialogs.user.CarritoDialog;
+import com.store.view.components.dialogs.user.QuantityInputDialog;
 import com.store.view.panels.BasePanel;
 import com.store.view.components.cards.constants.GridConstants;
-import com.store.view.components.cards.QuantityInputDialog;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -148,6 +148,7 @@ public class ProductosClientePanel extends BasePanel {
         
         QuantityInputDialog dialog = new QuantityInputDialog(
             SwingUtilities.getWindowAncestor(this),
+            producto.getNombre(),
             producto.getStock()
         );
         
