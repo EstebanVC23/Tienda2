@@ -80,7 +80,7 @@ public class SaleDialog extends BaseEntityFormDialog {
 
         // Combo de estado (único campo editable)
         statusCombo = new JComboBox<>(SaleStatus.values());
-        statusCombo.setSelectedItem(sale.getStatus() != null ? sale.getStatus() : SaleStatus.PENDING);
+        statusCombo.setSelectedItem(sale.getStatus() != null ? sale.getStatus() : SaleStatus.COMPLETED);
         addCustomField("Estado:", statusCombo);
 
         JScrollPane scrollPane = new JScrollPane(formPanel);

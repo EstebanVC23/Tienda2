@@ -51,10 +51,15 @@ public class UserView extends JFrame {
      * @param usuario Usuario con sesión iniciada
      * @param productoServicio Servicio para gestión de productos
      * @param usuarioServicio Servicio para gestión de usuarios
+     * @param saleServicio Servicio para gestión de ventas
      */
-    public UserView(Usuario usuario, ProductoServicioImpl productoServicio, UsuarioServicioImpl usuarioServicio) {
+    public UserView(Usuario usuario, 
+               ProductoServicioImpl productoServicio, 
+               UsuarioServicioImpl usuarioServicio,
+               SaleServiceImpl saleServicio) {  // Añade este parámetro
         this.usuarioServicio = usuarioServicio;
         this.productoServicio = productoServicio;
+        this.saleServicio = saleServicio;  // Inicializa el servicio
         this.usuario = usuario;
         
         configurarVentana();
@@ -95,7 +100,7 @@ public class UserView extends JFrame {
      */
     private List<ProductoCarrito> mostrarPanelProductos(List<ProductoCarrito> carritoCompras) {
         JPanel panel = crearPanelBase("Catálogo de Productos");
-        ProductosClientePanel productosPanel = new ProductosClientePanel(productoServicio, carritoCompras);
+        ProductosClientePanel productosPanel = new ProductosClientePanel(productoServicio, carritoCompras, saleServicio);
         panel.add(productosPanel, BorderLayout.CENTER);
         mainContent.add(panel, BorderLayout.CENTER);
         return carritoCompras;
@@ -180,5 +185,22 @@ public class UserView extends JFrame {
         
         panel.add(btnLogout);
         return panel;
+    }
+
+    // En UserView.java añadimos estos métodos:
+    public SaleServiceImpl getSaleService() {
+        return saleServicio;
+    }
+
+    public ProductoServicioImpl getProductService() {
+        return productoServicio;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void limpiarCarrito() {
+        this.carritoCompras.clear();
     }
 }

@@ -1,6 +1,13 @@
 package com.store.view.components.dialogs.user;
 
+import com.store.models.Producto;
 import com.store.models.ProductoCarrito;
+import com.store.models.Sale;
+import com.store.models.SaleItem;
+import com.store.models.SaleStatus;
+import com.store.models.Usuario;
+import com.store.services.ProductoServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.buttons.CustomButton;
@@ -11,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 
 /**
  * Diálogo para mostrar el contenido actual del carrito de compras.
@@ -23,9 +31,19 @@ public class CarritoDialog extends JDialog {
     private final List<ProductoCarrito> carrito;
     private CustomTable table;
     
-    public CarritoDialog(Window parent, List<ProductoCarrito> carrito) {
+    private final SaleServiceImpl saleService;
+    private final ProductoServicioImpl productService;
+    private final Usuario usuario;
+
+    public CarritoDialog(Window parent, List<ProductoCarrito> carrito, 
+                        SaleServiceImpl saleService, 
+                        ProductoServicioImpl productService,
+                        Usuario usuario) {
         super(parent, "Carrito de Compras", ModalityType.APPLICATION_MODAL);
         this.carrito = carrito;
+        this.saleService = saleService;
+        this.productService = productService;
+        this.usuario = usuario;
         
         setSize(WIDTH, HEIGHT);
         setResizable(false);
@@ -77,6 +95,7 @@ public class CarritoDialog extends JDialog {
         }
     }
     
+    // En la clase CarritoDialog, modificamos el método createBottomPanel() para añadir el ActionListener al botón Comprar
     private JPanel createBottomPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new EmptyBorder(15, 0, 0, 0));
@@ -97,6 +116,7 @@ public class CarritoDialog extends JDialog {
         CustomButton buyButton = new CustomButton("Comprar", Colors.PRIMARY);
         buyButton.setRound(true);
         buyButton.setCornerRadius(8);
+        buyButton.addActionListener(_ -> processPurchase());
         buttonPanel.add(buyButton);
         
         // Botón de Cerrar
@@ -109,5 +129,90 @@ public class CarritoDialog extends JDialog {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         
         return panel;
+    }
+
+    private void processPurchase() {
+        // Confirmar con el usuario antes de proceder
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro que desea proceder con la compra?",
+            "Confirmar compra",
+            JOptionPane.YES_NO_OPTION);
+        
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            // 1. Crear la venta
+            Sale nuevaVenta = new Sale();
+            nuevaVenta.setCustomerId(usuario.getId());
+            nuevaVenta.setDate(new Date());
+            nuevaVenta.setStatus(SaleStatus.COMPLETED);
+
+            // 2. Convertir ProductoCarrito a SaleItem
+            List<SaleItem> itemsVenta = carrito.stream()
+                .map(pc -> new SaleItem(pc.getProducto(), pc.getCantidadSeleccionada()))
+                .toList();
+            
+            nuevaVenta.setItems(itemsVenta);
+            nuevaVenta.recalculateTotal();
+
+            // 3. Verificar stock antes de proceder
+            for (ProductoCarrito item : carrito) {
+                Producto producto = item.getProducto();
+                if (producto.getStock() < item.getCantidadSeleccionada()) {
+                    JOptionPane.showMessageDialog(this,
+                        "No hay suficiente stock para: " + producto.getNombre() + 
+                        "\nStock disponible: " + producto.getStock() +
+                        "\nCantidad solicitada: " + item.getCantidadSeleccionada(),
+                        "Error de stock",
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            // 4. Registrar la venta
+            boolean ventaExitosa = saleService.crearVenta(nuevaVenta);
+            
+            if (!ventaExitosa) {
+                throw new Exception("No se pudo registrar la venta en el sistema");
+            }
+
+            // 5. Actualizar stock de productos
+            for (ProductoCarrito item : carrito) {
+                Producto producto = item.getProducto();
+                int cantidadVendida = item.getCantidadSeleccionada();
+                producto.setStock(producto.getStock() - cantidadVendida);
+                productService.actualizarProducto(producto);
+            }
+
+            // 6. Mostrar confirmación con detalles
+            String mensaje = String.format(
+                "¡Compra realizada con éxito!\n\n" +
+                "Número de venta: %d\n" +
+                "Fecha: %s\n" +
+                "Total: $%.2f\n" +
+                "Productos: %d",
+                nuevaVenta.getId(),
+                nuevaVenta.getDate(),
+                nuevaVenta.getTotal(),
+                nuevaVenta.getItems().size());
+            
+            JOptionPane.showMessageDialog(this,
+                mensaje,
+                "Compra exitosa",
+                JOptionPane.INFORMATION_MESSAGE);
+
+            // 7. Cerrar el diálogo
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al procesar la compra: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 }

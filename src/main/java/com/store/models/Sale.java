@@ -20,7 +20,7 @@ public class Sale {
     public Sale() {
         this.items = new ArrayList<>();
         this.total = 0.0;
-        this.status = SaleStatus.PENDING;
+        this.status = SaleStatus.COMPLETED;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Sale {
         this.date = date;
         this.customerId = customerId;
         this.items = items != null ? items : new ArrayList<>();
-        this.status = status != null ? status : SaleStatus.PENDING;
+        this.status = status != null ? status : SaleStatus.COMPLETED;
         this.total = calculateTotal();
     }
 

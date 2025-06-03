@@ -3,7 +3,9 @@ package com.store.view.panels.users;
 import com.store.models.Producto;
 import com.store.models.ProductoCarrito;
 import com.store.services.ProductoServicioImpl;
+import com.store.services.SaleServiceImpl;
 import com.store.utils.Colors;
+import com.store.view.UserView.UserView;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
 import com.store.view.components.cards.spaces.ProductSearchHeader;
@@ -25,11 +27,14 @@ public class ProductosClientePanel extends BasePanel {
     private final JScrollPane scrollPane;
     private final TitlePanel titlePanel;
     private final List<ProductoCarrito> carritoCompras;
+    private final SaleServiceImpl saleService;
 
     public ProductosClientePanel(ProductoServicioImpl productoServicio, 
-                               List<ProductoCarrito> carritoCompras) {
+                               List<ProductoCarrito> carritoCompras,
+                               SaleServiceImpl saleService) {
         this.productoServicio = productoServicio;
         this.carritoCompras = carritoCompras;
+        this.saleService = saleService;
         setBackground(Colors.BACKGROUND);
         setBorder(new EmptyBorder(15, 15, 15, 15));
         
@@ -85,7 +90,10 @@ public class ProductosClientePanel extends BasePanel {
         
         CarritoDialog dialog = new CarritoDialog(
             SwingUtilities.getWindowAncestor(this),
-            carritoCompras
+            carritoCompras,
+            saleService,  // Usa el servicio que recibió el panel
+            productoServicio,
+            ((UserView)SwingUtilities.getWindowAncestor(this)).getUsuario()
         );
         dialog.setVisible(true);
     }

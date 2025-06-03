@@ -78,7 +78,7 @@ public class LoginController {
         if ("ADMIN".equalsIgnoreCase(usuario.getRol())) {
             new AdminView(usuario, usuarioServicio, productoServicio, saleServicio).setVisible(true);
         } else {
-            new UserView(usuario, productoServicio, usuarioServicio).setVisible(true);
+            new UserView(usuario, productoServicio, usuarioServicio, saleServicio).setVisible(true);
         }
         view.dispose();
     }
