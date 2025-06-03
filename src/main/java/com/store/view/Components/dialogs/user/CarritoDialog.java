@@ -3,6 +3,7 @@ package com.store.view.components.dialogs.user;
 import com.store.models.ProductoCarrito;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
+import com.store.view.components.buttons.CustomButton;
 import com.store.view.components.tables.CustomTable;
 
 import javax.swing.*;
@@ -92,22 +93,21 @@ public class CarritoDialog extends JDialog {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setBackground(Colors.BACKGROUND);
         
-        JButton closeButton = createButton("Cerrar", this::dispose);
+        // Botón de Comprar
+        CustomButton buyButton = new CustomButton("Comprar", Colors.PRIMARY);
+        buyButton.setRound(true);
+        buyButton.setCornerRadius(8);
+        buttonPanel.add(buyButton);
+        
+        // Botón de Cerrar
+        CustomButton closeButton = new CustomButton("Cerrar", Colors.SECONDARY_GRAY);
+        closeButton.setRound(true);
+        closeButton.setCornerRadius(8);
+        closeButton.addActionListener(_ -> dispose());
         buttonPanel.add(closeButton);
         
         panel.add(buttonPanel, BorderLayout.SOUTH);
         
         return panel;
-    }
-    
-    private JButton createButton(String text, Runnable action) {
-        JButton button = new JButton(text);
-        button.setFont(Fonts.BODY);
-        button.setBackground(Colors.PRIMARY);
-        button.setForeground(Color.WHITE);
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
-        button.addActionListener(_ -> action.run());
-        return button;
     }
 }
