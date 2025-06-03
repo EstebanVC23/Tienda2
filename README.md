@@ -231,12 +231,12 @@ Store/
 ### Credenciales por Defecto
 
 **Administrador:**
-- Usuario: `admin`
-- Contraseña: `admin123`
+- Usuario: `root`
+- Contraseña: `123`
 
 **Cliente de Prueba:**
-- Usuario: `cliente1`
-- Contraseña: `123456`
+- Usuario: `esvca`
+- Contraseña: `123`
 
 ### Funcionalidades Principales
 
@@ -245,7 +245,6 @@ Store/
 2. Gestionar inventario de productos (Crear, Leer, Actualizar, Eliminar)
 3. Ver reportes de ventas
 4. Administrar usuarios registrados
-5. Gestionar categorías de productos
 
 #### Para Clientes:
 1. Registrarse como nuevo usuario o iniciar sesión
@@ -260,22 +259,20 @@ Store/
 - Login seguro con validación de credenciales
 - Registro de nuevos usuarios
 - Diferentes roles (Admin/Cliente)
-- Recuperación de contraseña
+- Contraseña Hasheada
 
 ### 📦 Gestión de Productos
 - Catálogo completo con categorías
 - Búsqueda y filtrado
 - Gestión de inventario
-- Carga de imágenes de productos
 
 ### 🛒 Carrito de Compras
 - Agregar/eliminar productos
 - Modificar cantidades
 - Cálculo automático de totales
-- Persistencia entre sesiones
 
 ### 📊 Panel de Administración
-- Dashboard con estadísticas
+- Dashboard con Datos
 - Gestión completa de productos
 - Reportes de ventas
 - Administración de usuarios
@@ -364,4 +361,4 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ---
 
-*Desarrollado con ❤️ por Esteban Vásquez*
+*Desarrollado por Esteban Vásquez*
