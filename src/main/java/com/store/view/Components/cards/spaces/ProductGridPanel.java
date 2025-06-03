@@ -5,6 +5,7 @@ import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.view.components.cards.ProductCard;
 import com.store.view.components.cards.constants.GridConstants;
+import com.store.view.panels.users.ProductosClientePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,10 +23,12 @@ public class ProductGridPanel extends JPanel {
     private final JPanel contentPanel;
     private final GridConstants constants;
     private ProductoServicioImpl productService;
+    private ProductosClientePanel parentPanel; // Referencia al panel padre
 
-    public ProductGridPanel(GridConstants constants, ProductoServicioImpl productService) {
+    public ProductGridPanel(GridConstants constants, ProductoServicioImpl productService, ProductosClientePanel parentPanel) {
         this.constants = constants;
         this.productService = productService;
+        this.parentPanel = parentPanel; // Asignar la referencia
         setLayout(new BorderLayout());
         setBackground(Colors.BACKGROUND);
         
@@ -63,6 +66,13 @@ public class ProductGridPanel extends JPanel {
         
         productos.forEach(p -> {
             ProductCard card = new ProductCard(p, productService);
+            
+            // AQUÍ ESTÁ LA CORRECIÓN CLAVE: Conectar el ProductCard con el panel padre
+            card.setOnAddToCart(productoCarrito -> {
+                System.out.println("DEBUG: ProductGridPanel - onAddToCart llamado para: " + productoCarrito.getProducto().getNombre());
+                parentPanel.addToCart(productoCarrito.getProducto());
+            });
+            
             contentPanel.add(card);
         });
     }

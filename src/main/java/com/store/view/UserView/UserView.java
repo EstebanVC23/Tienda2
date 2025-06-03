@@ -10,9 +10,12 @@ import com.store.view.auth.Login;
 import com.store.view.components.NavBar.*;
 import com.store.view.panels.profile.UserProfilePanel;
 import com.store.view.panels.users.ProductosClientePanel;
+import com.store.models.ProductoCarrito;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ventana principal de la aplicación para usuarios regulares del sistema de tienda.
@@ -40,6 +43,8 @@ public class UserView extends JFrame {
     private SaleServiceImpl saleServicio;
     /** Panel principal de contenido */
     private JPanel mainContent;
+    /** Carrito Compras */
+    private List<ProductoCarrito> carritoCompras = new ArrayList<>();
     
     /**
      * Construye la vista principal del usuario.
@@ -68,7 +73,7 @@ public class UserView extends JFrame {
                 mostrarPanelDashboard();
                 break;
             case "Productos":
-                mostrarPanelProductos();
+                carritoCompras = mostrarPanelProductos(carritoCompras);
                 break;
         }
         
@@ -88,10 +93,12 @@ public class UserView extends JFrame {
     /**
      * Muestra el panel con el catálogo de productos.
      */
-    private void mostrarPanelProductos() {
+    private List<ProductoCarrito> mostrarPanelProductos(List<ProductoCarrito> carritoCompras) {
         JPanel panel = crearPanelBase("Catálogo de Productos");
-        panel.add(new ProductosClientePanel(productoServicio), BorderLayout.CENTER);
+        ProductosClientePanel productosPanel = new ProductosClientePanel(productoServicio, carritoCompras);
+        panel.add(productosPanel, BorderLayout.CENTER);
         mainContent.add(panel, BorderLayout.CENTER);
+        return carritoCompras;
     }
     
     /**

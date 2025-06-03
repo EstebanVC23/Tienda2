@@ -1,11 +1,13 @@
 package com.store.view.components.cards;
 
 import com.store.models.Producto;
+import com.store.models.ProductoCarrito;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
 import com.store.view.components.cards.constants.ProductCardConstants;
 import com.store.view.components.dialogs.user.ProductDetailsDialog;
+import com.store.view.components.buttons.CustomButton;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -14,10 +16,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.function.Consumer;
 
 public class ProductCard extends BaseCard {
     private final Producto producto;
     private final ProductoServicioImpl productService;
+    private Consumer<ProductoCarrito> onAddToCart;
 
     public ProductCard(Producto producto, ProductoServicioImpl productService) {
         super();
@@ -25,6 +29,10 @@ public class ProductCard extends BaseCard {
         this.producto = producto;
         setupCard();
         setupMouseListeners();
+    }
+
+    public void setOnAddToCart(Consumer<ProductoCarrito> listener) {
+        this.onAddToCart = listener;
     }
 
     private void setupMouseListeners() {
@@ -49,9 +57,64 @@ public class ProductCard extends BaseCard {
     }
 
     protected void setupCard() {
+        setLayout(new BorderLayout());
         setPreferredSize(ProductCardConstants.CARD_SIZE);
         add(createImagePanel(), BorderLayout.CENTER);
-        add(createDetailsPanel(), BorderLayout.SOUTH);
+        add(createDetailsAndButtonPanel(), BorderLayout.SOUTH);
+    }
+
+    private JPanel createAddButtonPanel() {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(new EmptyBorder(0, 0, 10, 10));
+        
+        if (producto.getStock() > 0) {
+            CustomButton addButton = new CustomButton("Añadir", new Color(46, 204, 113), Color.WHITE);
+            addButton.setPreferredSize(new Dimension(90, 32));
+            addButton.setFont(Fonts.BUTTON);
+            addButton.setCornerRadius(8);
+            addButton.setRound(true);
+            
+            addButton.addActionListener(_ -> {
+                
+                QuantityInputDialog dialog = new QuantityInputDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    producto.getStock()
+                );
+                
+                dialog.setVisible(true);
+                
+                if (dialog.isConfirmed()) {
+                    int selectedQuantity = dialog.getSelectedQuantity();
+                    ProductoCarrito productoCarrito = new ProductoCarrito(producto, selectedQuantity);
+                    
+                    if (onAddToCart != null) {
+                        onAddToCart.accept(productoCarrito);
+                    } else {
+                        System.out.println("DEBUG: onAddToCart es null - NO SE EJECUTÓ");
+                    }
+                }
+            });
+            
+            panel.add(addButton);
+        } else {
+            JLabel outOfStock = new JLabel("Agotado");
+            outOfStock.setForeground(Colors.ACCENT);
+            outOfStock.setFont(Fonts.SMALL);
+            panel.add(outOfStock);
+        }
+        
+        return panel;
+    }
+
+    private JPanel createDetailsAndButtonPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        panel.add(createDetailsPanel());
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(createAddButtonPanel());
+        return panel;
     }
 
     private JPanel createImagePanel() {
@@ -149,7 +212,6 @@ public class ProductCard extends BaseCard {
             throw new IllegalStateException("No se puede mostrar detalles: el producto es nulo");
         }
         
-        // Actualizamos el producto antes de mostrar los detalles
         Producto productoActualizado = productService.obtenerProductoPorCodigo(producto.getCodigo());
         
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
