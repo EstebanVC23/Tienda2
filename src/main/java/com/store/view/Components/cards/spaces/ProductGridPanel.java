@@ -1,7 +1,6 @@
 package com.store.view.components.cards.spaces;
 
 import com.store.models.Producto;
-import com.store.services.IShoppingCartService;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.view.components.cards.ProductCard;
@@ -11,11 +10,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+
+/**
+ * Panel que muestra una cuadrícula de productos.
+ * Este panel se encarga de organizar y mostrar
+ * los productos en un formato de cuadrícula, permitiendo
+ * una visualización clara y ordenada.
+ * Utiliza un GridLayout para organizar los productos
+ */
 public class ProductGridPanel extends JPanel {
     private final JPanel contentPanel;
     private final GridConstants constants;
-    private IShoppingCartService cartService;
-    private int userId;
     private ProductoServicioImpl productService;
 
     public ProductGridPanel(GridConstants constants, ProductoServicioImpl productService) {
@@ -29,11 +34,6 @@ public class ProductGridPanel extends JPanel {
         contentPanel.setBackground(Colors.BACKGROUND);
         
         enableFastMouseWheelScrolling(contentPanel);
-    }
-
-    public void setCartService(IShoppingCartService cartService, int userId) {
-        this.cartService = cartService;
-        this.userId = userId;
     }
 
     public void displayProducts(List<Producto> productos) {
@@ -62,9 +62,7 @@ public class ProductGridPanel extends JPanel {
             constants.H_GAP, constants.V_GAP));
         
         productos.forEach(p -> {
-            ProductCard card = (cartService != null) 
-                ? new ProductCard(p, cartService, userId, productService)
-                : new ProductCard(p, productService);
+            ProductCard card = new ProductCard(p, productService);
             contentPanel.add(card);
         });
     }

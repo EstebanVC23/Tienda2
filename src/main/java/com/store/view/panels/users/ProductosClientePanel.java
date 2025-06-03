@@ -1,7 +1,6 @@
 package com.store.view.panels.users;
 
 import com.store.models.Producto;
-import com.store.services.IShoppingCartService;
 import com.store.services.IProductoServicio;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
@@ -23,9 +22,7 @@ public class ProductosClientePanel extends BasePanel {
     private final JScrollPane scrollPane;
     private final TitlePanel titlePanel;
 
-    public ProductosClientePanel(IProductoServicio productoServicio, 
-                               IShoppingCartService cartService, 
-                               int userId) {
+    public ProductosClientePanel(IProductoServicio productoServicio) {
         this.productoServicio = productoServicio;
         setBackground(Colors.BACKGROUND);
         setBorder(new EmptyBorder(15, 15, 15, 15));
@@ -36,19 +33,12 @@ public class ProductosClientePanel extends BasePanel {
         // Inicialización del gridPanel con las constantes y el servicio
         GridConstants gridConstants = new GridConstants();
         this.gridPanel = new ProductGridPanel(gridConstants, (ProductoServicioImpl) productoServicio);
-        if (cartService != null && userId != -1) {
-            gridPanel.setCartService(cartService, userId);
-        }
         
         this.scrollPane = createScrollPane();
         
         setupUI();
         setupListeners();
         loadProducts();
-    }
-    
-    public ProductosClientePanel(IProductoServicio productoServicio) {
-        this(productoServicio, null, -1);
     }
     
     private JScrollPane createScrollPane() {

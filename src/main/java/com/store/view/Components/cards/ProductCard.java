@@ -1,7 +1,6 @@
 package com.store.view.components.cards;
 
 import com.store.models.Producto;
-import com.store.services.IShoppingCartService;
 import com.store.services.ProductoServicioImpl;
 import com.store.utils.Colors;
 import com.store.utils.Fonts;
@@ -18,23 +17,14 @@ import java.awt.event.MouseEvent;
 
 public class ProductCard extends BaseCard {
     private final Producto producto;
-    private final IShoppingCartService cartService;
-    private final int userId;
     private final ProductoServicioImpl productService;
 
-    public ProductCard(Producto producto, IShoppingCartService cartService, int userId, ProductoServicioImpl productService) {
+    public ProductCard(Producto producto, ProductoServicioImpl productService) {
         super();
         this.productService = productService;
         this.producto = producto;
-        this.cartService = cartService;
-        this.userId = userId;
         setupCard();
         setupMouseListeners();
-    }
-
-    // Constructor adicional para compatibilidad
-    public ProductCard(Producto producto, ProductoServicioImpl productService) {
-        this(producto, null, -1, productService);
     }
 
     private void setupMouseListeners() {
@@ -58,7 +48,6 @@ public class ProductCard extends BaseCard {
         });
     }
 
-    // Resto de los métodos de ProductCard permanecen igual...
     protected void setupCard() {
         setPreferredSize(ProductCardConstants.CARD_SIZE);
         add(createImagePanel(), BorderLayout.CENTER);
@@ -121,11 +110,6 @@ public class ProductCard extends BaseCard {
         panel.add(Box.createRigidArea(new Dimension(0, ProductCardConstants.SPACING_SMALL)));
         panel.add(createStockLabel());
         
-        if (cartService != null && userId != -1) {
-            panel.add(Box.createRigidArea(new Dimension(0, ProductCardConstants.SPACING_LARGE)));
-            panel.add(createAddToCartButton());
-        }
-        
         return panel;
     }
 
@@ -160,37 +144,6 @@ public class ProductCard extends BaseCard {
         }};
     }
 
-    protected JButton createAddToCartButton() {
-        JButton button = new JButton("Añadir al carrito") {{
-            setFont(Fonts.BUTTON);
-            setBackground(Colors.PRIMARY_BLUE);
-            setForeground(Color.WHITE);
-            setFocusPainted(false);
-            setBorder(new CompoundBorder(
-                BorderFactory.createLineBorder(Colors.DARK_BLUE, 1),
-                new EmptyBorder(8, 0, 8, 0)
-            ));
-            setMaximumSize(new Dimension(Integer.MAX_VALUE, ProductCardConstants.BUTTON_MAX_HEIGHT));
-            addActionListener(_ -> handleAddToCart());
-        }};
-        return button;
-    }
-
-    protected void handleAddToCart() {
-        if (cartService == null || userId == -1) return;
-        
-        boolean success = cartService.addToCart(userId, producto, 1);
-        String message = success ? "Producto agregado al carrito" : "No se pudo agregar el producto al carrito";
-        int messageType = success ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE;
-        
-        JOptionPane.showMessageDialog(
-            SwingUtilities.getWindowAncestor(this),
-            message,
-            "Carrito",
-            messageType
-        );
-    }
-
     public void showProductDetails() {
         if (producto == null) {
             throw new IllegalStateException("No se puede mostrar detalles: el producto es nulo");
@@ -200,25 +153,10 @@ public class ProductCard extends BaseCard {
         Producto productoActualizado = productService.obtenerProductoPorCodigo(producto.getCodigo());
         
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
-        ProductDetailsDialog detailsDialog;
-        
-        if (cartService != null && userId != -1) {
-            detailsDialog = new ProductDetailsDialog(
-                parentWindow, 
-                productoActualizado, 
-                cartService, 
-                userId
-            );
-        } else {
-            // Modo solo visualización sin funcionalidad de carrito
-            detailsDialog = new ProductDetailsDialog(
-                parentWindow, 
-                productoActualizado, 
-                null, 
-                -1
-            );
-            detailsDialog.setAddToCartEnabled(false);
-        }
+        ProductDetailsDialog detailsDialog = new ProductDetailsDialog(
+            parentWindow, 
+            productoActualizado
+        );
         
         detailsDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         detailsDialog.setLocationRelativeTo(parentWindow);

@@ -17,7 +17,6 @@ public class Usuario {
     private String password;
     private String rol;
     private boolean estadoActivo;
-    private int carritoComprasId;
 
     /**
      * Constructor por defecto de la clase Usuario.
@@ -34,7 +33,6 @@ public class Usuario {
         this.telefono = "";
         this.password = "";
         this.rol = "USER";
-        this.carritoComprasId = 0;
         this.estadoActivo = true;
     }
 
@@ -212,21 +210,5 @@ public class Usuario {
      */
     public void setRol(String rol) {
         this.rol = rol;
-    }
-
-    /**
-     * Obtiene el ID del carrito de compras asociado al usuario.
-     * @return El ID del carrito de compras.
-     */
-    public int getCarritoComprasId() {
-        return carritoComprasId;
-    }
-
-    /**
-     * Establece el ID del carrito de compras asociado al usuario.
-     * @param carritoComprasId El ID del carrito de compras.
-     */
-    public void setCarritoComprasId(int carritoComprasId) {
-        this.carritoComprasId = carritoComprasId;
     }
 }
