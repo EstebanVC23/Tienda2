@@ -1,14 +1,17 @@
 package com.store.view.components.dialogs.user;
 
 import com.store.models.Producto;
+import com.store.models.ProductoCarrito;
 import com.store.view.components.dialogs.constants.ProductDetailsConstants;
 import com.store.view.components.dialogs.user.components.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.function.Consumer;
 
 public class ProductDetailsDialog extends BaseDetailsDialog {
     private final Producto producto;
+    private Consumer<ProductoCarrito> onAddToCart; // Callback para agregar al carrito
     
     private ProductImagePanel imagePanel;
     private ProductHeaderPanel headerPanel;
@@ -16,14 +19,21 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
     private ProductDescriptionPanel descriptionPanel;
     private ProductActionPanel actionPanel;
 
-    public ProductDetailsDialog(Window parent, Producto producto) {
+    // Constructor modificado para recibir el callback
+    public ProductDetailsDialog(Window parent, Producto producto, Consumer<ProductoCarrito> onAddToCart) {
         super(parent, ProductDetailsConstants.TITLE, 
              ProductDetailsConstants.WIDTH, 
              ProductDetailsConstants.HEIGHT);
         this.producto = producto;
+        this.onAddToCart = onAddToCart; // Asignar el callback
         
         initComponents();
         setupLayout();
+    }
+
+    // Constructor sobrecargado para mantener compatibilidad (sin callback)
+    public ProductDetailsDialog(Window parent, Producto producto) {
+        this(parent, producto, null);
     }
 
     private void initComponents() {
@@ -59,7 +69,7 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
             ProductDetailsConstants.DESCRIPTION_TOP_SPACING
         );
         
-        // Panel de acción - ya no necesitas crear el botón manualmente
+        // Panel de acción con el callback actualizado
         this.actionPanel = new ProductActionPanel(
             this::openQuantityDialog, // Acción para agregar al carrito
             null, // No hay acción de quitar del carrito
@@ -78,14 +88,23 @@ public class ProductDetailsDialog extends BaseDetailsDialog {
         
         if (quantityDialog.isConfirmed()) {
             int selectedQuantity = quantityDialog.getSelectedQuantity();
-            // Aquí iría la lógica real para agregar al carrito
-            JOptionPane.showMessageDialog(
-                this, 
-                String.format("Agregado al carrito: %d unidades de %s", 
-                    selectedQuantity, producto.getNombre()),
-                "Producto agregado",
-                JOptionPane.INFORMATION_MESSAGE
-            );
+            
+            // Si hay callback, usar la lógica real del carrito
+            if (onAddToCart != null) {
+                ProductoCarrito productoCarrito = new ProductoCarrito(producto, selectedQuantity);
+                onAddToCart.accept(productoCarrito);
+                // Cerrar el diálogo después de agregar al carrito
+                dispose();
+            } else {
+                // Fallback: solo mostrar mensaje (para compatibilidad)
+                JOptionPane.showMessageDialog(
+                    this, 
+                    String.format("Agregado al carrito: %d unidades de %s", 
+                        selectedQuantity, producto.getNombre()),
+                    "Producto agregado",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+            }
         }
     }
 

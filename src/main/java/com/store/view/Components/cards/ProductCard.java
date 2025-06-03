@@ -214,9 +214,12 @@ public class ProductCard extends BaseCard {
         Producto productoActualizado = productService.obtenerProductoPorCodigo(producto.getCodigo());
         
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
+        
+        // Pasar el callback onAddToCart al diálogo de detalles
         ProductDetailsDialog detailsDialog = new ProductDetailsDialog(
             parentWindow, 
-            productoActualizado
+            productoActualizado,
+            this.onAddToCart // Pasar el callback que ya tiene esta tarjeta
         );
         
         detailsDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
