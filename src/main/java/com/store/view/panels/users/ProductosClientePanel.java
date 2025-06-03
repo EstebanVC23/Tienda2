@@ -7,6 +7,7 @@ import com.store.utils.Colors;
 import com.store.view.components.TitlePanel;
 import com.store.view.components.cards.spaces.ProductGridPanel;
 import com.store.view.components.cards.spaces.ProductSearchHeader;
+import com.store.view.components.dialogs.user.CarritoDialog;
 import com.store.view.panels.BasePanel;
 import com.store.view.components.cards.constants.GridConstants;
 import com.store.view.components.cards.QuantityInputDialog;
@@ -32,7 +33,7 @@ public class ProductosClientePanel extends BasePanel {
         setBackground(Colors.BACKGROUND);
         setBorder(new EmptyBorder(15, 15, 15, 15));
         
-        this.titlePanel = new TitlePanel("Productos Disponibles");
+        this.titlePanel = createTitlePanelWithCartButton();
         this.filterPanel = new ProductSearchHeader(productoServicio.obtenerCategorias());
         
         GridConstants gridConstants = new GridConstants();
@@ -43,6 +44,50 @@ public class ProductosClientePanel extends BasePanel {
         setupUI();
         setupListeners();
         loadProducts();
+    }
+
+    public List<ProductoCarrito> getCarritoCompras() {
+        return carritoCompras;
+    }
+    
+    private TitlePanel createTitlePanelWithCartButton() {
+        TitlePanel panel = new TitlePanel("Productos Disponibles");
+        
+        // Crear botón para ver el carrito
+        JButton cartButton = new JButton("Ver carrito actual");
+        cartButton.setBackground(Colors.PRIMARY);
+        cartButton.setForeground(Color.WHITE);
+        cartButton.setFocusPainted(false);
+        cartButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        
+        // Agregar acción al botón
+        cartButton.addActionListener(_ -> showCurrentCart());
+        
+        // Crear panel para el botón alineado a la derecha
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(Colors.BACKGROUND);
+        buttonPanel.add(cartButton);
+        
+        // Agregar el panel del botón al TitlePanel
+        panel.add(buttonPanel, BorderLayout.EAST);
+        
+        return panel;
+    }
+    
+    private void showCurrentCart() {
+        if (carritoCompras.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "El carrito está vacío",
+                "Carrito de compras",
+                JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        CarritoDialog dialog = new CarritoDialog(
+            SwingUtilities.getWindowAncestor(this),
+            carritoCompras
+        );
+        dialog.setVisible(true);
     }
     
     private JScrollPane createScrollPane() {
